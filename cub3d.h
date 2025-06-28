@@ -25,10 +25,12 @@ typedef struct s_cub3d
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	void		*img_ptr;
 	char		*map_route;
 	t_map		map;
 	t_player	player;
 }	t_cub3d;
 
-
+int		main(int argc, char **argv);
+void	cub3d(char **argv);
 #endif
