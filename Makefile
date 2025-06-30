@@ -15,7 +15,8 @@ OBJ_DIR := obj
 
 SRCS := \
 	main.c \
-	initializer/init_cub3d.c
+	initializer/init_cub3d.c \
+	read_map/read_map.c \
 
 OBJ_FILES := $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
