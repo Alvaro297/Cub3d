@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	cub3d(char **argv)
+static void	cub3d(void)
 {
 	t_cub3d	cub3d;
 
@@ -11,8 +11,8 @@ int	main(int argc, char **argv)
 {
 	if (argc == 3)
 	{
-		*argv++;
-		cub3d(argv);
+		(void)argv;
+		cub3d();
 	}
 	return (0);
 }

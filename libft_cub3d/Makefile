@@ -1,29 +1,44 @@
-#Variables
+# Variables
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -fPIE
 NAME = libft.a
+OBJ_DIR = obj
+
 SRCS = ft_isalnum.c ft_isalpha.c ft_isprint.c ft_isascii.c ft_isdigit.c ft_tolower.c ft_toupper.c ft_bzero.c ft_calloc.c ft_memchr.c\
 	ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strdup.c ft_strndup.c ft_atoi.c ft_itoa.c ft_split.c ft_strchr.c ft_striteri.c\
 	ft_strjoin.c ft_strjoin_free.c ft_strlcat.c ft_strncpy.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c\
-	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_realloc.c get_next_line.c
-SRCB = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c\
-	ft_lstmap.c
-OBJ = $(SRCS:.c=.o)
-BONUSOBJ = $(SRCB:.c=.o)
+	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_realloc.c get_next_line.c\
+	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+
+OBJ = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+TOTAL_FILES = $(words $(OBJ))
+COUNT = 0
+
 RM = rm -rf
 
+# Targets
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
+	@ar rc $(NAME) $(OBJ)
 
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(eval COUNT := $(shell echo $$(($(COUNT) + 1))))
+	$(eval PERCENT := $(shell echo $$(($(COUNT) * 100 / $(TOTAL_FILES)))))
+	@echo "\033[1;32m[ $(PERCENT)% ] Building C object $@\033[0m"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $@
 clean:
-	$(RM) $(OBJ) $(BONUSOBJ)
+	@rm -rf $(OBJ_DIR)
+	@echo "\033[1;31mObject files removed.\033[0m"
+
+
 fclean: clean
-	$(RM) $(NAME)
-bonus: $(OBJ) $(BONUSOBJ)
-	ar rc $(NAME) $(OBJ) $(BONUSOBJ)
+	@rm -f $(NAME)
+	@echo "\033[1;31mProgramm removed.\033[0m"
+
+
 re: fclean all
+
+.PHONY: all clean fclean re

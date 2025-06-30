@@ -1,7 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../minilibx_cub3d/mlx.h"
+# include "./minilibx-linux/mlx.h"
+# include "./minilibx-linux/mlx_int.h"
 # include "./libft_cub3d/libft.h"
 
 typedef struct s_map
@@ -32,5 +33,6 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 int		main(int argc, char **argv);
-void	cub3d(char **argv);
+void	init_cub3d(t_cub3d *cub3d);
+
 #endif
