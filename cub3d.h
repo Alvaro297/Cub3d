@@ -1,26 +1,37 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "./libft_cub3d/libft.h"
 # include "./minilibx-linux/mlx.h"
 # include "./minilibx-linux/mlx_int.h"
-# include "./libft_cub3d/libft.h"
+
+typedef enum s_color
+{
+	RED,
+	GREEN,
+	BLUE,
+}				t_color;
 
 typedef struct s_map
 {
-	char	**matriz;
-	int		n_wall;
-	int		n_players;
-	int		*rgb_floor;
-	int		*rgb_celling;
-}	t_map;
+	char		**matriz;
+	int			n_wall;
+	int			n_players;
+	int			rgb_floor[3];
+	int			rgb_ceiling[3];
+	char		*tex_no;
+	char		*tex_so;
+	char		*tex_we;
+	char		*tex_ea;
+	t_color		colors;
+}				t_map;
 
 typedef struct s_player
 {
-	int		x_position;
-	int		y_position;
-	void	*img;
-}	t_player;
-
+	int			x_position;
+	int			y_position;
+	void		*img;
+}				t_player;
 
 typedef struct s_cub3d
 {
@@ -30,9 +41,11 @@ typedef struct s_cub3d
 	char		*map_route;
 	t_map		map;
 	t_player	player;
-}	t_cub3d;
+}				t_cub3d;
 
-int		main(int argc, char **argv);
-void	init_cub3d(t_cub3d *cub3d);
+int				main(int argc, char **argv);
+void			init_cub3d(t_cub3d *cub3d);
+void			check_name(char *filename);
+void	read_map(char *filename, t_cub3d *cub3d);
 
 #endif
