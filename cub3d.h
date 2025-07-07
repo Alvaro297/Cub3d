@@ -57,5 +57,6 @@ int				is_line(char *line);
 void			set_player(t_cub3d *cub3d, int x, int y, char dir);
 int				is_closed(char **map, int x, int y);
 void			validate_map(t_cub3d *cub3d);
+void			free_cub3d(t_cub3d *cub3d);
 
 #endif
