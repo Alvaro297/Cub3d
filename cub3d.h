@@ -23,6 +23,7 @@ typedef struct s_map
 	char		*tex_so;
 	char		*tex_we;
 	char		*tex_ea;
+	int			map_index;
 	t_color		colors;
 }				t_map;
 
@@ -46,6 +47,9 @@ typedef struct s_cub3d
 int				main(int argc, char **argv);
 void			init_cub3d(t_cub3d *cub3d);
 void			check_name(char *filename);
-void	read_map(char *filename, t_cub3d *cub3d);
+void			read_map(char *filename, t_cub3d *cub3d);
+void			ft_freedom(char **str);
+int				coun_lines(char *filename);
+int				is_line(char *line);
 
 #endif
