@@ -62,7 +62,6 @@ void	read_map(char *filename, t_cub3d *cub3d)
 	int		fd;
 	char	**map_lines;
 	char	*line;
-	int		map_index;
 	int		n_lines;
 
 	n_lines = coun_lines(filename);
@@ -70,17 +69,25 @@ void	read_map(char *filename, t_cub3d *cub3d)
 	if (!map_lines)
 		(printf("Error\nMalloc of map failed\n"), exit(1));
 	fd = open(filename, O_RDONLY);
-	map_index = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
 		handle_map_line(line, cub3d, map_lines);
-		printf("%s", line);
+		/* printf("%s", line); */
 		free(line);
 	}
 	map_lines[cub3d->map.map_index] = NULL;
 	cub3d->map.matriz = map_lines;
+	int	i = 0;
+
+	printf("=== MAP ===\n");
+	while (cub3d->map.matriz[i])
+	{
+		printf("%s", cub3d->map.matriz[i]);
+		i++;
+	}
+	printf("===========\n");
 	close(fd);
 }

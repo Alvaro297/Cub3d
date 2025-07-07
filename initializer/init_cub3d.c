@@ -8,6 +8,7 @@ static t_map	init_map(void)
 	map.n_players = 0;
 	map.n_wall = 0;
 	map.rgb_floor[0] = -1;
+	map.map_index = 0;
 	map.rgb_floor[1] = -1;
 	map.rgb_floor[2] = -1;
 	map.rgb_ceiling[0] = -1;
@@ -26,6 +27,7 @@ static t_player	init_player(void)
 
 	player.img = NULL;
 	player.x_position = 0;
+	player.player_count = 0;
 	player.y_position = 0;
 	return (player);
 }

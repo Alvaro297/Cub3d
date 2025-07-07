@@ -7,6 +7,7 @@ static void	cub3d(char *argv)
 	check_name(argv);
 	init_cub3d(&cub3d);
 	read_map(argv, &cub3d);
+	validate_map(&cub3d);
 }
 
 int	main(int argc, char **argv)

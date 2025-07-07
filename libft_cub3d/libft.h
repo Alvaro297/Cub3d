@@ -6,7 +6,7 @@
 /*   By: astefane <astefane@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:50:49 by alvamart          #+#    #+#             */
-/*   Updated: 2025/06/30 17:33:36 by astefane         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:43:55 by astefane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //LIBS//
 # include <string.h>
 # include <stdlib.h>
+#include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 
