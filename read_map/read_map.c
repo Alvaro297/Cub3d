@@ -79,14 +79,6 @@ void	read_map(char *filename, t_cub3d *cub3d)
 	}
 	map_lines[cub3d->map.map_index] = NULL;
 	cub3d->map.matriz = map_lines;
-	int	i = 0;
-
-	printf("=== MAP ===\n");
-	while (cub3d->map.matriz[i])
-	{
-		printf("%s", cub3d->map.matriz[i]);
-		i++;
-	}
-	printf("===========\n");
+	get_next_line(fd, 1);
 	close(fd);
 }

@@ -13,7 +13,15 @@ void	set_player(t_cub3d *cub3d, int x, int y, char dir)
 		cub3d->player.angle = 0.0;
 	else if (dir == 'W')
 		cub3d->player.angle = 180.0;
-	printf("posicion x %d\n posicion y %d\n posicion del angulo %f\n posicon de la angulo %c\n", x, y, cub3d->player.angle, dir);
+	/* printf(
+		"Jugador:\n"
+		"  Posición X: %d\n"
+		"  Posición Y: %d\n"
+		"  Ángulo: %.1f\n"
+		"  Nº de jugar %d\n"
+		"  Dirección: %c\n",
+		x, y, cub3d->player.angle, cub3d->player.player_count, dir
+	); */
 
 }
 
@@ -33,11 +41,9 @@ void	validate_map(t_cub3d *cub3d)
 {
 	int		x;
 	int		y;
-	int		player_count;
 	char	c;
 
 	y = 0;
-	player_count = 0;
 	while (cub3d->map.matriz[y])
 	{
 		x = 0;
@@ -45,10 +51,7 @@ void	validate_map(t_cub3d *cub3d)
 		{
 			c = cub3d->map.matriz[y][x];
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-			{
-				set_player(cub3d, x, y, c);
-				player_count++;
-			}
+				(set_player(cub3d, x, y, c), cub3d->player.player_count++);
 			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W'
 				|| c == '\0')
 			{
@@ -59,7 +62,6 @@ void	validate_map(t_cub3d *cub3d)
 		}
 		y++;
 	}
-	printf("N de jugador %d\n", player_count);
 	if (cub3d->player.player_count != 1)
 		(printf("Error\nincorrect nº of player\n"), exit(1));
 }
