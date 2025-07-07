@@ -6,7 +6,7 @@
 /*   By: astefane <astefane@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:50:49 by alvamart          #+#    #+#             */
-/*   Updated: 2025/07/07 17:43:55 by astefane         ###   ########.fr       */
+/*   Updated: 2025/07/08 00:52:27 by astefane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,14 @@ void	ft_putstr_fd(char *s, int fd);
 //******//
 
 // ** GNL **//
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int mode);
+void	*ft_memcpy_gnl(void *dst, const void *src, size_t n);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+char	*ft_strchr_gnl(char *s, int c);
+char	*ft_reading(int fd, char *str);
+char	*ft_get_line(char *str);
+char	*ft_cleanline(char *str);
+char	*ft_free(char **str);
 //*****//
 
 //BONUS//
@@ -94,4 +101,5 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 //*****//
+
 #endif
