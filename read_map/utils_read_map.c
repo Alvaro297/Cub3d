@@ -2,11 +2,10 @@
 
 int	is_line(char *line)
 {
-	while (*line)
+	while (*line && *line != '\n')
 	{
 		if (*line != ' ' && *line != '0' && *line != '1'
-			&& *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W'
-			&& *line != '\n')
+			&& *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W')
 			return (0);
 		line++;
 	}
@@ -16,22 +15,22 @@ int	is_line(char *line)
 int	coun_lines(char *filename)
 {
 	int		fd;
-	int		i;
+	int		count;
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		(printf("Error\nCould'nt open map\n"), exit(1));
-	i = 0;
-	while (1)
 	{
-		line = get_next_line(fd);
-		if (!line || line == (void *)0)
-			break ;
-		if (is_line(line))
-			i++;
+		(printf("Error\nCould not open file\n"), exit(1));
+	}
+	count = 0;
+	line = get_next_line(fd, 0);
+	while (line)
+	{
+		count++;
 		free(line);
+		line = get_next_line(fd, 0);
 	}
 	close(fd);
-	return (i);
+	return (count);
 }

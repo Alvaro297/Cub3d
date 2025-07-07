@@ -71,11 +71,10 @@ void	read_map(char *filename, t_cub3d *cub3d)
 	fd = open(filename, O_RDONLY);
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd, 0);
 		if (!line)
 			break ;
 		handle_map_line(line, cub3d, map_lines);
-		/* printf("%s", line); */
 		free(line);
 	}
 	map_lines[cub3d->map.map_index] = NULL;
