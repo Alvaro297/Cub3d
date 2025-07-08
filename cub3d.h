@@ -17,6 +17,7 @@ typedef struct s_map
 	char		**matriz;
 	int			n_wall;
 	int			n_players;
+	int			count_textures;
 	int			rgb_floor[3];
 	int			rgb_ceiling[3];
 	char		*tex_no;
@@ -29,12 +30,12 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int			x_position;
-	int			y_position;
-	char		direction;
-	double		angle;
-	int			player_count;
-	void		*img;
+	double			x_position;
+	double			y_position;
+	char			direction;
+	double			angle;
+	int				player_count;
+	void			*img;
 }				t_player;
 
 typedef struct s_cub3d
@@ -54,9 +55,12 @@ void			read_map(char *filename, t_cub3d *cub3d);
 void			ft_freedom(char **str);
 int				coun_lines(char *filename);
 int				is_line(char *line);
+int				check_rgb(char *str, int rgb[3]);
 void			set_player(t_cub3d *cub3d, int x, int y, char dir);
 int				is_closed(char **map, int x, int y);
 void			validate_map(t_cub3d *cub3d);
+void			validate_config(t_cub3d *cub3d);
 void			free_cub3d(t_cub3d *cub3d);
+void			ft_free_map(char **map_lines, t_cub3d *cub3d);
 
 #endif

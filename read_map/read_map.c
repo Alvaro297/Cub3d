@@ -1,15 +1,16 @@
 #include "./cub3d.h"
 
-void	check_name(char *filename)
+static int	error_rgb(char **splited, char *trimmed, char *msg)
 {
-	int	len;
-
-	len = ft_strlen(filename);
-	if (len < 4 || ft_strncmp(filename + len - 4, ".cub", 4) != 0)
-		(printf("Error\nIncorrect extension\n"), exit(1));
+	if (trimmed)
+		free(trimmed);
+	if (splited)
+		ft_freedom(splited);
+	printf("Error\n%s\n", msg);
+	return (1);
 }
 
-void	check_rgb(char *str, int rgb[3])
+int	check_rgb(char *str, int rgb[3])
 {
 	char	**splited;
 	char	*trimmed;
@@ -18,43 +19,70 @@ void	check_rgb(char *str, int rgb[3])
 
 	splited = ft_split(str, ',');
 	if (!splited || !splited[0] || !splited[1] || !splited[2] || splited[3])
-		(printf("Error\nIncorrect RGB format\n"), exit(1));
+		return (error_rgb(splited, NULL, "Incorrect RGB format"));
 	i = -1;
 	while (++i < 3)
 	{
 		trimmed = ft_strtrim(splited[i], " \t\n");
 		if (!trimmed || *trimmed == '\0')
-			(printf("Error\nMissing RGB\n"), exit(1));
+			return (error_rgb(splited, trimmed, "Missing RGB"));
 		j = -1;
 		while (trimmed[++j])
 			if (!ft_isdigit(trimmed[j]))
-				(printf("Error\nRGB is not numeric\n"), exit(1));
+				return (error_rgb(splited, trimmed, "RGB is not numeric"));
 		rgb[i] = ft_atoi(trimmed);
 		if (rgb[i] < 0 || rgb[i] > 255)
-			(printf("Error\nRGB value out of range\n"), exit(1));
+			return (error_rgb(splited, trimmed, "RGB values is out of range"));
 		free(trimmed);
 	}
-	i = -1;
 	ft_freedom(splited);
+	return (0);
 }
 
-static void	handle_map_line(char *line, t_cub3d *cub3d,
+static void	set_texture(t_cub3d *cub3d, char *line)
+{
+	if (!ft_strncmp(line, "NO ", 3))
+	{
+		cub3d->map.tex_no = ft_strtrim(line + 3, " \n");
+		cub3d->map.count_textures++;
+	}
+	else if (!ft_strncmp(line, "SO ", 3))
+	{
+		cub3d->map.tex_so = ft_strtrim(line + 3, " \n");
+		cub3d->map.count_textures++;
+	}
+	else if (!ft_strncmp(line, "WE ", 3))
+	{
+		cub3d->map.tex_we = ft_strtrim(line + 3, " \n");
+		cub3d->map.count_textures++;
+	}
+	else if (!ft_strncmp(line, "EA ", 3))
+	{
+		cub3d->map.tex_ea = ft_strtrim(line + 3, " \n");
+		cub3d->map.count_textures++;
+	}
+}
+
+static int	handle_map_line(char *line, t_cub3d *cub3d,
 	char **map_lines)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		cub3d->map.tex_no = ft_strdup(ft_strtrim(line + 3, " \n"));
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		cub3d->map.tex_so = ft_strdup(ft_strtrim(line + 3, " \n"));
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-		cub3d->map.tex_we = ft_strdup(ft_strtrim(line + 3, " \n"));
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-		cub3d->map.tex_ea = ft_strdup(ft_strtrim(line + 3, " \n"));
-	else if (ft_strncmp(line, "C ", 2) == 0)
-		check_rgb(line + 2, cub3d->map.rgb_ceiling);
-	else if (ft_strncmp(line, "F ", 2) == 0)
-		check_rgb(line + 2, cub3d->map.rgb_floor);
+	if (!ft_strncmp(line, "NO ", 3))
+		set_texture(cub3d, line);
+	else if (!ft_strncmp(line, "SO ", 3))
+		set_texture(cub3d, line);
+	else if (!ft_strncmp(line, "WE ", 3))
+		set_texture(cub3d, line);
+	else if (!ft_strncmp(line, "EA ", 3))
+		set_texture(cub3d, line);
+	else if (!ft_strncmp(line, "C ", 2)
+		&& check_rgb(line + 2, cub3d->map.rgb_ceiling))
+		return (ft_free_map(map_lines, cub3d), 1);
+	else if (!ft_strncmp(line, "F ", 2)
+		&& check_rgb(line + 2, cub3d->map.rgb_floor))
+		return (ft_free_map(map_lines, cub3d), 1);
 	else if (is_line(line))
 		map_lines[cub3d->map.map_index++] = ft_strdup(line);
+	return (0);
 }
 
 void	read_map(char *filename, t_cub3d *cub3d)
@@ -74,7 +102,10 @@ void	read_map(char *filename, t_cub3d *cub3d)
 		line = get_next_line(fd, 0);
 		if (!line)
 			break ;
-		handle_map_line(line, cub3d, map_lines);
+		if (handle_map_line(line, cub3d, map_lines) == 1)
+			(free(line), get_next_line(fd, 1), free_cub3d(cub3d), exit(1));
+		if (cub3d->map.count_textures != 4)
+			(free(line), get_next_line(fd, 1), free_cub3d(cub3d), printf("Error\n Incorrect nº of textures\n") ,exit(1));
 		free(line);
 	}
 	map_lines[cub3d->map.map_index] = NULL;
