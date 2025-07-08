@@ -13,16 +13,6 @@ void	set_player(t_cub3d *cub3d, int x, int y, char dir)
 		cub3d->player.angle = 0.0;
 	else if (dir == 'W')
 		cub3d->player.angle = 180.0;
-	/* printf(
-		"Jugador:\n"
-		"  Posición X: %d\n"
-		"  Posición Y: %d\n"
-		"  Ángulo: %.1f\n"
-		"  Nº de jugar %d\n"
-		"  Dirección: %c\n",
-		x, y, cub3d->player.angle, cub3d->player.player_count, dir
-	); */
-
 }
 
 int	is_closed(char **map, int x, int y)
@@ -56,12 +46,27 @@ void	validate_map(t_cub3d *cub3d)
 				|| c == '\0')
 			{
 				if (!is_closed(cub3d->map.matriz, x, y))
-					(printf("Error\nMap is not closed\n"), exit(1));
+					(printf("Error\nMap is not closed\n"), free_cub3d(cub3d), exit(1));
 			}
 			x++;
 		}
 		y++;
 	}
 	if (cub3d->player.player_count != 1)
-		(printf("Error\nincorrect nº of player\n"), exit(1));
+		(printf("Error\nincorrect nº of player\n"), free_cub3d(cub3d), exit(1));
+}
+
+void	validate_config(t_cub3d *cub3d)
+{
+	if (!cub3d->map.tex_no || !cub3d->map.tex_so
+		|| !cub3d->map.tex_we || !cub3d->map.tex_ea)
+		(printf("Error\nMissing textures\n"), free_cub3d(cub3d), exit(1));
+	if (cub3d->map.rgb_floor[0] == -1
+		|| cub3d->map.rgb_floor[1] == -1
+		|| cub3d->map.rgb_floor[2] == -1)
+		(printf("Error\nMissing floor color\n"), free_cub3d(cub3d), exit(1));
+	if (cub3d->map.rgb_ceiling[0] == -1
+		|| cub3d->map.rgb_ceiling[1] == -1
+		|| cub3d->map.rgb_ceiling[2] == -1)
+		(printf("Error\nMissing ceiling color\n"), free_cub3d(cub3d), exit(1));
 }

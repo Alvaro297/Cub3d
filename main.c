@@ -26,37 +26,14 @@ static void	print_cub3d(t_cub3d *cub3d)
 		i++;
 	}
 	printf("\n=== JUGADOR ===\n");
-	printf("Posición X: %d\n", cub3d->player.x_position);
-	printf("Posición Y: %d\n", cub3d->player.y_position);
+	printf("Posición X: %.1f\n", cub3d->player.x_position);
+	printf("Posición Y: %.1f\n", cub3d->player.y_position);
 	printf("Dirección: %c\n", cub3d->player.direction);
 	printf("Ángulo: %.1f\n", cub3d->player.angle);
 	printf("================\n");
 }
 
-void	free_cub3d(t_cub3d *cub3d)
-{
-	int	i;
 
-	// Liberar texturas
-	if (cub3d->map.tex_no)
-		free(cub3d->map.tex_no);
-	if (cub3d->map.tex_so)
-		free(cub3d->map.tex_so);
-	if (cub3d->map.tex_we)
-		free(cub3d->map.tex_we);
-	if (cub3d->map.tex_ea)
-		free(cub3d->map.tex_ea);
-	if (cub3d->map.matriz)
-	{
-		i = 0;
-		while (cub3d->map.matriz[i])
-		{
-			free(cub3d->map.matriz[i]);
-			i++;
-		}
-		free(cub3d->map.matriz);
-	}
-}
 static void	cub3d(char *argv)
 {
 	t_cub3d	cub3d;
@@ -64,6 +41,7 @@ static void	cub3d(char *argv)
 	check_name(argv);
 	init_cub3d(&cub3d);
 	read_map(argv, &cub3d);
+	validate_config(&cub3d);
 	validate_map(&cub3d);
 	print_cub3d(&cub3d);
 	free_cub3d(&cub3d);

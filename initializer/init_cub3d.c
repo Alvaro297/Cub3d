@@ -7,6 +7,7 @@ static t_map	init_map(void)
 	map.matriz = NULL;
 	map.n_players = 0;
 	map.n_wall = 0;
+	map.count_textures = 0;
 	map.rgb_floor[0] = -1;
 	map.map_index = 0;
 	map.rgb_floor[1] = -1;

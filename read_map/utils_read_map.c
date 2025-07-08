@@ -34,3 +34,12 @@ int	coun_lines(char *filename)
 	close(fd);
 	return (count);
 }
+
+void	check_name(char *filename)
+{
+	int	len;
+
+	len = ft_strlen(filename);
+	if (len < 4 || ft_strncmp(filename + len - 4, ".cub", 4) != 0)
+		(printf("Error\nIncorrect extension\n"), exit(1));
+}
