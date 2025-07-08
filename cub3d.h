@@ -4,6 +4,10 @@
 # include "./libft_cub3d/libft.h"
 # include "./minilibx-linux/mlx.h"
 # include "./minilibx-linux/mlx_int.h"
+# include <math.h>
+
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
 
 typedef enum s_color
 {
@@ -14,17 +18,18 @@ typedef enum s_color
 
 typedef struct s_map
 {
-	char		**matriz;
-	int			n_wall;
-	int			n_players;
-	int			rgb_floor[3];
-	int			rgb_ceiling[3];
-	char		*tex_no;
-	char		*tex_so;
-	char		*tex_we;
-	char		*tex_ea;
-	int			map_index;
-	t_color		colors;
+	char			**matriz;
+	int				n_wall;
+	int				n_players;
+	
+	int				rgb_floor[3];
+	int				rgb_ceiling[3];
+	char			*tex_no;
+	char			*tex_so;
+	char			*tex_we;
+	char			*tex_ea;
+	int				map_index;
+	t_color			colors;
 }				t_map;
 
 typedef struct s_player
@@ -58,5 +63,6 @@ void			set_player(t_cub3d *cub3d, int x, int y, char dir);
 int				is_closed(char **map, int x, int y);
 void			validate_map(t_cub3d *cub3d);
 void			free_cub3d(t_cub3d *cub3d);
+void			init_raycasting(t_cub3d *cub3d);
 
 #endif
