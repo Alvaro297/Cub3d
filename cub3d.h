@@ -45,7 +45,12 @@ typedef struct s_player
 
 typedef struct s_raycasting
 {
-	
+	double	*delta_dist_x;
+	double	*delta_dist_y;
+	double	*raydir_x;
+	double	*raydir_y;
+	short	*step_x;
+	short	*step_y;
 }				t_raycasting;
 
 typedef struct s_cub3d

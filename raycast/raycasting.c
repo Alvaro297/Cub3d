@@ -26,7 +26,7 @@ static void	starting_raycasting(t_cub3d *cub3d, char pos_player)
 		printf("Error\n");
 }
 
-double	*fill_raydirx(t_cub3d *cub3d)
+static double	*fill_raydirx(t_cub3d *cub3d)
 {
 	double	*raydir_x;
 	double	camera;
@@ -46,7 +46,7 @@ double	*fill_raydirx(t_cub3d *cub3d)
 	return (raydir_x);
 }
 
-double *fill_raydiry(t_cub3d *cub3d)
+static double	*fill_raydiry(t_cub3d *cub3d)
 {
 	double *raydir_y;
 	double camera;
@@ -66,12 +66,28 @@ double *fill_raydiry(t_cub3d *cub3d)
 	return (raydir_y);
 }
 
-void	init_raycast(t_cub3d *cub3d)
+void	dda_algorithm(t_cub3d *cub3d)
 {
-	double	*raydir_x;
-	double	*raydir_y;
+	int		x;
 
+	cub3d->raycast.delta_dist_x = malloc(sizeof(double) * SCREEN_WIDTH);
+	cub3d->raycast.delta_dist_y = malloc(sizeof(double) * SCREEN_WIDTH);
+	x = 0;
+	while (x < SCREEN_WIDTH)
+	{
+		cub3d->raycast.delta_dist_x[x] = sqrt(1
+			+ (cub3d->raycast.raydir_y[x] / cub3d->raycast.raydir_x[x])^2);
+		cub3d->raycast.delta_dist_y[x] = sqrt(1
+			+ (cub3d->raycast.raydir_x[x] / cub3d->raycast.raydir_y[x])^2);
+		x++;
+	}
+	steps(cub3d);
+}
+
+void	raycast(t_cub3d *cub3d)
+{
 	starting_raycasting(cub3d, cub3d->player.direction);
-	raydir_x = fill_raydirx(cub3d);
-	raydir_y = fill_raydiry(cub3d);
+	cub3d->raycast.raydir_x = fill_raydirx(cub3d);
+	cub3d->raycast.raydir_y = fill_raydiry(cub3d);
+	dda_algorithm(cub3d);
 }
