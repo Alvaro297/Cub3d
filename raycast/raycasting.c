@@ -17,7 +17,7 @@ static void	starting_raycasting(t_cub3d *cub3d, char pos_player)
 		cub3d->player.direccion_y = 0;
 		cub3d->player.direccion_x = 1;
 	}
-	else if (pos_player == 4)
+	else if (pos_player == 'W')
 	{
 		cub3d->player.direccion_y = 1;
 		cub3d->player.direccion_x = 0;
@@ -26,40 +26,40 @@ static void	starting_raycasting(t_cub3d *cub3d, char pos_player)
 		printf("Error\n");
 }
 
-float	*fill_raydirx(t_cub3d *cub3d)
+double	*fill_raydirx(t_cub3d *cub3d)
 {
-	float	*raydir_x;
-	float	camera;
+	double	*raydir_x;
+	double	camera;
 	int		i;
-	float	plane_x;
+	double	plane_x;
 
 	i = 0;
-	raydir_x = malloc(sizeof(float) * SCREEN_WIDTH);
+	raydir_x = malloc(sizeof(double) * SCREEN_WIDTH);
 	camera = 0;
-	plane_x = -cub3d->player.x_position * 0.66;
+	plane_x = -cub3d->player.direccion_x * 0.66;
 	while (i < SCREEN_WIDTH)
 	{
-		camera = 2 * i / (float) SCREEN_WIDTH -1;
+		camera = 2 * i / (double) SCREEN_WIDTH -1;
 		raydir_x[i] = cub3d->player.direccion_x + plane_x * camera;
 		i++;
 	}
 	return (raydir_x);
 }
 
-float *fill_raydiry(t_cub3d *cub3d)
+double *fill_raydiry(t_cub3d *cub3d)
 {
-	float *raydir_y;
-	float camera;
+	double *raydir_y;
+	double camera;
 	int i;
-	float	plane_y;
+	double	plane_y;
 
-	raydir_y = malloc(sizeof(float) * SCREEN_WIDTH);
+	raydir_y = malloc(sizeof(double) * SCREEN_WIDTH);
 	i = 0;
 	camera = 0;
-	plane_y = -cub3d->player.y_position * 0.66;
+	plane_y = -cub3d->player.direccion_y * 0.66;
 	while (i < SCREEN_WIDTH)
 	{
-		camera = 2 * i / (float)SCREEN_WIDTH - 1;
+		camera = 2 * i / (double)SCREEN_WIDTH - 1;
 		raydir_y[i] = cub3d->player.direccion_y + plane_y * camera;
 		i++;
 	}
@@ -68,10 +68,10 @@ float *fill_raydiry(t_cub3d *cub3d)
 
 void	init_raycast(t_cub3d *cub3d)
 {
-	float	*raydir_x;
-	float	*raydir_y;
+	double	*raydir_x;
+	double	*raydir_y;
 
 	starting_raycasting(cub3d, cub3d->player.direction);
 	raydir_x = fill_raydirx(cub3d);
-	raydir_y = fill_raydirxy(cub3d);
+	raydir_y = fill_raydiry(cub3d);
 }

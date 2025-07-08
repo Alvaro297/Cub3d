@@ -21,7 +21,6 @@ typedef struct s_map
 	char			**matriz;
 	int				n_wall;
 	int				n_players;
-	
 	int				rgb_floor[3];
 	int				rgb_ceiling[3];
 	char			*tex_no;
@@ -34,22 +33,30 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int			x_position;
-	int			y_position;
+	double		x_position;
+	double		y_position;
 	char		direction;
 	double		angle;
 	int			player_count;
+	double		direccion_x;
+	double		direccion_y;
 	void		*img;
 }				t_player;
 
+typedef struct s_raycasting
+{
+	
+}				t_raycasting;
+
 typedef struct s_cub3d
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	char		*map_route;
-	t_map		map;
-	t_player	player;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	char			*map_route;
+	t_map			map;
+	t_player		player;
+	t_raycasting	raycast;
 }				t_cub3d;
 
 int				main(int argc, char **argv);
@@ -64,5 +71,4 @@ int				is_closed(char **map, int x, int y);
 void			validate_map(t_cub3d *cub3d);
 void			free_cub3d(t_cub3d *cub3d);
 void			init_raycasting(t_cub3d *cub3d);
-
 #endif
