@@ -69,16 +69,18 @@ static double	*fill_raydiry(t_cub3d *cub3d)
 void	dda_algorithm(t_cub3d *cub3d)
 {
 	int		x;
+	double	ratio_x;
+	double	ratio_y;
 
 	cub3d->raycast.delta_dist_x = malloc(sizeof(double) * SCREEN_WIDTH);
 	cub3d->raycast.delta_dist_y = malloc(sizeof(double) * SCREEN_WIDTH);
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
-		cub3d->raycast.delta_dist_x[x] = sqrt(1
-			+ (cub3d->raycast.raydir_y[x] / cub3d->raycast.raydir_x[x])^2);
-		cub3d->raycast.delta_dist_y[x] = sqrt(1
-			+ (cub3d->raycast.raydir_x[x] / cub3d->raycast.raydir_y[x])^2);
+		ratio_x = cub3d->raycast.raydir_y[x] / cub3d->raycast.raydir_x[x];
+		ratio_y = cub3d->raycast.raydir_x[x] / cub3d->raycast.raydir_y[x];
+		cub3d->raycast.delta_dist_x[x] = sqrt(1 + ratio_x * ratio_x);
+		cub3d->raycast.delta_dist_y[x] = sqrt(1 + ratio_y * ratio_y);
 		x++;
 	}
 	steps(cub3d);

@@ -5,6 +5,7 @@
 # include "./minilibx-linux/mlx.h"
 # include "./minilibx-linux/mlx_int.h"
 # include <math.h>
+# include <stdbool.h>
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -49,6 +50,8 @@ typedef struct s_raycasting
 	double	*delta_dist_y;
 	double	*raydir_x;
 	double	*raydir_y;
+	double	*sideDist_x;
+	double	*sideDist_y;
 	short	*step_x;
 	short	*step_y;
 }				t_raycasting;
@@ -76,4 +79,5 @@ int				is_closed(char **map, int x, int y);
 void			validate_map(t_cub3d *cub3d);
 void			free_cub3d(t_cub3d *cub3d);
 void			init_raycasting(t_cub3d *cub3d);
+void			steps(t_cub3d *cub3d);
 #endif
