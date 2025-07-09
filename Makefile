@@ -17,8 +17,10 @@ SRCS := \
 	main.c \
 	initializer/init_cub3d.c \
 	read_map/read_map.c \
+	read_map/handle_map.c \
 	read_map/utils_read_map.c \
 	read_map/validate_map.c \
+	read_map/utils_validate_map.c \
 	freedoom/freedoom.c \
 
 OBJ_FILES := $(SRCS:%.c=$(OBJ_DIR)/%.o)

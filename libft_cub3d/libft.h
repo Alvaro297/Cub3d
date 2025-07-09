@@ -6,7 +6,7 @@
 /*   By: astefane <astefane@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:50:49 by alvamart          #+#    #+#             */
-/*   Updated: 2025/07/08 00:52:27 by astefane         ###   ########.fr       */
+/*   Updated: 2025/07/09 20:36:52 by astefane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <sys/stat.h>
+
 
 # define BUFFER_SIZE 10
 

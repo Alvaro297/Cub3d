@@ -19,6 +19,7 @@ static t_map	init_map(void)
 	map.tex_so = NULL;
 	map.tex_we = NULL;
 	map.tex_ea = NULL;
+	map.parse = PARSE_TEXTURES;
 	return (map);
 }
 
