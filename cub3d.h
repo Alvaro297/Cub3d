@@ -54,6 +54,11 @@ typedef struct s_raycasting
 	double	*sideDist_y;
 	short	*step_x;
 	short	*step_y;
+	bool	*is_horizontal;
+	double	*perp_wall_dist;
+	double	*wall_hit_x;
+	double	*wall_hit_y;
+	char	*hit_type;
 }				t_raycasting;
 
 typedef struct s_cub3d
@@ -80,4 +85,6 @@ void			validate_map(t_cub3d *cub3d);
 void			free_cub3d(t_cub3d *cub3d);
 void			init_raycasting(t_cub3d *cub3d);
 void			steps(t_cub3d *cub3d);
+void			free_raycast(t_cub3d *cub3d);
+void			reinit_raycast(t_cub3d *cub3d);
 #endif

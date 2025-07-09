@@ -72,8 +72,6 @@ void	dda_algorithm(t_cub3d *cub3d)
 	double	ratio_x;
 	double	ratio_y;
 
-	cub3d->raycast.delta_dist_x = malloc(sizeof(double) * SCREEN_WIDTH);
-	cub3d->raycast.delta_dist_y = malloc(sizeof(double) * SCREEN_WIDTH);
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
@@ -89,7 +87,6 @@ void	dda_algorithm(t_cub3d *cub3d)
 void	raycast(t_cub3d *cub3d)
 {
 	starting_raycasting(cub3d, cub3d->player.direction);
-	cub3d->raycast.raydir_x = fill_raydirx(cub3d);
-	cub3d->raycast.raydir_y = fill_raydiry(cub3d);
+	reinit_raycast(cub3d);
 	dda_algorithm(cub3d);
 }
