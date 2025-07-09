@@ -20,9 +20,7 @@ int	coun_lines(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
 		(printf("Error\nCould not open file\n"), exit(1));
-	}
 	count = 0;
 	line = get_next_line(fd, 0);
 	while (line)
@@ -42,4 +40,15 @@ void	check_name(char *filename)
 	len = ft_strlen(filename);
 	if (len < 4 || ft_strncmp(filename + len - 4, ".cub", 4) != 0)
 		(printf("Error\nIncorrect extension\n"), exit(1));
+}
+
+int	is_blank_line(char *line)
+{
+	while (*line)
+	{
+		if (*line != ' ' && *line != '\t' && *line != '\n' && *line != '\r')
+			return (0);
+		line++;
+	}
+	return (1);
 }

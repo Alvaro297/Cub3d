@@ -42,6 +42,7 @@ static void	cub3d(char *argv)
 	init_cub3d(&cub3d);
 	read_map(argv, &cub3d);
 	validate_config(&cub3d);
+	validate_textures(&cub3d);
 	validate_map(&cub3d);
 	print_cub3d(&cub3d);
 	free_cub3d(&cub3d);
