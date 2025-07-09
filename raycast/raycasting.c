@@ -66,27 +66,27 @@ static double	*fill_raydiry(t_cub3d *cub3d)
 	return (raydir_y);
 }
 
-void	dda_algorithm(t_cub3d *cub3d)
+void	raycast(t_cub3d *cub3d)
 {
 	int		x;
 	double	ratio_x;
 	double	ratio_y;
+	int	map_x;
+	int	map_y;
 
+	map_x = (int)cub3d->player.x_position;
+	map_y = (int)cub3d->player.y_position;
 	x = 0;
+	starting_raycasting(cub3d, cub3d->player.direction);
 	while (x < SCREEN_WIDTH)
 	{
-		ratio_x = cub3d->raycast.raydir_y[x] / cub3d->raycast.raydir_x[x];
-		ratio_y = cub3d->raycast.raydir_x[x] / cub3d->raycast.raydir_y[x];
-		cub3d->raycast.delta_dist_x[x] = sqrt(1 + ratio_x * ratio_x);
-		cub3d->raycast.delta_dist_y[x] = sqrt(1 + ratio_y * ratio_y);
+		ratio_x = cub3d->raycast.raydir_y / cub3d->raycast.raydir_x;
+		ratio_y = cub3d->raycast.raydir_x / cub3d->raycast.raydir_y;
+		cub3d->raycast.delta_dist_x = sqrt(1 + ratio_x * ratio_x);
+		cub3d->raycast.delta_dist_y = sqrt(1 + ratio_y * ratio_y);
+		step_direccion(cub3d, map_x, map_y);
+		dda_loop(cub3d, map_x, map_y);
+		print_cub3d(cub3d);
 		x++;
 	}
-	steps(cub3d);
-}
-
-void	raycast(t_cub3d *cub3d)
-{
-	starting_raycasting(cub3d, cub3d->player.direction);
-	reinit_raycast(cub3d);
-	dda_algorithm(cub3d);
 }

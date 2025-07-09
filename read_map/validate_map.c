@@ -21,7 +21,7 @@ int	is_closed(char **map, int x, int y)
 		return (0);
 	if (!map[y][x - 1] || !map[y][x + 1])
 		return (0);
-	if (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
+	if (map[y - 1] == ' ' || map[y + 1] == ' '
 		|| map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
 		return (0);
 	return (1);
@@ -36,9 +36,9 @@ void	validate_map(t_cub3d *cub3d)
 	while (cub3d->map.matriz[y])
 	{
 		x = 0;
-		while (cub3d->map.matriz[y][x])
+		while (cub3d->map.matriz[y])
 		{
-			c = cub3d->map.matriz[y][x];
+			c = cub3d->map.matriz[y];
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 				(set_player(cub3d, x, y, c), cub3d->player.player_count++);
 			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W'
