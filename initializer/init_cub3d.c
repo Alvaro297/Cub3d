@@ -34,6 +34,17 @@ static t_player	init_player(void)
 	return (player);
 }
 
+static t_raycasting	init_raycasting(void)
+{
+	t_raycasting	raycast;
+
+	raycast.delta_dist_x = NULL;
+	raycast.delta_dist_y = NULL;
+	raycast.raydir_x = NULL;
+	raycast.raydir_y = NULL;
+	return (raycast);
+}
+
 void	init_cub3d(t_cub3d *cub3d)
 {
 	/* cub3d->mlx_ptr = mlx_init();
@@ -41,4 +52,5 @@ void	init_cub3d(t_cub3d *cub3d)
 	cub3d->img_ptr = mlx_new_image(cub3d->mlx_ptr, 1280, 720); */
 	cub3d->map = init_map();
 	cub3d->player = init_player();
+	cub3d->raycast = init_raycasting();
 }
