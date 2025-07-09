@@ -81,8 +81,10 @@ int				is_closed(char **map, int x, int y);
 void			validate_map(t_cub3d *cub3d);
 void			validate_config(t_cub3d *cub3d);
 void			free_cub3d(t_cub3d *cub3d);
-void			init_raycasting(t_cub3d *cub3d);
-void			steps(t_cub3d *cub3d);void			ft_free_map(char **map_lines, t_cub3d *cub3d);
 void			ft_free_map(char **map_lines, t_cub3d *cub3d);
 
+//** Raycasting **//
+void			init_raycasting(t_cub3d *cub3d);
+void			steps(t_cub3d *cub3d);
+void			dda_algorithm(t_cub3d *cub3d)
 #endif

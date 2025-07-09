@@ -1,6 +1,6 @@
 # include "../cub3d.h"
 
-void	step_direccion(t_cub3d *cub3d, t_raycasting *raycast, int x)
+static void	step_direccion(t_cub3d *cub3d, t_raycasting *raycast, int x)
 {
 	int	map_x;
 	int	map_y;
