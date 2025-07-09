@@ -19,17 +19,18 @@ typedef enum s_color
 
 typedef struct s_map
 {
-	char			**matriz;
-	int				n_wall;
-	int				n_players;
-	int				rgb_floor[3];
-	int				rgb_ceiling[3];
-	char			*tex_no;
-	char			*tex_so;
-	char			*tex_we;
-	char			*tex_ea;
-	int				map_index;
-	t_color			colors;
+	char		**matriz;
+	int			n_wall;
+	int			n_players;
+	int			count_textures;
+	int			rgb_floor[3];
+	int			rgb_ceiling[3];
+	char		*tex_no;
+	char		*tex_so;
+	char		*tex_we;
+	char		*tex_ea;
+	int			map_index;
+	t_color		colors;
 }				t_map;
 
 typedef struct s_player
@@ -79,12 +80,18 @@ void			read_map(char *filename, t_cub3d *cub3d);
 void			ft_freedom(char **str);
 int				coun_lines(char *filename);
 int				is_line(char *line);
+int				check_rgb(char *str, int rgb[3]);
 void			set_player(t_cub3d *cub3d, int x, int y, char dir);
 int				is_closed(char **map, int x, int y);
 void			validate_map(t_cub3d *cub3d);
+void			validate_config(t_cub3d *cub3d);
 void			free_cub3d(t_cub3d *cub3d);
+void			ft_free_map(char **map_lines, t_cub3d *cub3d);
+
+//** Raycasting **//
 void			init_raycasting(t_cub3d *cub3d);
 void			steps(t_cub3d *cub3d);
 void			free_raycast(t_cub3d *cub3d);
 void			reinit_raycast(t_cub3d *cub3d);
+void			dda_algorithm(t_cub3d *cub3d)
 #endif
