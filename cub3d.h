@@ -102,7 +102,8 @@ int				is_blank_line(char *line);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
 
 //** Raycasting **//
-void			init_raycasting(t_cub3d *cub3d);
+t_raycasting	init_raycasting(void);
+void			starting_raycasting(t_cub3d *cub3d, char pos_player);
 void			raycast(t_cub3d *cub3d);
 void			steps(t_cub3d *cub3d);
 void			dda_loop(t_cub3d *cub3d, int map_x, int map_y);

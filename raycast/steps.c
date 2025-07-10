@@ -53,8 +53,6 @@ void	wall_hit(t_cub3d *cub3d, bool is_horizontal, int map)
 
 void	dda_loop(t_cub3d *cub3d, int map_x, int map_y)
 {
-	bool	is_wall;
-
 	while (1)
 	{
 		if (cub3d->raycast.sideDist_x > cub3d->raycast.sideDist_y)
@@ -64,7 +62,7 @@ void	dda_loop(t_cub3d *cub3d, int map_x, int map_y)
 			if (cub3d->map.matriz[map_x][map_y] == '1'
 					|| cub3d->map.matriz[map_x][map_y] == '2')
 			{
-				wall_hit(cub3d, x, true, map_x);
+				wall_hit(cub3d, true, map_x);
 				cub3d->raycast.hit_type = cub3d->map.matriz[map_x][map_y];
 				break;
 			}
@@ -77,7 +75,7 @@ void	dda_loop(t_cub3d *cub3d, int map_x, int map_y)
 			if (cub3d->map.matriz[map_x][map_y] == '1'
 					|| cub3d->map.matriz[map_x][map_y] == '2')
 			{
-				wall_hit(cub3d, x, false, map_y);
+				wall_hit(cub3d, false, map_y);
 				cub3d->raycast.hit_type = cub3d->map.matriz[map_x][map_y];
 				break;
 			}

@@ -6,7 +6,7 @@
 /*   By: alvamart <alvamart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:32:42 by alvamart          #+#    #+#             */
-/*   Updated: 2025/07/09 20:42:57 by alvamart         ###   ########.fr       */
+/*   Updated: 2025/07/10 18:44:25 by alvamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static char	*find_out(char *str, char *to_find, size_t i, size_t n)
 	size_t	x;
 
 	x = 0;
-	while (to_find != '\0' )
+	while (to_find[x] != '\0' )
 	{
-		if (to_find != str[i + x] || n <= i + x)
+		if (to_find[x] != str[i + x] || n <= i + x)
 			return (NULL);
 		x++;
 	}

@@ -2,14 +2,12 @@
 
 static void	start_cub3d(t_cub3d *cub3d)
 {
+	starting_raycasting(cub3d, cub3d->player.direction);
 	while (1)
 	{
 		raycast(cub3d);
 	}
 }
-
-
-
 
 static void	cub3d(char *argv)
 {
