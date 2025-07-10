@@ -17,6 +17,13 @@ typedef enum s_color
 	BLUE,
 }				t_color;
 
+typedef enum e_parse_state
+{
+	PARSE_TEXTURES,
+	PARSE_COLORS,
+	PARSE_MAP
+}	t_parse_state;
+
 typedef struct s_map
 {
 	char		**matriz;
@@ -31,6 +38,7 @@ typedef struct s_map
 	char		*tex_ea;
 	int			map_index;
 	t_color		colors;
+	t_parse_state	parse;
 }				t_map;
 
 typedef struct s_player
@@ -84,9 +92,15 @@ int				check_rgb(char *str, int rgb[3]);
 void			set_player(t_cub3d *cub3d, int x, int y, char dir);
 int				is_closed(char **map, int x, int y);
 void			validate_map(t_cub3d *cub3d);
+void			validate_textures(t_cub3d *cub3d);
+int				check_texture_file(const char *path);
+int				check_texture_name(const char *path, const char *expected);
 void			validate_config(t_cub3d *cub3d);
 void			free_cub3d(t_cub3d *cub3d);
 void			ft_free_map(char **map_lines, t_cub3d *cub3d);
+int				is_blank_line(char *line);
+int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
+
 //** Raycasting **//
 void			init_raycasting(t_cub3d *cub3d);
 void			raycast(t_cub3d *cub3d);

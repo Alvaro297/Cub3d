@@ -26,7 +26,6 @@ int	is_closed(char **map, int x, int y)
 		return (0);
 	return (1);
 }
-
 void	validate_map(t_cub3d *cub3d)
 {
 	int		x;
@@ -69,4 +68,17 @@ void	validate_config(t_cub3d *cub3d)
 		|| cub3d->map.rgb_ceiling[1] == -1
 		|| cub3d->map.rgb_ceiling[2] == -1)
 		(printf("Error\nMissing ceiling color\n"), free_cub3d(cub3d), exit(1));
+}
+
+void	validate_textures(t_cub3d *cub3d)
+{
+	if (check_texture_file(cub3d->map.tex_no)
+		|| check_texture_name(cub3d->map.tex_no, "north")
+		|| check_texture_file(cub3d->map.tex_so)
+		|| check_texture_name(cub3d->map.tex_so, "south")
+		|| check_texture_file(cub3d->map.tex_we)
+		|| check_texture_name(cub3d->map.tex_we, "west")
+		|| check_texture_file(cub3d->map.tex_ea)
+		|| check_texture_name(cub3d->map.tex_ea, "east"))
+		(free_cub3d(cub3d), exit(1));
 }
