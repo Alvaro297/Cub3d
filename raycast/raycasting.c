@@ -66,12 +66,12 @@ void	raycast(t_cub3d *cub3d)
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
+		cub3d->raycast.raydir_x = fill_raydirx(cub3d, x);
+		cub3d->raycast.raydir_y = fill_raydiry(cub3d, x); 
 		ratio_x = cub3d->raycast.raydir_y / cub3d->raycast.raydir_x;
 		ratio_y = cub3d->raycast.raydir_x / cub3d->raycast.raydir_y;
 		cub3d->raycast.delta_dist_x = sqrt(1 + ratio_x * ratio_x);
 		cub3d->raycast.delta_dist_y = sqrt(1 + ratio_y * ratio_y);
-		cub3d->raycast.raydir_x = fill_raydirx(cub3d, x);
-		cub3d->raycast.raydir_y = fill_raydiry(cub3d, x); 
 		step_direccion(cub3d, map_x, map_y);
 		dda_loop(cub3d, map_x, map_y);
 		print_cub3d(cub3d);
