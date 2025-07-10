@@ -10,7 +10,7 @@ void	validate_map(t_cub3d *cub3d)
 	while (cub3d->map.matriz[y])
 	{
 		x = 0;
-		while (cub3d->map.matriz[y][x])
+		while (cub3d->map.matriz[y])
 		{
 			c = cub3d->map.matriz[y][x];
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')

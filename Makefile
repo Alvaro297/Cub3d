@@ -23,8 +23,8 @@ SRCS := \
 	read_map/utils_validate_map.c \
 	freedoom/freedoom.c \
 	raycast/raycasting.c \
-	raycast/reinit_raycast.c \
 	raycast/steps.c \
+	print_cub3d/print_cub3d.c
 
 OBJ_FILES := $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

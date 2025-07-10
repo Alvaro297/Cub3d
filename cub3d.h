@@ -55,19 +55,19 @@ typedef struct s_player
 
 typedef struct s_raycasting
 {
-	double	*delta_dist_x;
-	double	*delta_dist_y;
-	double	*raydir_x;
-	double	*raydir_y;
-	double	*sideDist_x;
-	double	*sideDist_y;
-	short	*step_x;
-	short	*step_y;
-	bool	*is_horizontal;
-	double	*perp_wall_dist;
-	double	*wall_hit_x;
-	double	*wall_hit_y;
-	char	*hit_type;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	raydir_x;
+	double	raydir_y;
+	double	sideDist_x;
+	double	sideDist_y;
+	short	step_x;
+	short	step_y;
+	bool	is_horizontal;
+	double	perp_wall_dist;
+	double	wall_hit_x;
+	double	wall_hit_y;
+	char	hit_type;
 }				t_raycasting;
 
 typedef struct s_cub3d
@@ -102,9 +102,12 @@ int				is_blank_line(char *line);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
 
 //** Raycasting **//
-void			init_raycasting(t_cub3d *cub3d);
+t_raycasting	init_raycasting(void);
+void			starting_raycasting(t_cub3d *cub3d, char pos_player);
+void			raycast(t_cub3d *cub3d);
 void			steps(t_cub3d *cub3d);
-void			free_raycast(t_cub3d *cub3d);
-void			reinit_raycast(t_cub3d *cub3d);
-void			dda_algorithm(t_cub3d *cub3d)
+void			dda_loop(t_cub3d *cub3d, int map_x, int map_y);
+void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
+//** Print_Cub3d **//
+void	print_cub3d(t_cub3d *cub3d);
 #endif
