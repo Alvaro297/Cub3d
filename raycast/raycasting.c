@@ -74,7 +74,7 @@ void	raycast(t_cub3d *cub3d)
 		cub3d->raycast.delta_dist_y = sqrt(1 + ratio_y * ratio_y);
 		step_direccion(cub3d, map_x, map_y);
 		dda_loop(cub3d, map_x, map_y);
-		print_cub3d(cub3d);
+		print_cub3d(cub3d, x);
 		x++;
 	}
 }

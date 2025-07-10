@@ -109,5 +109,5 @@ void			steps(t_cub3d *cub3d);
 void			dda_loop(t_cub3d *cub3d, int map_x, int map_y);
 void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 //** Print_Cub3d **//
-void	print_cub3d(t_cub3d *cub3d);
+void			print_cub3d(t_cub3d *cub3d, int x);
 #endif

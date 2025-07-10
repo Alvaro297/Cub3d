@@ -1,8 +1,20 @@
 # include "../cub3d.h"
 
-void	print_cub3d(t_cub3d *cub3d)
+void	print_cub3d(t_cub3d *cub3d, int x)
 {
-	int	i;
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+	
+	line_height = SCREEN_WIDTH / cub3d->raycast.perp_wall_dist;
+	draw_start = (SCREEN_HEIGHT / 2) - (line_height / 2);
+	draw_end = (SCREEN_HEIGHT / 2) + (line_height / 2);
+	if (draw_start < 0)
+		draw_start = 0;
+	if (draw_end > SCREEN_HEIGHT)
+		draw_end = SCREEN_HEIGHT - 1;
+	
+/*	int	i;
 
 	printf("=== TEXTURAS ===\n");
 	printf("NO: %s\n", cub3d->map.tex_no);
@@ -30,5 +42,5 @@ void	print_cub3d(t_cub3d *cub3d)
 	printf("Posición Y: %.1f\n", cub3d->player.y_position);
 	printf("Dirección: %c\n", cub3d->player.direction);
 	printf("Ángulo: %.1f\n", cub3d->player.angle);
-	printf("================\n");
+	printf("================\n");*/
 }
