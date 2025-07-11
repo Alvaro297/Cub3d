@@ -1,6 +1,34 @@
 # include "../cub3d.h"
 
-void	print_cub3d(t_cub3d *cub3d, int x)
+void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
+{
+	int	y;
+
+	y = 0;
+	while (y < draw_start)
+		mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, y++, GREY);
+	while (draw_start < draw_end)
+	{
+		if (cub3d->raycast.is_horizontal)
+		{
+			if ((int) cub3d->raycast.raydir_y < 0)
+				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, RED);
+			else
+				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, BLUE);
+		}
+		else
+		{
+			if ((int) cub3d->raycast.raydir_x < 0)
+				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, GREEN);
+			else
+				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, YELLOW);
+		}
+	}
+	while (draw_end < SCREEN_HEIGHT)
+		mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_end++, BLACK);
+}
+
+void	 print_cub3d(t_cub3d *cub3d, int x)
 {
 	int	line_height;
 	int	draw_start;
@@ -13,7 +41,8 @@ void	print_cub3d(t_cub3d *cub3d, int x)
 		draw_start = 0;
 	if (draw_end > SCREEN_HEIGHT)
 		draw_end = SCREEN_HEIGHT - 1;
-	
+	put_all(cub3d, draw_start, draw_end, x);
+}
 /*	int	i;
 
 	printf("=== TEXTURAS ===\n");
@@ -42,5 +71,5 @@ void	print_cub3d(t_cub3d *cub3d, int x)
 	printf("Posición Y: %.1f\n", cub3d->player.y_position);
 	printf("Dirección: %c\n", cub3d->player.direction);
 	printf("Ángulo: %.1f\n", cub3d->player.angle);
-	printf("================\n");*/
-}
+	printf("================\n");
+}*/

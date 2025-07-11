@@ -9,6 +9,12 @@
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
+#define GREY 0xAAAAAA
+#define RED 0xFF0000
+#define GREEN 0x00FF00
+#define BLUE 0x0000FF
+#define YELLOW 0xFFFF00
+#define BLACK 0x444444
 
 typedef enum s_color
 {
@@ -100,7 +106,6 @@ void			free_cub3d(t_cub3d *cub3d);
 void			ft_free_map(char **map_lines, t_cub3d *cub3d);
 int				is_blank_line(char *line);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
-
 //** Raycasting **//
 t_raycasting	init_raycasting(void);
 void			starting_raycasting(t_cub3d *cub3d, char pos_player);
@@ -110,4 +115,6 @@ void			dda_loop(t_cub3d *cub3d, int map_x, int map_y);
 void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 //** Print_Cub3d **//
 void			print_cub3d(t_cub3d *cub3d, int x);
+int				ft_key_hook(int keycode, t_cub3d *cub3d);
+int				ft_mouse_hook(int x, int y, t_cub3d *cub3d);
 #endif
