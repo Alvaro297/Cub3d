@@ -12,14 +12,14 @@ void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 		if (cub3d->raycast.is_horizontal)
 		{
 			if ((int) cub3d->raycast.raydir_y < 0)
-				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, RED);
+				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, RED2);
 			else
-				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, BLUE);
+				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, BLUE2);
 		}
 		else
 		{
 			if ((int) cub3d->raycast.raydir_x < 0)
-				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, GREEN);
+				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, GREEN2);
 			else
 				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, YELLOW);
 		}

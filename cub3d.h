@@ -10,9 +10,9 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define GREY 0xAAAAAA
-#define RED 0xFF0000
-#define GREEN 0x00FF00
-#define BLUE 0x0000FF
+#define RED2 0xFF0000
+#define GREEN2 0x00FF00
+#define BLUE2 0x0000FF
 #define YELLOW 0xFFFF00
 #define BLACK 0x444444
 
@@ -116,5 +116,5 @@ void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 //** Print_Cub3d **//
 void			print_cub3d(t_cub3d *cub3d, int x);
 int				ft_key_hook(int keycode, t_cub3d *cub3d);
-int				ft_mouse_hook(int x, int y, t_cub3d *cub3d);
+int				ft_mouse_hook(int x, t_cub3d *cub3d);
 #endif

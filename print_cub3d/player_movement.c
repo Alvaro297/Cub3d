@@ -42,7 +42,7 @@ int ft_key_hook(int keycode, t_cub3d *cub3d)
 	return (0);
 }
 
-int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
+int ft_mouse_hook(int x, t_cub3d *cub3d)
 {
 	static int	last_x = -1;
 	double	speed_rotate;

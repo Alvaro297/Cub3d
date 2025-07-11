@@ -11,24 +11,23 @@ static void	start_cub3d(t_cub3d *cub3d)
 	mlx_loop(cub3d->mlx_ptr);
 }
 
-static void	cub3d(char *argv)
+static void	cub3d(char **argv)
 {
 	t_cub3d	cub3d;
 
-	check_name(argv);
+	check_name(argv[2]);
 	init_cub3d(&cub3d);
-	read_map(argv, &cub3d);
+	read_map(argv[2], &cub3d);
 	validate_config(&cub3d);
 	validate_textures(&cub3d);
 	validate_map(&cub3d);
 	start_cub3d(&cub3d);
-	free_cub3d(&cub3d);
 }
 
 int	main(int argc, char **argv)
 {
-	if (argc == 2)
-		cub3d(argv[1]);
+	if (argc == 3)
+		cub3d(argv);
 	else
 		return (printf("Error\nIncorrect arguments\n"), 0);
 	return (0);
