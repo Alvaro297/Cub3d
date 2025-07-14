@@ -38,7 +38,6 @@ int ft_key_hook(int keycode, t_cub3d *cub3d)
 	else
 		return (0);
 	raycast(cub3d);
-	print_cub3d(cub3d, 0);
 	return (0);
 }
 
@@ -58,6 +57,5 @@ int ft_mouse_hook(int x, t_cub3d *cub3d)
 	}
 	last_x = x;
 	raycast(cub3d);
-	print_cub3d(cub3d, 0);
 	return (0);
 }
