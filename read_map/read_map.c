@@ -28,7 +28,7 @@ int	check_rgb(char *str, int rgb[3])
 			return (error_rgb(splited, trimmed, "Missing RGB"));
 		j = -1;
 		while (trimmed[++j])
-			if (!ft_isdigit(trimmed[j]))
+			if (!ft_isdigit(trimmed[j]) && trimmed[j] != 13)
 				return (error_rgb(splited, trimmed, "RGB is not numeric"));
 		rgb[i] = ft_atoi(trimmed);
 		if (rgb[i] < 0 || rgb[i] > 255)

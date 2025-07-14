@@ -5,8 +5,9 @@ int	is_line(char *line)
 	while (*line && *line != '\n')
 	{
 		if (*line != ' ' && *line != '0' && *line != '1'
-			&& *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W')
-			return (0);
+			&& *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W' 
+			&& *line != 13)
+				return (0);
 		line++;
 	}
 	return (1);

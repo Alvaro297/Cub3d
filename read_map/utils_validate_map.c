@@ -40,6 +40,7 @@ int	check_texture_file(const char *path)
 	int		fd;
 	char	buf;
 
+	printf("Trying to open: %s\n", path);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
@@ -60,10 +61,10 @@ int	check_texture_name(const char *path, const char *expected)
 {
 	size_t	len;
 
-    len = ft_strlen(path);
+	len = ft_strlen(path);
 	if (!ft_strnstr(path, expected, len))
-        return (printf("Error\nIn texture name\n"), 1);
+		return (printf("Error\nIn texture name\n"), 1);
 	if (len < 4 || ft_strncmp(path + len - 4, ".xpm", 4) != 0)
-        return (printf("Error\nIn texture extension\n"), 1);
+		return (printf("Error\nIn texture extension\n"), 1);
 	return (0);
 }

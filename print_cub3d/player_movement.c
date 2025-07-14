@@ -5,9 +5,9 @@ static void	change_angle(t_cub3d *cub3d, int keycode)
 	double	rot_speed;
 
 	rot_speed = 0.07;
-	if (keycode == 123) // Flecha izquierda
+	if (keycode == 65361) // Flecha izquierda en Linux
 		cub3d->player.angle -= rot_speed;
-	else if (keycode == 124) // Flecha derecha
+	else if (keycode == 65363) // Flecha derecha en Linux
 		cub3d->player.angle += rot_speed;
 	cub3d->player.direccion_x = cos(cub3d->player.angle);
 	cub3d->player.direccion_y = sin(cub3d->player.angle);
@@ -18,17 +18,17 @@ int ft_key_hook(int keycode, t_cub3d *cub3d)
 	double	move_speed;
 
 	move_speed = 0.1;
-	if (keycode == 13)
+	if (keycode == 119 || keycode == 'w')
 		cub3d->player.x_position += cub3d->player.direccion_x * move_speed;
-	else if (keycode == 1)
+	else if (keycode == 115 || keycode == 's')
 		cub3d->player.x_position -= cub3d->player.direccion_x * move_speed;
-	else if (keycode == 0)
+	else if (keycode == 97 || keycode == 'a')
 		cub3d->player.y_position -= cub3d->player.direccion_y * move_speed;
-	else if (keycode == 2)
+	else if (keycode == 100 || keycode == 'd')
 		cub3d->player.y_position += cub3d->player.direccion_y * move_speed;
-	else if (keycode == 123)
+	else if (keycode == 65361)
 		change_angle(cub3d, keycode);
-	else if (keycode == 124)
+	else if (keycode == 65363)
 		change_angle(cub3d, keycode);
 	else if (keycode == 65307)
 	{

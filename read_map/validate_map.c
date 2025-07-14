@@ -47,12 +47,12 @@ void	validate_config(t_cub3d *cub3d)
 void	validate_textures(t_cub3d *cub3d)
 {
 	if (check_texture_file(cub3d->map.tex_no)
-		|| check_texture_name(cub3d->map.tex_no, "north")
+		|| check_texture_name(cub3d->map.tex_no, "N")
 		|| check_texture_file(cub3d->map.tex_so)
-		|| check_texture_name(cub3d->map.tex_so, "south")
+		|| check_texture_name(cub3d->map.tex_so, "S")
 		|| check_texture_file(cub3d->map.tex_we)
-		|| check_texture_name(cub3d->map.tex_we, "west")
+		|| check_texture_name(cub3d->map.tex_we, "W")
 		|| check_texture_file(cub3d->map.tex_ea)
-		|| check_texture_name(cub3d->map.tex_ea, "east"))
+		|| check_texture_name(cub3d->map.tex_ea, "E"))
 		(free_cub3d(cub3d), exit(1));
 }

@@ -2,14 +2,30 @@
 
 static void	set_texture(t_cub3d *cub3d, char *line)
 {
+	char	*ej;
+
+	ej = NULL;
 	if (!ft_strncmp(line, "NO ", 3))
-		cub3d->map.tex_no = ft_strtrim(line + 3, " \n");
+	{
+		ej = ft_strtrim(line + 3, " \n");
+		cub3d->map.tex_no = ft_strjoin("./", ej);
+	}
 	else if (!ft_strncmp(line, "SO ", 3))
-		cub3d->map.tex_so = ft_strtrim(line + 3, " \n");
+	{
+		ej = ft_strtrim(line + 3, " \n");
+		cub3d->map.tex_so = ft_strjoin("./", ej);
+	}
 	else if (!ft_strncmp(line, "WE ", 3))
-		cub3d->map.tex_we = ft_strtrim(line + 3, " \n");
+	{
+		ej = ft_strtrim(line + 3, " \n");
+		cub3d->map.tex_we = ft_strjoin("./", ej);
+	}
 	else if (!ft_strncmp(line, "EA ", 3))
-		cub3d->map.tex_ea = ft_strtrim(line + 3, " \n");
+	{
+		ej = ft_strtrim(line + 3, " \n");
+		cub3d->map.tex_ea = ft_strjoin("./", ej);
+	}
+	free (ej);
 	cub3d->map.count_textures++;
 }
 
