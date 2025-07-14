@@ -8,6 +8,7 @@ static t_map	init_map(void)
 	map.n_players = 0;
 	map.n_wall = 0;
 	map.count_textures = 0;
+	map.count_rgb = 0;
 	map.rgb_floor[0] = -1;
 	map.map_index = 0;
 	map.rgb_floor[1] = -1;
@@ -19,7 +20,7 @@ static t_map	init_map(void)
 	map.tex_so = NULL;
 	map.tex_we = NULL;
 	map.tex_ea = NULL;
-	map.parse = PARSE_TEXTURES;
+	map.parse = 0;
 	return (map);
 }
 
