@@ -24,7 +24,8 @@ SRCS := \
 	freedoom/freedoom.c \
 	raycast/raycasting.c \
 	raycast/steps.c \
-	print_cub3d/print_cub3d.c
+	print_cub3d/print_cub3d.c \
+	print_cub3d/player_movement.c
 
 OBJ_FILES := $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

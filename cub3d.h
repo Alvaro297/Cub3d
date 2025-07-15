@@ -9,6 +9,12 @@
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
+#define GREY 0xAAAAAA
+#define RED2 0xFF0000
+#define GREEN2 0x00FF00
+#define BLUE2 0x0000FF
+#define YELLOW 0xFFFF00
+#define BLACK 0x444444
 
 typedef enum s_color
 {
@@ -17,19 +23,13 @@ typedef enum s_color
 	BLUE,
 }				t_color;
 
-typedef enum e_parse_state
-{
-	PARSE_TEXTURES,
-	PARSE_COLORS,
-	PARSE_MAP
-}	t_parse_state;
-
 typedef struct s_map
 {
 	char		**matriz;
 	int			n_wall;
 	int			n_players;
 	int			count_textures;
+	int			count_rgb;
 	int			rgb_floor[3];
 	int			rgb_ceiling[3];
 	char		*tex_no;
@@ -38,7 +38,7 @@ typedef struct s_map
 	char		*tex_ea;
 	int			map_index;
 	t_color		colors;
-	t_parse_state	parse;
+	int			parse;
 }				t_map;
 
 typedef struct s_player
@@ -94,13 +94,12 @@ int				is_closed(char **map, int x, int y);
 void			validate_map(t_cub3d *cub3d);
 void			validate_textures(t_cub3d *cub3d);
 int				check_texture_file(const char *path);
-int				check_texture_name(const char *path, const char *expected);
+int				check_texture_name(const char *path);
 void			validate_config(t_cub3d *cub3d);
 void			free_cub3d(t_cub3d *cub3d);
 void			ft_free_map(char **map_lines, t_cub3d *cub3d);
 int				is_blank_line(char *line);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
-
 //** Raycasting **//
 t_raycasting	init_raycasting(void);
 void			starting_raycasting(t_cub3d *cub3d, char pos_player);
@@ -109,5 +108,7 @@ void			steps(t_cub3d *cub3d);
 void			dda_loop(t_cub3d *cub3d, int map_x, int map_y);
 void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 //** Print_Cub3d **//
-void	print_cub3d(t_cub3d *cub3d);
+void			print_cub3d(t_cub3d *cub3d, int x);
+int				ft_key_hook(int keycode, t_cub3d *cub3d);
+int				ft_mouse_hook(int x, t_cub3d *cub3d);
 #endif
