@@ -69,13 +69,13 @@ int	ft_key_hook(t_cub3d *cub3d)
 	}
 	if (cub3d->player.movement.a)
 	{
-		cub3d->player.x_position += cub3d->player.direccion_y * move_speed;
-		cub3d->player.y_position -= cub3d->player.direccion_x * move_speed;
+		cub3d->player.x_position -= cub3d->player.direccion_y * move_speed;
+		cub3d->player.y_position += cub3d->player.direccion_x * move_speed;
 	}
 	if (cub3d->player.movement.d)
 	{
-		cub3d->player.x_position -= cub3d->player.direccion_y * move_speed;
-		cub3d->player.y_position += cub3d->player.direccion_x * move_speed;
+		cub3d->player.x_position += cub3d->player.direccion_y * move_speed;
+		cub3d->player.y_position -= cub3d->player.direccion_x * move_speed;
 	}
 	if (cub3d->player.movement.left)
 		change_angle(cub3d, 65361);
