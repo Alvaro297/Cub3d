@@ -16,9 +16,9 @@ static void	cub3d(char **argv)
 {
 	t_cub3d	cub3d;
 
-	check_name(argv[2]);
+	check_name(argv[1]);
 	init_cub3d(&cub3d);
-	read_map(argv[2], &cub3d);
+	read_map(argv[1], &cub3d);
 	validate_config(&cub3d);
 	validate_textures(&cub3d);
 	validate_map(&cub3d);
@@ -27,7 +27,7 @@ static void	cub3d(char **argv)
 
 int	main(int argc, char **argv)
 {
-	if (argc == 3)
+	if (argc == 2)
 		cub3d(argv);
 	else
 		return (printf("Error\nIncorrect arguments\n"), 0);
