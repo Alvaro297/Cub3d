@@ -1,55 +1,110 @@
 #include "./cub3d.h"
 
+static int	flood_fill(char **map, int x, int y, int height)
+{
+	if (y < 0 || y >= height || x < 0 || x >= (int)ft_strlen(map[y]))
+		return (0);
+	if (map[y][x] == ' ' || map[y][x] == '\0')
+		return (0);
+	if (map[y][x] == '1' || map[y][x] == 'x')
+		return (1);
+	map[y][x] = 'x';
+	if (!flood_fill(map, x + 1, y, height))
+		return (0);
+	if (!flood_fill(map, x - 1, y, height))
+		return (0);
+	if (!flood_fill(map, x, y + 1, height))
+		return (0);
+	if (!flood_fill(map, x, y - 1, height))
+		return (0);
+	return (1);
+}
+
+static void	fill_spaces(char *line, int start, int width)
+{
+	while (start < width)
+	{
+		line[start] = ' ';
+		start++;
+	}
+	line[width] = '\0';
+}
+
+static char	**normalize_map(char **map)
+{
+	int		height;
+	int		width;
+	char	**norm;
+	int		y;
+
+	height = 0;
+	width = 0;
+	while (map[height])
+	{
+		if ((int)ft_strlen(map[height]) > width)
+			width = ft_strlen(map[height]);
+		height++;
+	}
+	norm = malloc(sizeof(char *) * (height + 1));
+	if (!norm)
+		return (NULL);
+	y = -1;
+	while (++y < height)
+	{
+		norm[y] = malloc(width + 1);
+		if (!norm[y])
+			return (free_norm_map(norm, y), NULL);
+		ft_strlcpy(norm[y], map[y], width + 1);
+		fill_spaces(norm[y], ft_strlen(map[y]), width);
+	}
+	norm[height] = NULL;
+	return (norm);
+}
+
 void	validate_map(t_cub3d *cub3d)
 {
 	int		x;
 	int		y;
-	char	c;
+	int		height;
+	char	**map_copy;
 
-	y = 0;
-	while (cub3d->map.matriz[y])
+	height = 0;
+	while (cub3d->map.matriz[height])
+		height++;
+	map_copy = normalize_map(cub3d->map.matriz);
+	if (!map_copy)
 	{
-		x = 0;
-		while (cub3d->map.matriz[y][x])
-		{
-			c = cub3d->map.matriz[y][x];
-			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-				(set_player(cub3d, x, y, c), cub3d->player.player_count++);
-			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W'
-				|| c == '\0')
-			{
-				if (!is_closed(cub3d->map.matriz, x, y))
-					(printf("Error\nMap is not closed\n"), free_cub3d(cub3d), exit(1));
-			}
-			x++;
-		}
-		y++;
+		printf("Error\nFailed to allocate map copy\n");
+		free_cub3d(cub3d);
+		exit(1);
 	}
-	if (cub3d->player.player_count != 1)
-		(printf("Error\nincorrect nº of player\n"), free_cub3d(cub3d), exit(1));
+	y = -1;
+	while (map_copy[++y])
+	{
+		x = -1;
+		while (map_copy[y][++x])
+			validate_cell(cub3d, map_copy, y, x, height);
+	}
+	ft_free_map(map_copy, cub3d);
 }
 
-void	validate_config(t_cub3d *cub3d)
+void	validate_cell(t_cub3d *cub3d, char **map_copy,
+				int y, int x, int height)
 {
-	if (!cub3d->map.tex_no || !cub3d->map.tex_so
-		|| !cub3d->map.tex_we || !cub3d->map.tex_ea)
-		(printf("Error\nMissing textures\n"), free_cub3d(cub3d), exit(1));
-	if (cub3d->map.rgb_floor[0] == -1
-		|| cub3d->map.rgb_floor[1] == -1
-		|| cub3d->map.rgb_floor[2] == -1)
-		(printf("Error\nMissing floor color\n"), free_cub3d(cub3d), exit(1));
-	if (cub3d->map.rgb_ceiling[0] == -1
-		|| cub3d->map.rgb_ceiling[1] == -1
-		|| cub3d->map.rgb_ceiling[2] == -1)
-		(printf("Error\nMissing ceiling color\n"), free_cub3d(cub3d), exit(1));
-}
+	char	c;
+	char	**map_region;
 
-void	validate_textures(t_cub3d *cub3d)
-{
-	if (check_texture_file(cub3d->map.tex_no)
-		|| check_texture_file(cub3d->map.tex_so)
-		|| check_texture_file(cub3d->map.tex_so)
-		|| check_texture_file(cub3d->map.tex_we)
-		|| check_texture_file(cub3d->map.tex_ea))
-		(free_cub3d(cub3d), exit(1));
+	c = map_copy[y][x];
+	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != '0')
+		return ;
+	map_region = normalize_map(map_copy);
+	if (!flood_fill(map_region, x, y, height))
+	{
+		printf("Error\nMap is not closed\n");
+		ft_free_map(map_region, cub3d);
+		ft_free_map(map_copy, cub3d);
+		free_cub3d(cub3d);
+		exit(1);
+	}
+	ft_free_map(map_region, cub3d);
 }
