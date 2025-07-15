@@ -56,3 +56,16 @@ void	free_cub3d(t_cub3d *cub3d)
 		free(cub3d->map.matriz);
 	}
 }
+
+void	free_norm_map(char **map, int upto)
+{
+	int	i;
+
+	i = 0;
+	while (i < upto)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}

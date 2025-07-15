@@ -121,6 +121,10 @@ void			validate_config(t_cub3d *cub3d);
 void			free_cub3d(t_cub3d *cub3d);
 void			ft_free_map(char **map_lines, t_cub3d *cub3d);
 int				is_blank_line(char *line);
+void			check_player(t_cub3d *cub3d);
+void			validate_cell(t_cub3d *cub3d, char **map_copy,
+					int y, int x, int height);
+void			free_norm_map(char **map, int upto);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
 //** Raycasting **//
 t_raycasting	init_raycasting(void);

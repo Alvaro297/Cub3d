@@ -21,6 +21,7 @@ SRCS := \
 	read_map/utils_read_map.c \
 	read_map/validate_map.c \
 	read_map/utils_validate_map.c \
+	read_map/validade_player.c \
 	freedoom/freedoom.c \
 	raycast/raycasting.c \
 	raycast/steps.c \

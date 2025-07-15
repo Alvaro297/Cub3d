@@ -24,6 +24,7 @@ static void	cub3d(char *argv)
 	read_map(argv, &cub3d);
 	validate_config(&cub3d);
 	validate_textures(&cub3d);
+	check_player(&cub3d);
 	validate_map(&cub3d);
 	start_cub3d(&cub3d);
 }

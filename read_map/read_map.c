@@ -46,7 +46,7 @@ void	read_map(char *filename, t_cub3d *cub3d)
 	char			*line;
 	int				n_lines;
 
-	n_lines = coun_lines(filename);	
+	n_lines = coun_lines(filename);
 	map_lines = malloc(sizeof(char *) * (n_lines + 1));
 	if (!map_lines)
 		(printf("Error\nMalloc of map failed\n"), exit(1));
