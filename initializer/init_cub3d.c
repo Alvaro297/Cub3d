@@ -24,6 +24,19 @@ static t_map	init_map(void)
 	return (map);
 }
 
+static t_movement	init_movement(void)
+{
+	t_movement move;
+
+	move.w = false;
+	move.a = false;
+	move.s = false;
+	move.d = false;
+	move.left = false;
+	move.right = false;
+	return (move);
+}
+
 static t_player	init_player(void)
 {
 	t_player	player;
@@ -32,6 +45,7 @@ static t_player	init_player(void)
 	player.x_position = 0;
 	player.player_count = 0;
 	player.y_position = 0;
+	player.movement = init_movement();
 	return (player);
 }
 

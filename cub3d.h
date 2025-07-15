@@ -41,6 +41,17 @@ typedef struct s_map
 	int			parse;
 }				t_map;
 
+typedef struct s_movement
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+}	t_movement;
+
+
 typedef struct s_player
 {
 	double		x_position;
@@ -50,6 +61,7 @@ typedef struct s_player
 	int			player_count;
 	double		direccion_x;
 	double		direccion_y;
+	t_movement	movement;
 	void		*img;
 }				t_player;
 
@@ -119,12 +131,15 @@ void			dda_loop(t_cub3d *cub3d, int map_x, int map_y);
 void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 //** Print_Cub3d **//
 void			print_cub3d(t_cub3d *cub3d, int x);
-int				ft_key_hook(int keycode, t_cub3d *cub3d);
-int				ft_mouse_hook(int x, t_cub3d *cub3d);
 //** Buffer Functions **//
 void			init_image_buffer(t_cub3d *cub3d);
 void			put_pixel_to_buffer(t_cub3d *cub3d, int x, int y, int color);
 void			render_buffer_to_window(t_cub3d *cub3d);
 void			clear_buffer(t_cub3d *cub3d, int color);
 void			render_ceiling_floor(t_cub3d *cub3d);
+//** Movement **//
+int				ft_key_hook(t_cub3d *cub3d);
+int				ft_mouse_hook(int x, t_cub3d *cub3d);
+int				key_press(int keycode, t_cub3d *cub3d);
+int				key_release(int keycode, t_cub3d *cub3d);
 #endif
