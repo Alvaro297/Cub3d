@@ -70,11 +70,21 @@ typedef struct s_raycasting
 	char	hit_type;
 }				t_raycasting;
 
+typedef struct s_image
+{
+	void	*img_ptr;
+	char	*data;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_image;
+
 typedef struct s_cub3d
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
+	t_image			image;
 	char			*map_route;
 	t_map			map;
 	t_player		player;
@@ -111,4 +121,10 @@ void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 void			print_cub3d(t_cub3d *cub3d, int x);
 int				ft_key_hook(int keycode, t_cub3d *cub3d);
 int				ft_mouse_hook(int x, t_cub3d *cub3d);
+//** Buffer Functions **//
+void			init_image_buffer(t_cub3d *cub3d);
+void			put_pixel_to_buffer(t_cub3d *cub3d, int x, int y, int color);
+void			render_buffer_to_window(t_cub3d *cub3d);
+void			clear_buffer(t_cub3d *cub3d, int color);
+void			render_ceiling_floor(t_cub3d *cub3d);
 #endif

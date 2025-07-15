@@ -3,7 +3,7 @@
 
 void	set_player(t_cub3d *cub3d, int x, int y, char dir)
 {
-	cub3d->player.x_position = (double) x + 0.5;;
+	cub3d->player.x_position = (double) x + 0.5;
 	cub3d->player.y_position = (double) y + 0.5;
 	cub3d->player.direction = dir;
 	if (dir == 'N')

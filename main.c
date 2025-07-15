@@ -6,6 +6,7 @@ static void	start_cub3d(t_cub3d *cub3d)
 	cub3d->mlx_ptr = mlx_init();
 	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
 	cub3d->img_ptr = mlx_new_image(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+	init_image_buffer(cub3d);
 	raycast(cub3d);
 	mlx_key_hook(cub3d->win_ptr, ft_key_hook, cub3d);
 	mlx_hook(cub3d->win_ptr, 6, 1L<<6, ft_mouse_hook, cub3d);

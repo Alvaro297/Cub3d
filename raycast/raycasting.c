@@ -63,6 +63,7 @@ void	raycast(t_cub3d *cub3d)
 
 	map_x = (int)cub3d->player.x_position;
 	map_y = (int)cub3d->player.y_position;
+	render_ceiling_floor(cub3d);
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
@@ -77,4 +78,5 @@ void	raycast(t_cub3d *cub3d)
 		print_cub3d(cub3d, x);
 		x++;
 	}
+	render_buffer_to_window(cub3d);
 }

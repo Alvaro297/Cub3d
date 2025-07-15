@@ -1,31 +1,106 @@
 # include "../cub3d.h"
 
+# include "../cub3d.h"
+
+void	init_image_buffer(t_cub3d *cub3d)
+{
+	cub3d->image.img_ptr = mlx_new_image(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+	cub3d->image.data = mlx_get_data_addr(cub3d->image.img_ptr,
+		&cub3d->image.bits_per_pixel,
+		&cub3d->image.line_length,
+		&cub3d->image.endian);
+}
+
+void	put_pixel_to_buffer(t_cub3d *cub3d, int x, int y, int color)
+{
+	int	pixel_index;
+
+	if (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT)
+	{
+		pixel_index = y * cub3d->image.line_length + x * (cub3d->image.bits_per_pixel / 8);
+		*(int *)(cub3d->image.data + pixel_index) = color;
+	}
+}
+
+void	render_buffer_to_window(t_cub3d *cub3d)
+{
+	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, cub3d->image.img_ptr, 0, 0);
+}
+
+void	clear_buffer(t_cub3d *cub3d, int color)
+{
+	int	*buffer;
+	int	total_pixels;
+	int	i;
+
+	buffer = (int *)cub3d->image.data;
+	total_pixels = SCREEN_WIDTH * SCREEN_HEIGHT;
+	i = 0;
+	while (i < total_pixels)
+	{
+		buffer[i] = color;
+		i++;
+	}
+}
+
+void	render_ceiling_floor(t_cub3d *cub3d)
+{
+	int	*buffer;
+	int	y;
+	int	x;
+	int	pixel_index;
+
+	buffer = (int *)cub3d->image.data;
+	y = 0;
+	while (y < SCREEN_HEIGHT / 2)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			pixel_index = y * SCREEN_WIDTH + x;
+			buffer[pixel_index] = GREY;
+			x++;
+		}
+		y++;
+	}
+	while (y < SCREEN_HEIGHT)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			pixel_index = y * SCREEN_WIDTH + x;
+			buffer[pixel_index] = BLACK;
+			x++;
+		}
+		y++;
+	}
+}
+
 void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 {
 	int	y;
+	int	wall_color;
 
-	y = 0;
-	while (y < draw_start)
-		mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, y++, GREY);
-	while (draw_start < draw_end)
+	if (cub3d->raycast.is_horizontal)
 	{
-		if (cub3d->raycast.is_horizontal)
-		{
-			if ((int) cub3d->raycast.raydir_y < 0)
-				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, RED2);
-			else
-				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, BLUE2);
-		}
+		if ((int) cub3d->raycast.raydir_y < 0)
+			wall_color = RED2;
 		else
-		{
-			if ((int) cub3d->raycast.raydir_x < 0)
-				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, GREEN2);
-			else
-				mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_start++, YELLOW);
-		}
+			wall_color = BLUE2;
 	}
-	while (draw_end < SCREEN_HEIGHT)
-		mlx_pixel_put(cub3d->mlx_ptr, cub3d->win_ptr, x, draw_end++, BLACK);
+	else
+	{
+		if ((int) cub3d->raycast.raydir_x < 0)
+			wall_color = GREEN2;
+		else
+			wall_color = YELLOW;
+	}
+	y = draw_start;
+	while (y < draw_end)
+	{
+		put_pixel_to_buffer(cub3d, x, y, wall_color);
+		y++;
+	}
 }
 
 void	 print_cub3d(t_cub3d *cub3d, int x)
