@@ -10,7 +10,7 @@ void	validate_map(t_cub3d *cub3d)
 	while (cub3d->map.matriz[y])
 	{
 		x = 0;
-		while (cub3d->map.matriz[y])
+		while (cub3d->map.matriz[y][x])
 		{
 			c = cub3d->map.matriz[y][x];
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
@@ -47,12 +47,9 @@ void	validate_config(t_cub3d *cub3d)
 void	validate_textures(t_cub3d *cub3d)
 {
 	if (check_texture_file(cub3d->map.tex_no)
-		|| check_texture_name(cub3d->map.tex_no, "N")
 		|| check_texture_file(cub3d->map.tex_so)
-		|| check_texture_name(cub3d->map.tex_so, "S")
+		|| check_texture_file(cub3d->map.tex_so)
 		|| check_texture_file(cub3d->map.tex_we)
-		|| check_texture_name(cub3d->map.tex_we, "W")
-		|| check_texture_file(cub3d->map.tex_ea)
-		|| check_texture_name(cub3d->map.tex_ea, "E"))
+		|| check_texture_file(cub3d->map.tex_ea))
 		(free_cub3d(cub3d), exit(1));
 }
