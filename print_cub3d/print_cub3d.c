@@ -58,7 +58,7 @@ void	render_ceiling_floor(t_cub3d *cub3d)
 		while (x < SCREEN_WIDTH)
 		{
 			pixel_index = y * SCREEN_WIDTH + x;
-			buffer[pixel_index] = GREY;
+			buffer[pixel_index] = cub3d->map.ceiling;
 			x++;
 		}
 		y++;
@@ -69,7 +69,7 @@ void	render_ceiling_floor(t_cub3d *cub3d)
 		while (x < SCREEN_WIDTH)
 		{
 			pixel_index = y * SCREEN_WIDTH + x;
-			buffer[pixel_index] = BLACK;
+			buffer[pixel_index] = cub3d->map.floor;
 			x++;
 		}
 		y++;

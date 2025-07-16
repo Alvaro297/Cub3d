@@ -9,6 +9,8 @@ static t_map	init_map(void)
 	map.n_wall = 0;
 	map.count_textures = 0;
 	map.count_rgb = 0;
+	map.floor = 0;
+	map.ceiling = 0;
 	map.rgb_floor[0] = -1;
 	map.map_index = 0;
 	map.rgb_floor[1] = -1;
