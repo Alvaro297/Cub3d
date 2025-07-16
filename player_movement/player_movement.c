@@ -6,9 +6,9 @@ static void	change_angle(t_cub3d *cub3d, int keycode)
 
 	rot_speed = 0.01;
 	if (keycode == 65361)
-		cub3d->player.angle -= rot_speed;
-	else if (keycode == 65363)
 		cub3d->player.angle += rot_speed;
+	else if (keycode == 65363)
+		cub3d->player.angle -= rot_speed;
 	cub3d->player.direccion_x = cos(cub3d->player.angle);
 	cub3d->player.direccion_y = sin(cub3d->player.angle);
 }
@@ -68,10 +68,6 @@ bool	is_wall(t_cub3d *cub3d, double x, double y)
 
 int	ft_key_hook(t_cub3d *cub3d)
 {
-
-	double	move_speed;
-
-	move_speed = 0.005;
 	if (cub3d->player.movement.left)
 		change_angle(cub3d, 65361);
 	if (cub3d->player.movement.right)
@@ -95,17 +91,24 @@ static void	rotate_player(t_cub3d *cub3d, double rot)
 int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 {
 	static int	last_x = -1;
+	static int	frame_count = 0;
 	double		speed_rotate;
 	double		rot;
 
 	(void)y;
-	speed_rotate = 0.002; // ajusta la sensibilidad
+	speed_rotate = 0.002;
+	frame_count++;
+	if (frame_count % 5 != 0)
+		return (0);
 	if (last_x != -1)
 	{
-		rot = (x - last_x) * speed_rotate;
-		rotate_player(cub3d, rot);
+		if (abs(x - last_x) > 1)
+		{
+			rot = (x - last_x) * speed_rotate;
+			rotate_player(cub3d, rot);
+			raycast(cub3d);
+		}
 	}
 	last_x = x;
-	raycast(cub3d);
 	return (0);
 }
