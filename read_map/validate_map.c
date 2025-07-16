@@ -30,19 +30,18 @@ static void	fill_spaces(char *line, int start, int width)
 	line[width] = '\0';
 }
 
-static char	**normalize_map(char **map)
+static char	**normalize_map(char **map, t_cub3d *cub3d)
 {
 	int		height;
-	int		width;
 	char	**norm;
 	int		y;
 
 	height = 0;
-	width = 0;
+	cub3d->map.width = 0;
 	while (map[height])
 	{
-		if ((int)ft_strlen(map[height]) > width)
-			width = ft_strlen(map[height]);
+		if ((int)ft_strlen(map[height]) > cub3d->map.width)
+			cub3d->map.width = ft_strlen(map[height]);
 		height++;
 	}
 	norm = malloc(sizeof(char *) * (height + 1));
@@ -51,11 +50,11 @@ static char	**normalize_map(char **map)
 	y = -1;
 	while (++y < height)
 	{
-		norm[y] = malloc(width + 1);
+		norm[y] = malloc(cub3d->map.width + 1);
 		if (!norm[y])
 			return (free_norm_map(norm, y), NULL);
-		ft_strlcpy(norm[y], map[y], width + 1);
-		fill_spaces(norm[y], ft_strlen(map[y]), width);
+		ft_strlcpy(norm[y], map[y], cub3d->map.width + 1);
+		fill_spaces(norm[y], ft_strlen(map[y]), cub3d->map.width);
 	}
 	norm[height] = NULL;
 	return (norm);
@@ -65,13 +64,12 @@ void	validate_map(t_cub3d *cub3d)
 {
 	int		x;
 	int		y;
-	int		height;
 	char	**map_copy;
 
-	height = 0;
-	while (cub3d->map.matriz[height])
-		height++;
-	map_copy = normalize_map(cub3d->map.matriz);
+	cub3d->map.height = 0;
+	while (cub3d->map.matriz[cub3d->map.height])
+		cub3d->map.height++;
+	map_copy = normalize_map(cub3d->map.matriz, cub3d);
 	if (!map_copy)
 	{
 		printf("Error\nFailed to allocate map copy\n");
@@ -83,7 +81,7 @@ void	validate_map(t_cub3d *cub3d)
 	{
 		x = -1;
 		while (map_copy[y][++x])
-			validate_cell(cub3d, map_copy, y, x, height);
+			validate_cell(cub3d, map_copy, y, x, cub3d->map.height);
 	}
 	ft_free_map(map_copy, cub3d);
 }
@@ -97,7 +95,7 @@ void	validate_cell(t_cub3d *cub3d, char **map_copy,
 	c = map_copy[y][x];
 	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != '0')
 		return ;
-	map_region = normalize_map(map_copy);
+	map_region = normalize_map(map_copy, cub3d);
 	if (!flood_fill(map_region, x, y, height))
 	{
 		printf("Error\nMap is not closed\n");

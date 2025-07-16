@@ -30,7 +30,7 @@ int	key_press(int keycode, t_cub3d *cub3d)
 	else if (keycode == 65307)
 	{
 		free_cub3d(cub3d);
-		return(exit(0), 0);
+		return (exit(0), 0);
 	}
 	return (0);
 }
@@ -52,53 +52,58 @@ int	key_release(int keycode, t_cub3d *cub3d)
 	return (0);
 }
 
+bool	is_wall(t_cub3d *cub3d, double x, double y)
+{
+	int	yi;
+	int	xi;
+
+	yi = (int)y;
+	xi = (int)x;
+	if (yi < 0 || yi >= cub3d->map.height || xi < 0 || xi >= cub3d->map.width)
+		return (true);
+	if (xi >= (int)ft_strlen(cub3d->map.matriz[yi]))
+		return (true);
+	return (cub3d->map.matriz[yi][xi] == '1');
+}
+
 int	ft_key_hook(t_cub3d *cub3d)
 {
+
 	double	move_speed;
-	
-	move_speed= 0.005;
-	if (cub3d->player.movement.w)
-	{
-		cub3d->player.x_position += cub3d->player.direccion_x * move_speed;
-		cub3d->player.y_position += cub3d->player.direccion_y * move_speed;
-	}
-	if (cub3d->player.movement.s)
-	{
-		cub3d->player.x_position -= cub3d->player.direccion_x * move_speed;
-		cub3d->player.y_position -= cub3d->player.direccion_y * move_speed;
-	}
-	if (cub3d->player.movement.a)
-	{
-		cub3d->player.x_position -= cub3d->player.direccion_y * move_speed;
-		cub3d->player.y_position += cub3d->player.direccion_x * move_speed;
-	}
-	if (cub3d->player.movement.d)
-	{
-		cub3d->player.x_position += cub3d->player.direccion_y * move_speed;
-		cub3d->player.y_position -= cub3d->player.direccion_x * move_speed;
-	}
+
+	move_speed = 0.005;
 	if (cub3d->player.movement.left)
 		change_angle(cub3d, 65361);
 	if (cub3d->player.movement.right)
 		change_angle(cub3d, 65363);
-
+	movement_player(cub3d);
 	raycast(cub3d);
 	return (0);
 }
 
-int ft_mouse_hook(int x, t_cub3d *cub3d)
+static void	rotate_player(t_cub3d *cub3d, double rot)
+{
+	cub3d->player.angle += rot;
+	if (cub3d->player.angle < 0)
+		cub3d->player.angle += 2 * M_PI;
+	if (cub3d->player.angle >= 2 * M_PI)
+		cub3d->player.angle -= 2 * M_PI;
+	cub3d->player.direccion_x = cos(cub3d->player.angle);
+	cub3d->player.direccion_y = sin(cub3d->player.angle);
+}
+
+int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 {
 	static int	last_x = -1;
-	double	speed_rotate;
-	double	rot;
+	double		speed_rotate;
+	double		rot;
 
-	speed_rotate = 0.1;
+	(void)y;
+	speed_rotate = 0.002; // ajusta la sensibilidad
 	if (last_x != -1)
 	{
 		rot = (x - last_x) * speed_rotate;
-		cub3d->player.angle += rot;
-		cub3d->player.direccion_x = cos(cub3d->player.angle);
-		cub3d->player.direccion_y = sin(cub3d->player.angle);
+		rotate_player(cub3d, rot);
 	}
 	last_x = x;
 	raycast(cub3d);

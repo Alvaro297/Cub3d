@@ -16,13 +16,6 @@
 #define YELLOW 0xFFFF00
 #define BLACK 0x444444
 
-typedef enum s_color
-{
-	RED,
-	GREEN,
-	BLUE,
-}				t_color;
-
 typedef struct s_map
 {
 	char		**matriz;
@@ -36,8 +29,9 @@ typedef struct s_map
 	char		*tex_so;
 	char		*tex_we;
 	char		*tex_ea;
+	int			height;
+	int			width;
 	int			map_index;
-	t_color		colors;
 	int			parse;
 }				t_map;
 
@@ -112,7 +106,6 @@ int				coun_lines(char *filename);
 int				is_line(char *line);
 int				check_rgb(char *str, int rgb[3]);
 void			set_player(t_cub3d *cub3d, int x, int y, char dir);
-int				is_closed(char **map, int x, int y);
 void			validate_map(t_cub3d *cub3d);
 void			validate_textures(t_cub3d *cub3d);
 int				check_texture_file(const char *path);
@@ -143,7 +136,9 @@ void			clear_buffer(t_cub3d *cub3d, int color);
 void			render_ceiling_floor(t_cub3d *cub3d);
 //** Movement **//
 int				ft_key_hook(t_cub3d *cub3d);
-int				ft_mouse_hook(int x, t_cub3d *cub3d);
+int				ft_mouse_hook(int x, int y, t_cub3d *cub3d);
 int				key_press(int keycode, t_cub3d *cub3d);
 int				key_release(int keycode, t_cub3d *cub3d);
+void			movement_player(t_cub3d *cub3d);
+bool			is_wall(t_cub3d *cub3d, double x, double y);
 #endif
