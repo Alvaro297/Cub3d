@@ -131,6 +131,7 @@ void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 //** Print_Cub3d **//
 void			print_cub3d(t_cub3d *cub3d, int x);
 void			color_floor_ceiling(t_cub3d *cub3d);
+int				print_textures(t_cub3d *cub3d, int direction, int y, int draw_end);
 //** Buffer Functions **//
 void			init_image_buffer(t_cub3d *cub3d);
 void			put_pixel_to_buffer(t_cub3d *cub3d, int x, int y, int color);
