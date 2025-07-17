@@ -80,12 +80,27 @@ typedef struct s_raycasting
 
 typedef struct s_image
 {
+	struct {
+		void	*img_ptr;
+		char	*data;
+		int		width;
+		int		height;
+		int		bits_per_pixel;
+		int		line_length;
+		int		endian;
+	} tex_north, tex_south, tex_east, tex_west;
+}				t_image;
+
+typedef struct s_texture
+{
 	void	*img_ptr;
 	char	*data;
+	int		width;
+	int		height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_image;
+}				t_texture;
 
 typedef struct s_cub3d
 {
@@ -93,6 +108,10 @@ typedef struct s_cub3d
 	void			*win_ptr;
 	void			*img_ptr;
 	t_image			image;
+	t_texture		tex_north;   // Textura NORTE (NO)
+	t_texture		tex_south;   // Textura SUR (SO)
+	t_texture		tex_east;    // Textura ESTE (EA)
+	t_texture		tex_west;    // Textura OESTE (WE)
 	char			*map_route;
 	t_map			map;
 	t_player		player;
@@ -132,6 +151,11 @@ void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 void			print_cub3d(t_cub3d *cub3d, int x);
 void			color_floor_ceiling(t_cub3d *cub3d);
 int				print_textures(t_cub3d *cub3d, int direction, int y, int draw_end);
+//** Texture Functions **//
+void			load_all_textures(t_cub3d *cub3d);
+void			load_texture(t_cub3d *cub3d, t_texture *tex, char *path);
+int				get_texture_color(t_texture *tex, int tex_x, int tex_y);
+void			free_textures(t_cub3d *cub3d);
 //** Buffer Functions **//
 void			init_image_buffer(t_cub3d *cub3d);
 void			put_pixel_to_buffer(t_cub3d *cub3d, int x, int y, int color);
