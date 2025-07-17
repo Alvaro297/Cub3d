@@ -24,12 +24,20 @@ void	ft_free_map(char **map_lines, t_cub3d *cub3d)
 	int	i;
 
 	i = 0;
+	if (!map_lines)
+		return ;
 	while (i < cub3d->map.map_index)
 	{
-		free(map_lines[i]);
-		map_lines[i++] = NULL;
+		if (map_lines[i])
+		{
+			free(map_lines[i]);
+			map_lines[i++] = NULL;
+		}
+		else
+			i++;
 	}
-	free(map_lines);
+	if (map_lines)
+		free(map_lines);
 	map_lines = NULL;
 }
 

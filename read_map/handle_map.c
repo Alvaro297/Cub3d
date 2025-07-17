@@ -43,17 +43,17 @@ static int	handle_texture_line(char *line, t_cub3d *cub3d)
 	return (printf("Error\nExpected texture line\n"), 1);
 }
 
-static int	handle_color_line(char *line, t_cub3d *cub3d, char **map_lines)
+static int	handle_color_line(char *line, t_cub3d *cub3d)
 {
 	if (!ft_strncmp(line, "F ", 2))
 	{
 		if (check_rgb(line + 2, cub3d->map.rgb_ceiling))
-			return (ft_free_map(map_lines, cub3d), cub3d->map.count_rgb = 1, 1);
+			return (cub3d->map.count_rgb = 1, 1);
 	}
 	else if (!ft_strncmp(line, "C ", 2))
 	{
 		if (check_rgb(line + 2, cub3d->map.rgb_floor))
-			return (ft_free_map(map_lines, cub3d), cub3d->map.count_rgb = 2, 1);
+			return (cub3d->map.count_rgb = 2, 1);
 		cub3d->map.parse += 1;
 	}
 	else
@@ -81,7 +81,7 @@ int	handle_map_line(char *line, t_cub3d *cub3d, char **map_lines)
 		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
 		return (handle_texture_line(line, cub3d));
 	if (!ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
-		return (handle_color_line(line, cub3d, map_lines));
+		return (handle_color_line(line, cub3d));
 	if (is_line(line))
 	{
 		if (cub3d->map.count_textures != 4 || cub3d->map.count_rgb != 2)
