@@ -29,36 +29,34 @@ void	render_buffer_to_window(t_cub3d *cub3d)
 
 void	clear_buffer(t_cub3d *cub3d, int color)
 {
-	int	*buffer;
-	int	total_pixels;
-	int	i;
+	int	y;
+	int	x;
 
-	buffer = (int *)cub3d->image.data;
-	total_pixels = SCREEN_WIDTH * SCREEN_HEIGHT;
-	i = 0;
-	while (i < total_pixels)
+	y = 0;
+	while (y < SCREEN_HEIGHT)
 	{
-		buffer[i] = color;
-		i++;
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			put_pixel_to_buffer(cub3d, x, y, color);
+			x++;
+		}
+		y++;
 	}
 }
 
 void	render_ceiling_floor(t_cub3d *cub3d)
 {
-	int	*buffer;
 	int	y;
 	int	x;
-	int	pixel_index;
 
-	buffer = (int *)cub3d->image.data;
 	y = 0;
 	while (y < SCREEN_HEIGHT / 2)
 	{
 		x = 0;
 		while (x < SCREEN_WIDTH)
 		{
-			pixel_index = y * SCREEN_WIDTH + x;
-			buffer[pixel_index] = cub3d->map.ceiling;
+			put_pixel_to_buffer(cub3d, x, y, cub3d->map.ceiling);
 			x++;
 		}
 		y++;
@@ -68,8 +66,7 @@ void	render_ceiling_floor(t_cub3d *cub3d)
 		x = 0;
 		while (x < SCREEN_WIDTH)
 		{
-			pixel_index = y * SCREEN_WIDTH + x;
-			buffer[pixel_index] = cub3d->map.floor;
+			put_pixel_to_buffer(cub3d, x, y, cub3d->map.floor);
 			x++;
 		}
 		y++;
@@ -86,17 +83,17 @@ void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 	{
 		if (cub3d->raycast.is_horizontal)
 		{
-			if ((int) cub3d->raycast.raydir_y < 0)
-				wall_color = print_textures(cub3d, 0, y, draw_end);  // NORTE (mirando hacia arriba)
+			if (cub3d->raycast.raydir_y < 0)
+				wall_color = print_textures(cub3d, 0, y, draw_end);
 			else
-				wall_color = print_textures(cub3d, 1, y, draw_end);  // SUR (mirando hacia abajo)
+				wall_color = print_textures(cub3d, 1, y, draw_end);
 		}
 		else
 		{
-			if ((int) cub3d->raycast.raydir_x < 0)
-				wall_color = print_textures(cub3d, 2, y, draw_end);  // OESTE (mirando hacia la izquierda)
+			if (cub3d->raycast.raydir_x < 0)
+				wall_color = print_textures(cub3d, 2, y, draw_end);
 			else
-				wall_color = print_textures(cub3d, 3, y, draw_end);  // ESTE (mirando hacia la derecha)
+				wall_color = print_textures(cub3d, 3, y, draw_end);
 		}
 		put_pixel_to_buffer(cub3d, x, y, wall_color);
 		y++;
@@ -109,7 +106,7 @@ void	 print_cub3d(t_cub3d *cub3d, int x)
 	int	draw_start;
 	int	draw_end;
 	
-	line_height = SCREEN_WIDTH / cub3d->raycast.perp_wall_dist;
+	line_height = SCREEN_HEIGHT / cub3d->raycast.perp_wall_dist;
 	draw_start = (SCREEN_HEIGHT / 2) - (line_height / 2);
 	draw_end = (SCREEN_HEIGHT / 2) + (line_height / 2);
 	if (draw_start < 0)

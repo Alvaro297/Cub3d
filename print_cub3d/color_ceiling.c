@@ -21,3 +21,17 @@ void	color_floor_ceiling(t_cub3d *cub3d)
 	blue = cub3d->map.rgb_floor[2];
 	cub3d->map.floor = red + green + blue;
 }
+
+unsigned int	get_texture_color(t_texture *texture, int x, int y)
+{
+	int				pixel_index;
+	unsigned int	*buffer;
+
+	if (!texture || !texture->data)
+		return (0xFF00FF);
+	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+		return (0xFF0000);
+	pixel_index = y * (texture->line_length / 4) + x;
+	buffer = (unsigned int *)texture->data;
+	return (buffer[pixel_index]);
+}

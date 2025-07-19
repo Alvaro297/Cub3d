@@ -26,7 +26,9 @@ SRCS := \
 	raycast/raycasting.c \
 	raycast/steps.c \
 	print_cub3d/print_cub3d.c \
+	print_cub3d/load_images.c \
 	print_cub3d/color_ceiling.c \
+	print_cub3d/print_textures.c \
 	player_movement/player_movement.c \
 	player_movement/movement.c \
 
