@@ -114,14 +114,11 @@ int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 	(void)y;
 	speed_rotate = 0.003;
 	frame_count++;
-	
-	// Reducir frecuencia de actualización del mouse
-	if (frame_count % 3 != 0)
+	if (frame_count % 10 != 0)
 		return (0);
 	
 	if (last_x != -1)
 	{
-		// Aumentar threshold para reducir micro-movimientos
 		if (abs(x - last_x) > 2)
 		{
 			rot = (x - last_x) * speed_rotate;
