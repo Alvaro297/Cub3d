@@ -150,7 +150,7 @@ void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 //** Print_Cub3d **//
 void			print_cub3d(t_cub3d *cub3d, int x);
 void			color_floor_ceiling(t_cub3d *cub3d);
-int				print_textures(t_cub3d *cub3d, int direction, int y, int draw_end);
+unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end);
 //** Texture Functions **//
 void			load_all_textures(t_cub3d *cub3d);
 void			load_images(t_cub3d *cub3d);

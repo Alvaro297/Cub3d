@@ -4,7 +4,7 @@ static void	change_angle(t_cub3d *cub3d, int keycode)
 {
 	double	rot_speed;
 
-	rot_speed = 0.01;
+	rot_speed = 0.02;
 	if (keycode == 65361)
 		cub3d->player.angle += rot_speed;
 	else if (keycode == 65363)
@@ -68,12 +68,28 @@ bool	is_wall(t_cub3d *cub3d, double x, double y)
 
 int	ft_key_hook(t_cub3d *cub3d)
 {
+	bool movement_occurred = false;
+	double old_x;
+	double old_y;
+	
 	if (cub3d->player.movement.left)
+	{
 		change_angle(cub3d, 65361);
+		movement_occurred = true;
+	}
 	if (cub3d->player.movement.right)
+	{
 		change_angle(cub3d, 65363);
+		movement_occurred = true;
+	}
+	old_x = cub3d->player.x_position;
+	old_y = cub3d->player.y_position;
 	movement_player(cub3d);
-	raycast(cub3d);
+	if (movement_occurred || 
+		old_x != cub3d->player.x_position || 
+		old_y != cub3d->player.y_position)
+		raycast(cub3d);
+	
 	return (0);
 }
 
@@ -96,13 +112,17 @@ int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 	double		rot;
 
 	(void)y;
-	speed_rotate = 0.002;
+	speed_rotate = 0.003;
 	frame_count++;
-	if (frame_count % 5 != 0)
+	
+	// Reducir frecuencia de actualización del mouse
+	if (frame_count % 3 != 0)
 		return (0);
+	
 	if (last_x != -1)
 	{
-		if (abs(x - last_x) > 1)
+		// Aumentar threshold para reducir micro-movimientos
+		if (abs(x - last_x) > 2)
 		{
 			rot = (x - last_x) * speed_rotate;
 			rotate_player(cub3d, rot);

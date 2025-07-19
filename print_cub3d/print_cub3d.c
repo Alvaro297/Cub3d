@@ -1,7 +1,5 @@
 # include "../cub3d.h"
 
-# include "../cub3d.h"
-
 void	init_image_buffer(t_cub3d *cub3d)
 {
 	cub3d->image.img_ptr = mlx_new_image(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -13,7 +11,7 @@ void	init_image_buffer(t_cub3d *cub3d)
 
 void	put_pixel_to_buffer(t_cub3d *cub3d, int x, int y, int color)
 {
-	int	pixel_index;
+	int				pixel_index;
 
 	if (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT)
 	{
@@ -75,8 +73,8 @@ void	render_ceiling_floor(t_cub3d *cub3d)
 
 void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 {
-	int	y;
-	int	wall_color;
+	int				y;
+	unsigned int	wall_color;
 
 	y = draw_start;
 	while (y < draw_end)
@@ -84,18 +82,18 @@ void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 		if (cub3d->raycast.is_horizontal)
 		{
 			if (cub3d->raycast.raydir_y < 0)
-				wall_color = print_textures(cub3d, 0, y, draw_end);
+				wall_color = print_textures(cub3d, 1, y, draw_start, draw_end); // Sur
 			else
-				wall_color = print_textures(cub3d, 1, y, draw_end);
+				wall_color = print_textures(cub3d, 0, y, draw_start, draw_end); // Norte
 		}
 		else
 		{
 			if (cub3d->raycast.raydir_x < 0)
-				wall_color = print_textures(cub3d, 2, y, draw_end);
+				wall_color = print_textures(cub3d, 3, y, draw_start, draw_end); // Este
 			else
-				wall_color = print_textures(cub3d, 3, y, draw_end);
+				wall_color = print_textures(cub3d, 2, y, draw_start, draw_end); // Oeste
 		}
-		put_pixel_to_buffer(cub3d, x, y, wall_color);
+		put_pixel_to_buffer(cub3d, x, y, (int)wall_color);
 		y++;
 	}
 }

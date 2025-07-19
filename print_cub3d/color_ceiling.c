@@ -26,12 +26,36 @@ unsigned int	get_texture_color(t_texture *texture, int x, int y)
 {
 	int				pixel_index;
 	unsigned int	*buffer;
+	static int		error_count = 0;
+	static int		debug_count = 0;
+	unsigned int	color;
 
 	if (!texture || !texture->data)
-		return (0xFF00FF);
-	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+	{
+		if (error_count < 5)
+			printf("ERROR: Textura o data es NULL\n");
+		error_count++;
 		return (0xFF0000);
+	}
+	
+	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+	{
+		if (error_count < 5)
+			printf("ERROR: Coordenadas fuera de rango - x:%d y:%d (max: %dx%d)\n", 
+				x, y, texture->width, texture->height);
+		error_count++;
+		return (0xFF0000);
+	}
 	pixel_index = y * (texture->line_length / 4) + x;
 	buffer = (unsigned int *)texture->data;
-	return (buffer[pixel_index]);
+	color = buffer[pixel_index];
+	
+	if (debug_count < 10)
+	{
+		printf("TEXTURE COLOR #%d: x=%d y=%d pixel_index=%d color=0x%08X\n", 
+			debug_count, x, y, pixel_index, color);
+		debug_count++;
+	}
+	
+	return (color);
 }
