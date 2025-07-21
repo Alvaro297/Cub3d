@@ -28,6 +28,7 @@ SRCS := \
 	print_cub3d/print_cub3d.c \
 	player_movement/player_movement.c \
 	player_movement/movement.c \
+	mini_map/minimap.c \
 
 
 OBJ_FILES := $(SRCS:%.c=$(OBJ_DIR)/%.o)

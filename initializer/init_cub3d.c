@@ -69,6 +69,8 @@ t_raycasting	init_raycasting(void)
 	return (rc);
 }
 
+
+
 void	init_cub3d(t_cub3d *cub3d)
 {
 	/* cub3d->mlx_ptr = mlx_init();
