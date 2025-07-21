@@ -28,6 +28,7 @@ static void	cub3d(char *argv)
 	validate_textures(&cub3d);
 	check_player(&cub3d);
 	validate_map(&cub3d);
+	color_floor_ceiling(&cub3d);
 	start_cub3d(&cub3d);
 }
 

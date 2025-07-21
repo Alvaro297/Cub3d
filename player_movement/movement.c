@@ -30,7 +30,7 @@ static void	move_back(t_cub3d *cub3d, double move_speed, double margin)
 		cub3d->player.y_position = new_y;
 }
 
-static void	move_left(t_cub3d *cub3d, double move_speed, double margin)
+static void	move_right(t_cub3d *cub3d, double move_speed, double margin)
 {
 	double	new_x;
 	double	new_y;
@@ -45,7 +45,7 @@ static void	move_left(t_cub3d *cub3d, double move_speed, double margin)
 		cub3d->player.y_position = new_y;
 }
 
-static void	move_right(t_cub3d *cub3d, double move_speed, double margin)
+static void	move_left(t_cub3d *cub3d, double move_speed, double margin)
 {
 	double	new_x;
 	double	new_y;
@@ -66,7 +66,7 @@ void	movement_player(t_cub3d *cub3d)
 	double	margin;
 
 	margin = 0.2;
-	move_speed = 0.05;
+	move_speed = 0.01;
 	if (cub3d->player.movement.w)
 		move_front(cub3d, move_speed, margin);
 	if (cub3d->player.movement.s)
