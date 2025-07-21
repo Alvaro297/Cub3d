@@ -1,5 +1,5 @@
 # include "../cub3d.h"
-
+/*
 void	step_direccion(t_cub3d *cub3d, int map_x, int map_y)
 {
 	if (cub3d->raycast.raydir_x < 0)
@@ -87,3 +87,4 @@ void	dda_loop(t_cub3d *cub3d, int map_x, int map_y)
 		}
 	}
 }
+*/

@@ -51,51 +51,49 @@ void	wall_hit(t_cub3d *cub3d, bool is_horizontal, int map)
 	}
 }
 
+static void hited_wall(t_cub3d *cub3d, int map_x, int map_y, int side)
+{
+	if (side == 0)
+		cub3d->raycast.is_horizontal = true;
+	else
+		cub3d->raycast.is_horizontal = false;
+	if (cub3d->raycast.is_horizontal)
+		wall_hit(cub3d, cub3d->raycast.is_horizontal, map_x);
+	else
+		wall_hit(cub3d, cub3d->raycast.is_horizontal, map_y);	
+	cub3d->raycast.hit_type = cub3d->map.matriz[map_y][map_x];
+}
+static void	dda_loop_help(t_cub3d *cub3d, int map_x, int map_y,  int side)
+{
+	if (cub3d->raycast.sideDist_x < cub3d->raycast.sideDist_y)
+	{
+		cub3d->raycast.sideDist_x += cub3d->raycast.delta_dist_x;
+		map_x += cub3d->raycast.step_x;
+		side = 0;
+	}
+	else
+	{
+		cub3d->raycast.sideDist_y += cub3d->raycast.delta_dist_y;
+		map_y += cub3d->raycast.step_y;
+		side = 1;
+	}
+}
+
 void	dda_loop(t_cub3d *cub3d, int map_x, int map_y)
 {
+	int		side;
+
 	while (1)
 	{
-		if (cub3d->raycast.sideDist_x < cub3d->raycast.sideDist_y)
+		dda_loop_help(cub3d, map_x, map_y, side);
+		if (map_y < 0 || map_y >= cub3d->map.height ||
+			map_x < 0 || map_x >= cub3d->map.width)
+			break;
+		if (cub3d->map.matriz[map_y][map_x] == '1' ||
+			cub3d->map.matriz[map_y][map_x] == '2')
 		{
-			cub3d->raycast.sideDist_x += cub3d->raycast.delta_dist_x;
-			map_x += (int) cub3d->raycast.step_x;
-			if (map_x < 0 || map_y < 0 || !cub3d->map.matriz)
-				break;
-			int num_rows = 0;
-			while (cub3d->map.matriz[num_rows])
-				num_rows++;
-			
-			if (map_y >= num_rows || !cub3d->map.matriz[map_y] || 
-				map_x >= (int)strlen(cub3d->map.matriz[map_y]))
-				break;
-			
-			if (cub3d->map.matriz[map_y][map_x] == '1'
-					|| cub3d->map.matriz[map_y][map_x] == '2')
-			{
-				wall_hit(cub3d, true, map_x);
-				cub3d->raycast.hit_type = cub3d->map.matriz[map_y][map_x];
-				break;
-			}
-		}
-		else
-		{
-			cub3d->raycast.sideDist_y += cub3d->raycast.delta_dist_y;
-			map_y += (int) cub3d->raycast.step_y;
-			if (map_x < 0 || map_y < 0 || !cub3d->map.matriz)
-				break;
-			int num_rows = 0;
-			while (cub3d->map.matriz[num_rows])
-				num_rows++;
-			if (map_y >= num_rows || !cub3d->map.matriz[map_y] || 
-				map_x >= (int)strlen(cub3d->map.matriz[map_y]))
-				break;
-			if (cub3d->map.matriz[map_y][map_x] == '1'
-					|| cub3d->map.matriz[map_y][map_x] == '2')
-			{
-				wall_hit(cub3d, false, map_y);
-				cub3d->raycast.hit_type = cub3d->map.matriz[map_y][map_x];
-				break;
-			}
+			hited_wall(cub3d, map_x, map_y, side);
+			break;
 		}
 	}
 }
