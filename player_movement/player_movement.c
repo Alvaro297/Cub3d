@@ -74,6 +74,8 @@ int	ft_key_hook(t_cub3d *cub3d)
 		change_angle(cub3d, 65363);
 	movement_player(cub3d);
 	raycast(cub3d);
+	draw_minimap(cub3d);
+	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, cub3d->img_ptr, 0, 0);
 	return (0);
 }
 
@@ -110,5 +112,7 @@ int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 		}
 	}
 	last_x = x;
+	raycast(cub3d);
+	draw_minimap(cub3d);
 	return (0);
 }
