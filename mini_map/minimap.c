@@ -1,23 +1,16 @@
 #include "cub3d.h"
 
-static t_minimap	init_minimap(t_cub3d *cub3d)
+/* static void	print_minimap(t_minimap *m)
 {
-	t_minimap	m;
-
-	m.map_rows = cub3d->map.height;
-	m.map_cols = cub3d->map.width;
-	m.max_width = SCREEN_WIDTH * 0.2;
-	m.max_height = SCREEN_HEIGHT * 0.2;
-	m.scale_x = m.max_width / m.map_cols;
-	m.scale_y = m.max_height / m.map_rows;
-	if (m.scale_x < m.scale_y)
-		cub3d->map.map_scale = m.scale_x;
-	else
-		cub3d->map.map_scale = m.scale_y;
-	if (cub3d->map.map_scale < 1)
-		cub3d->map.map_scale = 1;
-	return (m);
-}
+	printf("=== MINIMAP ===\n");
+	printf("map_rows:    %d\n", m->map_rows);
+	printf("map_cols:    %d\n", m->map_cols);
+	printf("max_width:   %d\n", m->max_width);
+	printf("max_height:  %d\n", m->max_height);
+	printf("scale_x:     %d\n", m->scale_x);
+	printf("scale_y:     %d\n", m->scale_y);
+	printf("================\n");
+} */
 
 static void	put_pixel_map(t_image *img, int x, int y, int color)
 {
@@ -48,31 +41,32 @@ static void	print_map(t_image *img, int x, int y, int size, int color)
 
 void	draw_minimap(t_cub3d *cub3d)
 {
-	t_minimap	*m;
 	int			i;
 	int			j;
 	int			screen_x;
 	int			screen_y;
 	int			player_x;
 	int			player_y;
+	
 	int			cell_size;
-
 	cub3d->minimap = init_minimap(cub3d);
-	m = &cub3d->minimap;
-
+	cell_size = 0;
 	i = 0;
 	cell_size = cub3d->map.map_scale;
-	while (i < m->map_rows)
+	while (i < cub3d->minimap.map_rows)
 	{
 		j = 0;
-		while (j < m->map_cols)
+		while (j < cub3d->minimap.map_cols)
 		{
 			screen_x = 10 + j * cell_size;
 			screen_y = 10 + i * cell_size;
-			if (cub3d->map.matriz[i][j] == '1')
+			char c = cub3d->map.matriz_norm[i][j];
+			if (c == '1')
 				print_map(&cub3d->image, screen_x, screen_y, cell_size, 0xFFFFFF);
-			else
+			else if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 				print_map(&cub3d->image, screen_x, screen_y, cell_size, 0x000000);
+			else
+				print_map(&cub3d->image, screen_x, screen_y, cell_size, 0x444444);
 			j++;
 		}
 		i++;
@@ -80,4 +74,5 @@ void	draw_minimap(t_cub3d *cub3d)
 	player_x = 10 + cub3d->player.x_position * cell_size;
 	player_y = 10 + cub3d->player.y_position * cell_size;
 	print_map(&cub3d->image, player_x - 1, player_y - 1, 3, 0xFF0000);
+	render_buffer_to_window(cub3d);
 }

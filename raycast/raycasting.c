@@ -78,5 +78,4 @@ void	raycast(t_cub3d *cub3d)
 		print_cub3d(cub3d, x);
 		x++;
 	}
-	render_buffer_to_window(cub3d);
 }

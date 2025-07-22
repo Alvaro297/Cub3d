@@ -19,6 +19,7 @@
 typedef struct s_map
 {
 	char		**matriz;
+	char		**matriz_norm;
 	int			n_wall;
 	int			n_players;
 	int			count_textures;
@@ -164,4 +165,5 @@ bool			is_wall(t_cub3d *cub3d, double x, double y);
 
 /* Minimap */
 void			draw_minimap(t_cub3d *cub3d);
+t_minimap		init_minimap(t_cub3d *cub3d);
 #endif
