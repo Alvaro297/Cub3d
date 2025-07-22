@@ -30,6 +30,7 @@ int	coun_lines(char *filename)
 		free(line);
 		line = get_next_line(fd, 0);
 	}
+	get_next_line(fd, 1);
 	close(fd);
 	return (count);
 }

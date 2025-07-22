@@ -104,5 +104,5 @@ void	validate_cell(t_cub3d *cub3d, char **map_copy,
 		free_cub3d(cub3d);
 		exit(1);
 	}
-	ft_free_map(map_region, cub3d);
+	cub3d->map.matriz_norm = map_region;
 }

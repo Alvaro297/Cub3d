@@ -75,7 +75,7 @@ int	ft_key_hook(t_cub3d *cub3d)
 	movement_player(cub3d);
 	raycast(cub3d);
 	draw_minimap(cub3d);
-	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, cub3d->img_ptr, 0, 0);
+	//mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, cub3d->img_ptr, 0, 0);
 	return (0);
 }
 
@@ -100,7 +100,7 @@ int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 	(void)y;
 	speed_rotate = 0.002;
 	frame_count++;
-	if (frame_count % 5 != 0)
+	if (frame_count % 50 != 0)
 		return (0);
 	if (last_x != -1)
 	{
@@ -109,6 +109,7 @@ int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 			rot = (x - last_x) * speed_rotate;
 			rotate_player(cub3d, rot);
 			raycast(cub3d);
+			draw_minimap(cub3d);
 		}
 	}
 	last_x = x;
