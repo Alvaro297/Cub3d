@@ -24,7 +24,7 @@ SRCS := \
 	read_map/validade_player.c \
 	freedoom/freedoom.c \
 	raycast/raycasting.c \
-	raycast/steps.c \
+	raycast/steps_clean.c \
 	print_cub3d/print_cub3d.c \
 	print_cub3d/load_images.c \
 	print_cub3d/color_ceiling.c \

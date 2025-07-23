@@ -155,7 +155,7 @@ unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start
 void			load_all_textures(t_cub3d *cub3d);
 void			load_images(t_cub3d *cub3d);
 void			load_texture(t_cub3d *cub3d, t_texture *tex, char *path);
-unsigned int	get_texture_color(t_texture *texture, int x, int y);
+unsigned int	get_texture_color(t_texture *texture, double x, double y);
 void			free_textures(t_cub3d *cub3d);
 //** Buffer Functions **//
 void			init_image_buffer(t_cub3d *cub3d);

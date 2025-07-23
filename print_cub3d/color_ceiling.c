@@ -22,7 +22,7 @@ void	color_floor_ceiling(t_cub3d *cub3d)
 	cub3d->map.floor = red + green + blue;
 }
 
-unsigned int	get_texture_color(t_texture *texture, int x, int y)
+unsigned int	get_texture_color(t_texture *texture, double x, double y)
 {
 	int				pixel_index;
 	unsigned int	*buffer;
@@ -35,24 +35,23 @@ unsigned int	get_texture_color(t_texture *texture, int x, int y)
 		if (error_count < 5)
 			printf("ERROR: Textura o data es NULL\n");
 		error_count++;
-		return (0xFF0000);
+		return (0x00FF00);
 	}
 	
 	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
 	{
 		if (error_count < 5)
-			printf("ERROR: Coordenadas fuera de rango - x:%d y:%d (max: %dx%d)\n", 
+			printf("ERROR: Coordenadas fuera de rango - x:%f y:%f (max: %dx%d)\n", 
 				x, y, texture->width, texture->height);
 		error_count++;
-		return (0xFF0000);
+		return (0x00FF00);
 	}
 	pixel_index = y * (texture->line_length / 4) + x;
 	buffer = (unsigned int *)texture->data;
 	color = buffer[pixel_index];
-	
-	if (debug_count < 10)
+	if (debug_count < 200)
 	{
-		printf("TEXTURE COLOR #%d: x=%d y=%d pixel_index=%d color=0x%08X\n", 
+		printf("TEXTURE COLOR #%d: x=%f y=%f pixel_index=%d color=0x%08X\n", 
 			debug_count, x, y, pixel_index, color);
 		debug_count++;
 	}
