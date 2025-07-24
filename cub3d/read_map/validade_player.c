@@ -1,4 +1,4 @@
-#include "./cub3d.h"
+#include "../cub3d.h"
 
 void	set_player(t_cub3d *cub3d, int x, int y, char dir)
 {

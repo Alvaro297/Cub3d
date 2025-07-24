@@ -1,4 +1,4 @@
-#include "./cub3d.h"
+#include "../cub3d.h"
 
 static void	set_texture(t_cub3d *cub3d, char *line)
 {

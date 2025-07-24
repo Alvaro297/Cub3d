@@ -1,4 +1,4 @@
-#include "./cub3d.h"
+#include "../cub3d.h"
 
 static t_map	init_map(void)
 {
@@ -29,7 +29,7 @@ static t_map	init_map(void)
 
 static t_movement	init_movement(void)
 {
-	t_movement move;
+	t_movement	move;
 
 	move.w = false;
 	move.a = false;
@@ -54,7 +54,7 @@ static t_player	init_player(void)
 
 t_raycasting	init_raycasting(void)
 {
-	t_raycasting rc;
+	t_raycasting	rc;
 
 	rc.delta_dist_x = 0.0;
 	rc.delta_dist_y = 0.0;
@@ -72,33 +72,9 @@ t_raycasting	init_raycasting(void)
 	return (rc);
 }
 
-t_minimap	init_minimap(t_cub3d *cub3d)
-{
-	t_minimap	m;
-
-	m.map_rows = cub3d->map.height;
-	m.map_cols = cub3d->map.width;
-	m.max_width = SCREEN_WIDTH * 0.5;
-	m.max_height = SCREEN_HEIGHT * 0.5;
-	m.scale_x = m.max_width / m.map_cols;
-	m.scale_y = m.max_height / m.map_rows;
-	if (m.scale_x < m.scale_y)
-		cub3d->map.map_scale = m.scale_x;
-	else
-		cub3d->map.map_scale = m.scale_y;
-	if (cub3d->map.map_scale < 1)
-		cub3d->map.map_scale = 1;
-	return (m);
-}
-
 void	init_cub3d(t_cub3d *cub3d)
 {
-	/* cub3d->mlx_ptr = mlx_init();
-	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, 1280, 720, "Cub3d");
-	cub3d->img_ptr = mlx_new_image(cub3d->mlx_ptr, 1280, 720); */
 	cub3d->map = init_map();
 	cub3d->player = init_player();
 	cub3d->raycast = init_raycasting();
-	
-	
 }

@@ -1,6 +1,5 @@
-# include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
-# include "../cub3d.h"
 
 void	init_image_buffer(t_cub3d *cub3d)
 {

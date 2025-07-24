@@ -1,0 +1,79 @@
+#include "../cub3d_bonus.h"
+
+
+static void	move_front(t_cub3d *cub3d, double move_speed, double margin)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = cub3d->player.x_position + cub3d->player.direccion_x * move_speed;
+	new_y = cub3d->player.y_position + cub3d->player.direccion_y * move_speed;
+	if (!is_wall(cub3d, new_x + cub3d->player.direccion_x * margin,
+			cub3d->player.y_position))
+		cub3d->player.x_position = new_x;
+	if (!is_wall(cub3d, cub3d->player.x_position, new_y
+			+ cub3d->player.direccion_y * margin))
+		cub3d->player.y_position = new_y;
+}
+
+static void	move_back(t_cub3d *cub3d, double move_speed, double margin)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = cub3d->player.x_position - cub3d->player.direccion_x * move_speed;
+	new_y = cub3d->player.y_position - cub3d->player.direccion_y * move_speed;
+	if (!is_wall(cub3d, new_x - cub3d->player.direccion_x * margin,
+			cub3d->player.y_position))
+		cub3d->player.x_position = new_x;
+	if (!is_wall(cub3d, cub3d->player.x_position, new_y
+			- cub3d->player.direccion_y * margin))
+		cub3d->player.y_position = new_y;
+}
+
+static void	move_right(t_cub3d *cub3d, double move_speed, double margin)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = cub3d->player.x_position + cub3d->player.direccion_y * move_speed;
+	new_y = cub3d->player.y_position - cub3d->player.direccion_x * move_speed;
+	if (!is_wall(cub3d, new_x + cub3d->player.direccion_y * margin,
+			cub3d->player.y_position))
+		cub3d->player.x_position = new_x;
+	if (!is_wall(cub3d, cub3d->player.x_position, new_y
+			- cub3d->player.direccion_x * margin))
+		cub3d->player.y_position = new_y;
+}
+
+static void	move_left(t_cub3d *cub3d, double move_speed, double margin)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = cub3d->player.x_position - cub3d->player.direccion_y * move_speed;
+	new_y = cub3d->player.y_position + cub3d->player.direccion_x * move_speed;
+	if (!is_wall(cub3d, new_x - cub3d->player.direccion_y * margin,
+			cub3d->player.y_position))
+		cub3d->player.x_position = new_x;
+	if (!is_wall(cub3d, cub3d->player.x_position, new_y
+			+ cub3d->player.direccion_x * margin))
+		cub3d->player.y_position = new_y;
+}
+
+void	movement_player(t_cub3d *cub3d)
+{
+	double	move_speed;
+	double	margin;
+
+	margin = 0.2;
+	move_speed = 0.01;
+	if (cub3d->player.movement.w)
+		move_front(cub3d, move_speed, margin);
+	if (cub3d->player.movement.s)
+		move_back(cub3d, move_speed, margin);
+	if (cub3d->player.movement.a)
+		move_left(cub3d, move_speed, margin);
+	if (cub3d->player.movement.d)
+		move_right(cub3d, move_speed, margin);
+}
