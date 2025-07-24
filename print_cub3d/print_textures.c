@@ -1,38 +1,36 @@
 # include "../cub3d.h"
 
-
-unsigned int    print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end)
+unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end)
 {
-    double  hit_coord_on_wall;
-    double  dec_x;
-    int     texture_x_coord;
-    t_texture *tex;
+	double		hit_coord_on_wall;
+	double		dec_x;
+	int			texture_x_coord;
+	int			texture_y_coord;
+	t_texture	*tex;
 
-    if (cub3d->raycast.is_horizontal)
-        hit_coord_on_wall = cub3d->raycast.wall_hit_y;
-    else // Rayo golpeó muro horizontal (N/S)
-        hit_coord_on_wall = cub3d->raycast.wall_hit_x;
-    dec_x = hit_coord_on_wall - floor(hit_coord_on_wall);
-
-    if (dec_x < 0)
-        dec_x += 1.0; 
-
-    texture_x_coord = (int)(dec_x * tex->width);
-
-    if ((cub3d->raycast.is_horizontal && cub3d->raycast.raydir_x < 0) ||
-        (!cub3d->raycast.is_horizontal && cub3d->raycast.raydir_y > 0))
-    {
-        texture_x_coord = tex->width - texture_x_coord - 1;
-    }
-
-
-    int texture_y_coord = ((y - draw_start) * tex->height) / (draw_end - draw_start);
-    printf("FINAL TEXTURE COORDS: x=%d y=%d for tex %dx%d (dec_x=%.4f)\n", 
-           texture_x_coord, texture_y_coord, tex->width, tex->height, dec_x);
-
-    return (get_texture_color(tex, texture_x_coord, texture_y_coord));
+	if (direction == 0)
+		tex = &cub3d->image.tex_north;
+	else if (direction == 1)
+		tex = &cub3d->image.tex_south;
+	else if (direction == 2)
+		tex = &cub3d->image.tex_west;
+	else
+		tex = &cub3d->image.tex_east;
+	if (cub3d->raycast.is_horizontal)
+		hit_coord_on_wall = cub3d->raycast.wall_hit_y;
+	else
+		hit_coord_on_wall = cub3d->raycast.wall_hit_x;
+	dec_x = hit_coord_on_wall - floor(hit_coord_on_wall);
+	if (dec_x < 0)
+		dec_x += 1.0;
+	texture_x_coord = (int)(dec_x * tex->width);
+	if ((cub3d->raycast.is_horizontal && cub3d->raycast.raydir_x < 0) ||
+		(!cub3d->raycast.is_horizontal && cub3d->raycast.raydir_y > 0))
+		texture_x_coord = tex->width - texture_x_coord - 1;
+	texture_y_coord = ((y - draw_start) * tex->height) / (draw_end - draw_start);
+	return (get_texture_color(tex, texture_x_coord, texture_y_coord));
 }
-
+/*
 unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end)
 {
 	double	wall_x;
@@ -73,4 +71,4 @@ unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start
 	}
 	
 	return (get_texture_color(tex, texture, texture_y));
-}
+}*/

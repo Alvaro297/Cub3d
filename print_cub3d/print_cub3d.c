@@ -81,17 +81,17 @@ void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 	{
 		if (cub3d->raycast.is_horizontal)
 		{
+			if (cub3d->raycast.raydir_x < 0)
+				wall_color = print_textures(cub3d, 0, y, draw_start, draw_end);
+			else
+				wall_color = print_textures(cub3d, 1, y, draw_start, draw_end);
+		}
+		else
+		{
 			if (cub3d->raycast.raydir_y < 0)
 				wall_color = print_textures(cub3d, 2, y, draw_start, draw_end);
 			else
 				wall_color = print_textures(cub3d, 3, y, draw_start, draw_end);
-		}
-		else
-		{
-			if (cub3d->raycast.raydir_x < 0)
-				wall_color = print_textures(cub3d, 1, y, draw_start, draw_end);
-			else
-				wall_color = print_textures(cub3d, 0, y, draw_start, draw_end);
 		}
 		put_pixel_to_buffer(cub3d, x, y, (int)wall_color);
 		y++;

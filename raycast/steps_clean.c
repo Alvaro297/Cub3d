@@ -30,8 +30,7 @@ void	step_direccion(t_cub3d *cub3d, int map_x, int map_y)
 
 void	wall_hit(t_cub3d *cub3d, bool is_horizontal, int map_coord_of_wall)
 {
-	cub3d->raycast.is_horizontal = is_horizontal;
-	 if (is_horizontal)
+	if (is_horizontal)
 	{
 		cub3d->raycast.perp_wall_dist = 
 			(map_coord_of_wall - cub3d->player.x_position + (1 - cub3d->raycast.step_x) / 2) 

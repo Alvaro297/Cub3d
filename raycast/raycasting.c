@@ -49,7 +49,6 @@ static double	fill_raydiry(t_cub3d *cub3d, int x)
 	plane_y = cub3d->player.direccion_x * 0.66;
 	camera = 2 * x / (double) SCREEN_WIDTH -1;
 	raydir_y = cub3d->player.direccion_y + plane_y * camera;
-
 	return (raydir_y);
 }
 

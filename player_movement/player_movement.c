@@ -4,10 +4,10 @@ static void	change_angle(t_cub3d *cub3d, int keycode)
 {
 	double	rot_speed;
 
-	rot_speed = 0.01;
-	if (keycode == 65361)
+	rot_speed = 0.02;
+	if (keycode == 65363)
 		cub3d->player.angle += rot_speed;
-	else if (keycode == 65363)
+	else if (keycode == 65361)
 		cub3d->player.angle -= rot_speed;
 	cub3d->player.direccion_x = cos(cub3d->player.angle);
 	cub3d->player.direccion_y = sin(cub3d->player.angle);
@@ -114,7 +114,7 @@ int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 	(void)y;
 	speed_rotate = 0.003;
 	frame_count++;
-	if (frame_count % 10 != 0)
+	if (frame_count % 15 != 0)
 		return (0);
 	
 	if (last_x != -1)

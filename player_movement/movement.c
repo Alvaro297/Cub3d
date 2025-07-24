@@ -37,13 +37,10 @@ static void	move_right(t_cub3d *cub3d, double move_speed, double margin)
 	double	right_x;
 	double	right_y;
 
-	// Vector perpendicular derecho: rotar dirección 90° en sentido horario
-	right_x = cub3d->player.direccion_y;    // cos(angle + π/2) = -sin(angle) = direccion_y
-	right_y = -cub3d->player.direccion_x;   // sin(angle + π/2) = cos(angle) = -direccion_x
-	
+	right_x = cub3d->player.direccion_y;
+	right_y = -cub3d->player.direccion_x;
 	new_x = cub3d->player.x_position + right_x * move_speed;
 	new_y = cub3d->player.y_position + right_y * move_speed;
-	
 	if (!is_wall(cub3d, new_x + right_x * margin, cub3d->player.y_position))
 		cub3d->player.x_position = new_x;
 	if (!is_wall(cub3d, cub3d->player.x_position, new_y + right_y * margin))
@@ -57,13 +54,11 @@ static void	move_left(t_cub3d *cub3d, double move_speed, double margin)
 	double	left_x;
 	double	left_y;
 
-	// Vector perpendicular izquierdo: rotar dirección 90° en sentido antihorario
-	left_x = -cub3d->player.direccion_y;    // cos(angle - π/2) = sin(angle) = -direccion_y
-	left_y = cub3d->player.direccion_x;     // sin(angle - π/2) = -cos(angle) = direccion_x
 	
+	left_x = -cub3d->player.direccion_y;
+	left_y = cub3d->player.direccion_x;
 	new_x = cub3d->player.x_position + left_x * move_speed;
 	new_y = cub3d->player.y_position + left_y * move_speed;
-	
 	if (!is_wall(cub3d, new_x + left_x * margin, cub3d->player.y_position))
 		cub3d->player.x_position = new_x;
 	if (!is_wall(cub3d, cub3d->player.x_position, new_y + left_y * margin))
