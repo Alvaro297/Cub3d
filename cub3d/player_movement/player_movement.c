@@ -74,46 +74,5 @@ int	ft_key_hook(t_cub3d *cub3d)
 		change_angle(cub3d, 65363);
 	movement_player(cub3d);
 	raycast(cub3d);
-	draw_minimap(cub3d);
-	//mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, cub3d->img_ptr, 0, 0);
-	return (0);
-}
-
-static void	rotate_player(t_cub3d *cub3d, double rot)
-{
-	cub3d->player.angle += rot;
-	if (cub3d->player.angle < 0)
-		cub3d->player.angle += 2 * M_PI;
-	if (cub3d->player.angle >= 2 * M_PI)
-		cub3d->player.angle -= 2 * M_PI;
-	cub3d->player.direccion_x = cos(cub3d->player.angle);
-	cub3d->player.direccion_y = sin(cub3d->player.angle);
-}
-
-int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
-{
-	static int	last_x = -1;
-	static int	frame_count = 0;
-	double		speed_rotate;
-	double		rot;
-
-	(void)y;
-	speed_rotate = 0.002;
-	frame_count++;
-	if (frame_count % 50 != 0)
-		return (0);
-	if (last_x != -1)
-	{
-		if (abs(x - last_x) > 1)
-		{
-			rot = (x - last_x) * speed_rotate;
-			rotate_player(cub3d, rot);
-			raycast(cub3d);
-			draw_minimap(cub3d);
-		}
-	}
-	last_x = x;
-	raycast(cub3d);
-	draw_minimap(cub3d);
 	return (0);
 }

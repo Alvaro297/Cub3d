@@ -90,20 +90,6 @@ typedef struct s_image
 	int		endian;
 }				t_image;
 
-typedef struct s_minimap
-{
-	int	row;
-	int	col;
-	int	sx;
-	int	sy;
-	int	map_rows;
-	int	map_cols;
-	int	scale_x;
-	int	scale_y;
-	int	max_width;
-	int	max_height;
-}	t_minimap;
-
 typedef struct s_cub3d
 {
 	void			*mlx_ptr;
@@ -114,7 +100,6 @@ typedef struct s_cub3d
 	t_image			image;
 	t_player		player;
 	t_raycasting	raycast;
-	t_minimap		minimap;
 }				t_cub3d;
 
 int				main(int argc, char **argv);
@@ -157,13 +142,9 @@ void			clear_buffer(t_cub3d *cub3d, int color);
 void			render_ceiling_floor(t_cub3d *cub3d);
 //** Movement **//
 int				ft_key_hook(t_cub3d *cub3d);
-int				ft_mouse_hook(int x, int y, t_cub3d *cub3d);
 int				key_press(int keycode, t_cub3d *cub3d);
 int				key_release(int keycode, t_cub3d *cub3d);
 void			movement_player(t_cub3d *cub3d);
 bool			is_wall(t_cub3d *cub3d, double x, double y);
 
-/* Minimap */
-void			draw_minimap(t_cub3d *cub3d);
-t_minimap		init_minimap(t_cub3d *cub3d);
 #endif

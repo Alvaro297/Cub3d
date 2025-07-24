@@ -1,4 +1,4 @@
-#include "./cub3d.h"
+#include "../cub3d.h"
 
 static int	error_rgb(char **splited, char *trimmed, char *msg)
 {
