@@ -4,7 +4,7 @@ static void	change_angle(t_cub3d *cub3d, int keycode)
 {
 	double	rot_speed;
 
-	rot_speed = 0.02;
+	rot_speed = 0.05;
 	if (keycode == 65363)
 		cub3d->player.angle += rot_speed;
 	else if (keycode == 65361)
