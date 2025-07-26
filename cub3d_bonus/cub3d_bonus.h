@@ -7,14 +7,25 @@
 # include <math.h>
 # include <stdbool.h>
 
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
-#define GREY 0xAAAAAA
-#define RED2 0xFF0000
-#define GREEN2 0x00FF00
-#define BLUE2 0x0000FF
-#define YELLOW 0xFFFF00
-#define BLACK 0x444444
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
+# define GREY 0xAAAAAA
+# define RED2 0xFF0000
+# define GREEN2 0x00FF00
+# define MORAO 0xAA00FF
+# define BLUE2 0x0000FF
+# define YELLOW 0xFFFF00
+# define BLACK 0x000000
+# define KEY_E 101
+
+typedef struct s_door
+{
+	int			x;
+	int			y;
+	bool		is_open;
+	double		animation;
+
+}				t_door;
 
 typedef struct s_map
 {
@@ -37,17 +48,19 @@ typedef struct s_map
 	int			map_index;
 	int			parse;
 	int			map_scale;
+	t_door		*door;
+	int			n_doors;
 }				t_map;
 
 typedef struct s_movement
 {
-	bool	w;
-	bool	a;
-	bool	s;
-	bool	d;
-	bool	left;
-	bool	right;
-}	t_movement;
+	bool		w;
+	bool		a;
+	bool		s;
+	bool		d;
+	bool		left;
+	bool		right;
+}				t_movement;
 
 
 typedef struct s_player
@@ -65,19 +78,19 @@ typedef struct s_player
 
 typedef struct s_raycasting
 {
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	raydir_x;
-	double	raydir_y;
-	double	sideDist_x;
-	double	sideDist_y;
-	short	step_x;
-	short	step_y;
-	bool	is_horizontal;
-	double	perp_wall_dist;
-	double	wall_hit_x;
-	double	wall_hit_y;
-	char	hit_type;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		raydir_x;
+	double		raydir_y;
+	double		sideDist_x;
+	double		sideDist_y;
+	short		step_x;
+	short		step_y;
+	bool		is_horizontal;
+	double		perp_wall_dist;
+	double		wall_hit_x;
+	double		wall_hit_y;
+	char		hit_type;
 }				t_raycasting;
 
 
@@ -117,6 +130,7 @@ typedef struct s_cub3d
 	t_minimap		minimap;
 }				t_cub3d;
 
+/* read && validate map */
 void			init_cub3d(t_cub3d *cub3d);
 void			check_name(char *filename);
 void			read_map(char *filename, t_cub3d *cub3d);
@@ -138,6 +152,7 @@ void			validate_cell(t_cub3d *cub3d, char **map_copy,
 					int y, int x, int height);
 void			free_norm_map(char **map, int upto);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
+
 //** Raycasting **//
 t_raycasting	init_raycasting(void);
 void			starting_raycasting(t_cub3d *cub3d, char pos_player);
@@ -145,15 +160,18 @@ void			raycast(t_cub3d *cub3d);
 void			steps(t_cub3d *cub3d);
 void			dda_loop(t_cub3d *cub3d, int map_x, int map_y);
 void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
+
 //** Print_Cub3d **//
 void			print_cub3d(t_cub3d *cub3d, int x);
 void			color_floor_ceiling(t_cub3d *cub3d);
+
 //** Buffer Functions **//
 void			init_image_buffer(t_cub3d *cub3d);
 void			put_pixel_to_buffer(t_cub3d *cub3d, int x, int y, int color);
 void			render_buffer_to_window(t_cub3d *cub3d);
 void			clear_buffer(t_cub3d *cub3d, int color);
 void			render_ceiling_floor(t_cub3d *cub3d);
+
 //** Movement **//
 int				ft_key_hook(t_cub3d *cub3d);
 int				ft_mouse_hook(int x, int y, t_cub3d *cub3d);
@@ -165,4 +183,12 @@ bool			is_wall(t_cub3d *cub3d, double x, double y);
 /* Minimap */
 void			draw_minimap(t_cub3d *cub3d);
 t_minimap		init_minimap(t_cub3d *cub3d);
+
+/* Doors */
+void			find_doors(t_cub3d *cub3d);
+void			open_door(t_cub3d *cub3d);
+t_door			*get_door(t_cub3d *cub3d, int x, int y);
+void			toogle_door(t_cub3d *cub3d);
+void			update_doors(t_cub3d *cub3d);
+
 #endif

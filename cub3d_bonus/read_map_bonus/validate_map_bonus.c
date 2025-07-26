@@ -6,7 +6,7 @@ static int	flood_fill(char **map, int x, int y, int height)
 		return (0);
 	if (map[y][x] == ' ' || map[y][x] == '\0')
 		return (0);
-	if (map[y][x] == '1' || map[y][x] == 'x')
+	if (map[y][x] == '1' || map[y][x] == 'x' || map[y][x] == '2')
 		return (1);
 	map[y][x] = 'x';
 	if (!flood_fill(map, x + 1, y, height))
@@ -86,6 +86,7 @@ void	validate_map(t_cub3d *cub3d)
 	ft_free_map(map_copy, cub3d);
 }
 
+
 void	validate_cell(t_cub3d *cub3d, char **map_copy,
 				int y, int x, int height)
 {
@@ -105,4 +106,5 @@ void	validate_cell(t_cub3d *cub3d, char **map_copy,
 		exit(1);
 	}
 	cub3d->map.matriz_norm = map_region;
+
 }

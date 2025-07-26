@@ -7,7 +7,7 @@ int	is_line(char *line)
 	{
 		if (*line != ' ' && *line != '0' && *line != '1'
 			&& *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W' 
-			&& *line != 13)
+			&& *line != 13 && *line != '2')
 				return (0);
 		line++;
 	}

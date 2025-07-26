@@ -69,13 +69,21 @@ void	dda_loop(t_cub3d *cub3d, int map_x, int map_y)
 				map_x >= (int)strlen(cub3d->map.matriz[map_y]))
 				break;
 			
-			if (cub3d->map.matriz[map_y][map_x] == '1'
-					|| cub3d->map.matriz[map_y][map_x] == '2')
+			if (cub3d->map.matriz[map_y][map_x] == '1')
 			{
 				wall_hit(cub3d, true, map_x);
 				cub3d->raycast.hit_type = cub3d->map.matriz[map_y][map_x];
 				break;
 			}
+			if (cub3d->map.matriz[map_y][map_x] == '2')
+			{
+				wall_hit(cub3d, true, map_x);
+				printf("Puerta detectada: x=%d hit_type=%c\n", x, cub3d->raycast.hit_type);
+
+				cub3d->raycast.hit_type = cub3d->map.matriz[map_y][map_x];
+				break;
+			}
+
 		}
 		else
 		{
