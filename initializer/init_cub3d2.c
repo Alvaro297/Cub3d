@@ -37,6 +37,7 @@ static t_texture	init_texture(void)
 t_image	init_image(void)
 {
 	t_image	image;
+	int		i;
 
 	image.img_ptr = NULL;
 	image.data = NULL;
@@ -44,9 +45,14 @@ t_image	init_image(void)
 	image.line_length = 0;
 	image.endian = 0;
 	image.animation_frame = 0;
+	image.animation_frame_west = 0;
 	image.tex_north = init_texture();
 	image.tex_south = init_texture();
-	image.tex_east = init_texture();
-	image.tex_west = init_texture();
+	while (i < TOTAL_ANIMATIONS)
+	{
+		image.tex_east[i] = init_texture();
+		image.tex_west[i] = init_texture();
+		i++;
+	}
 	return (image);
 }
