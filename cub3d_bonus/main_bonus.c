@@ -1,5 +1,19 @@
 #include "cub3d_bonus.h"
 
+static void	debug_all_doors(t_cub3d *cub3d)
+{
+	int i;
+
+	printf("=== Estado de todas las puertas ===\n");
+	for (i = 0; i < cub3d->map.n_doors; i++)
+	{
+		t_door *d = &cub3d->map.door[i];
+		printf("Puerta #%d en (%d, %d) - %s (anim: %.2f)\n",
+			i, d->x, d->y, d->is_open ? "ABIERTA" : "CERRADA", d->animation);
+	}
+	printf("===================================\n");
+}
+
 static void	start_cub3d(t_cub3d *cub3d)
 {
 	starting_raycasting(cub3d, cub3d->player.direction);
@@ -28,8 +42,11 @@ static void	cub3d(char *argv)
 	check_player(&cub3d);
 	validate_map(&cub3d);
 	color_floor_ceiling(&cub3d);
-	start_cub3d(&cub3d);
+	find_doors(&cub3d);
+	debug_all_doors(&cub3d);
+	start_cub3d(&cub3d);      // Luego ya todo puede arrancar
 }
+
 
 int	main(int argc, char **argv)
 {

@@ -1,9 +1,10 @@
 #include "../cub3d_bonus.h"
 
 
+
 static void	change_angle(t_cub3d *cub3d, int keycode)
 {
-	double	rot_speed;
+	double rot_speed;
 
 	rot_speed = 0.01;
 	if (keycode == 65361)
@@ -24,6 +25,8 @@ int	key_press(int keycode, t_cub3d *cub3d)
 		cub3d->player.movement.a = true;
 	else if (keycode == 100 || keycode == 'd')
 		cub3d->player.movement.d = true;
+	else if (keycode == KEY_E)
+		open_door(cub3d);
 	else if (keycode == 65361)
 		cub3d->player.movement.left = true;
 	else if (keycode == 65363)
@@ -55,16 +58,24 @@ int	key_release(int keycode, t_cub3d *cub3d)
 
 bool	is_wall(t_cub3d *cub3d, double x, double y)
 {
-	int	yi;
-	int	xi;
+	int yi = (int)y;
+	int xi = (int)x;
 
-	yi = (int)y;
-	xi = (int)x;
 	if (yi < 0 || yi >= cub3d->map.height || xi < 0 || xi >= cub3d->map.width)
 		return (true);
 	if (xi >= (int)ft_strlen(cub3d->map.matriz[yi]))
 		return (true);
-	return (cub3d->map.matriz[yi][xi] == '1');
+
+	char cell = cub3d->map.matriz[yi][xi];
+	if (cell == '1')
+		return (true);
+	else if (cell == '2')
+	{
+		t_door *door = get_door(cub3d, xi, yi);
+		if (!door || door->animation < 0.99)
+			return (true); //puerta cerrada o abriendo, aún no atravesable
+	}
+	return (false); // libre
 }
 
 int	ft_key_hook(t_cub3d *cub3d)
@@ -74,9 +85,9 @@ int	ft_key_hook(t_cub3d *cub3d)
 	if (cub3d->player.movement.right)
 		change_angle(cub3d, 65363);
 	movement_player(cub3d);
+	update_doors(cub3d);
 	raycast(cub3d);
 	draw_minimap(cub3d);
-	//mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, cub3d->img_ptr, 0, 0);
 	return (0);
 }
 
@@ -91,12 +102,12 @@ static void	rotate_player(t_cub3d *cub3d, double rot)
 	cub3d->player.direccion_y = sin(cub3d->player.angle);
 }
 
-int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
+int	ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 {
-	static int	last_x = -1;
-	static int	frame_count = 0;
-	double		speed_rotate;
-	double		rot;
+	static int last_x = -1;
+	static int frame_count = 0;
+	double speed_rotate;
+	double rot;
 
 	(void)y;
 	speed_rotate = 0.002;

@@ -80,7 +80,9 @@ void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 	int	y;
 	int	wall_color;
 
-	if (cub3d->raycast.is_horizontal)
+	if (cub3d->raycast.hit_type == '2')
+		wall_color = MORAO;
+	else if (cub3d->raycast.is_horizontal)
 	{
 		if ((int) cub3d->raycast.raydir_y < 0)
 			wall_color = RED2;

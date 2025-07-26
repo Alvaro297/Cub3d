@@ -25,6 +25,8 @@ static t_map	init_map(void)
 	map.tex_we = NULL;
 	map.tex_ea = NULL;
 	map.parse = 0;
+	map.door = NULL;
+	map.n_doors = 0;
 	return (map);
 }
 
@@ -94,12 +96,8 @@ t_minimap	init_minimap(t_cub3d *cub3d)
 
 void	init_cub3d(t_cub3d *cub3d)
 {
-	/* cub3d->mlx_ptr = mlx_init();
-	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, 1280, 720, "Cub3d");
-	cub3d->img_ptr = mlx_new_image(cub3d->mlx_ptr, 1280, 720); */
 	cub3d->map = init_map();
 	cub3d->player = init_player();
 	cub3d->raycast = init_raycasting();
-	
 	
 }

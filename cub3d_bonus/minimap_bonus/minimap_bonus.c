@@ -12,6 +12,21 @@
 	printf("scale_y:     %d\n", m->scale_y);
 	printf("================\n");
 } */
+/* static void	print_minimap(char **map)
+{
+	int	i = 0;
+
+	if (!map)
+	{
+		printf("Mapa nulo\n");
+		return;
+	}
+	while (map[i])
+	{
+		printf("%s", map[i]);
+		i++;
+	}
+} */
 
 static void	put_pixel_map(t_image *img, int x, int y, int color)
 {
@@ -54,6 +69,7 @@ void	draw_minimap(t_cub3d *cub3d)
 	cell_size = 0;
 	i = 0;
 	cell_size = cub3d->map.map_scale;
+
 	while (i < cub3d->minimap.map_rows)
 	{
 		j = 0;
@@ -66,6 +82,13 @@ void	draw_minimap(t_cub3d *cub3d)
 				print_map(&cub3d->image, screen_x, screen_y, cell_size, 0xFFFFFF);
 			else if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 				print_map(&cub3d->image, screen_x, screen_y, cell_size, 0x000000);
+			else if (c == '2')
+			{
+				if (get_door(cub3d, i, j))
+					print_map(&cub3d->image, screen_x, screen_y, cell_size, 0x00FF00); // Verde = abierta
+				else
+					print_map(&cub3d->image, screen_x, screen_y, cell_size, MORAO); // Negro = cerrada
+			}
 			else
 				print_map(&cub3d->image, screen_x, screen_y, cell_size, 0x444444);
 			j++;

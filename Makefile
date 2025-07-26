@@ -34,9 +34,10 @@ SRCS := \
 OBJ_FILES := $(SRCS:%.c=$(OBJ_DIR)/%.o)
 TOTAL := $(words $(SRCS))
 
-# Archivos fuente para la versión BONUS
 BONUS_SRCS := \
 	cub3d_bonus/main_bonus.c \
+	cub3d_bonus/doors_bonus/doors_bonus.c \
+	cub3d_bonus/doors_bonus/doors_utils_bonus.c \
 	cub3d_bonus/freedoom_bonus/freedoom_bonus.c \
 	cub3d_bonus/initializer_bonus/initializer_bonus.c \
 	cub3d_bonus/minimap_bonus/minimap_bonus.c \
