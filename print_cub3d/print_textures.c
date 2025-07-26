@@ -13,9 +13,9 @@ unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start
 	else if (direction == 1)
 		tex = &cub3d->image.tex_south;
 	else if (direction == 2)
-		tex = &cub3d->image.tex_west;
+		tex = &cub3d->image.tex_west[cub3d->image.animation_frame];
 	else
-		tex = &cub3d->image.tex_east;
+		tex = &cub3d->image.tex_east[cub3d->image.animation_frame];
 	if (cub3d->raycast.is_horizontal)
 		hit_coord_on_wall = cub3d->raycast.wall_hit_y;
 	else

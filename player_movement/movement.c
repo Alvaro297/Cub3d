@@ -70,7 +70,7 @@ void	movement_player(t_cub3d *cub3d)
 	double	move_speed;
 	double	margin;
 
-	margin = 0.50;
+	margin = 0.30;
 	move_speed = 0.03;
 	if (is_wall(cub3d, cub3d->player.x_position + cub3d->player.direccion_x * 0.5, 
 				cub3d->player.y_position) ||

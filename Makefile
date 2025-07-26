@@ -16,6 +16,7 @@ OBJ_DIR := obj
 SRCS := \
 	main.c \
 	initializer/init_cub3d.c \
+	initializer/init_cub3d2.c \
 	read_map/read_map.c \
 	read_map/handle_map.c \
 	read_map/utils_read_map.c \

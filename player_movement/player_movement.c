@@ -68,28 +68,12 @@ bool	is_wall(t_cub3d *cub3d, double x, double y)
 
 int	ft_key_hook(t_cub3d *cub3d)
 {
-	bool movement_occurred = false;
-	double old_x;
-	double old_y;
-	
 	if (cub3d->player.movement.left)
-	{
 		change_angle(cub3d, 65361);
-		movement_occurred = true;
-	}
 	if (cub3d->player.movement.right)
-	{
 		change_angle(cub3d, 65363);
-		movement_occurred = true;
-	}
-	old_x = cub3d->player.x_position;
-	old_y = cub3d->player.y_position;
 	movement_player(cub3d);
-	if (movement_occurred || 
-		old_x != cub3d->player.x_position || 
-		old_y != cub3d->player.y_position)
-		raycast(cub3d);
-	
+	raycast(cub3d);
 	return (0);
 }
 
@@ -116,7 +100,6 @@ int ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 	frame_count++;
 	if (frame_count % 15 != 0)
 		return (0);
-	
 	if (last_x != -1)
 	{
 		if (abs(x - last_x) > 2)

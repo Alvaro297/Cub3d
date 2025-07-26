@@ -107,15 +107,12 @@ void	 print_cub3d(t_cub3d *cub3d, int x)
 	double screen_center;
 	double distance_from_center;
 	
-	// Calcular la distancia del rayo desde el centro de la pantalla
 	screen_center = SCREEN_WIDTH / 2.0;
 	distance_from_center = fabs(x - screen_center) / screen_center;
-	// Aumentar la distancia mínima para rayos más alejados del centro
 	min_dist = 0.1 + (distance_from_center * 0.2);
 	if (cub3d->raycast.perp_wall_dist < min_dist)
 		cub3d->raycast.perp_wall_dist = min_dist;
 	line_height = SCREEN_HEIGHT / cub3d->raycast.perp_wall_dist;
-	// Limitar más agresivamente la altura para rayos laterales
 	int max_height = SCREEN_HEIGHT * (2.5 - distance_from_center);
 	if (line_height > max_height)
 		line_height = max_height;

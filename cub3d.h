@@ -7,6 +7,7 @@
 # include <math.h>
 # include <stdbool.h>
 
+#define TOTAL_ANIMATIONS 8
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define GREY 0xAAAAAA
@@ -96,10 +97,11 @@ typedef struct s_image
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			animation_frame;
 	t_texture	tex_north;
 	t_texture	tex_south;
-	t_texture	tex_east;
-	t_texture	tex_west;
+	t_texture	tex_east[TOTAL_ANIMATIONS];
+	t_texture	tex_west[TOTAL_ANIMATIONS];
 }				t_image;
 
 typedef struct s_cub3d
@@ -108,10 +110,6 @@ typedef struct s_cub3d
 	void			*win_ptr;
 	void			*img_ptr;
 	t_image			image;
-	t_texture		tex_north;   // Textura NORTE (NO)
-	t_texture		tex_south;   // Textura SUR (SO)
-	t_texture		tex_east;    // Textura ESTE (EA)
-	t_texture		tex_west;    // Textura OESTE (WE)
 	char			*map_route;
 	t_map			map;
 	t_player		player;
@@ -119,7 +117,10 @@ typedef struct s_cub3d
 }				t_cub3d;
 
 int				main(int argc, char **argv);
+//** Init_cub3d **//
 void			init_cub3d(t_cub3d *cub3d);
+t_image			init_image(void);
+t_raycasting	init_raycasting(void);
 void			check_name(char *filename);
 void			read_map(char *filename, t_cub3d *cub3d);
 void			ft_freedom(char **str);
@@ -141,7 +142,6 @@ void			validate_cell(t_cub3d *cub3d, char **map_copy,
 void			free_norm_map(char **map, int upto);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
 //** Raycasting **//
-t_raycasting	init_raycasting(void);
 void			starting_raycasting(t_cub3d *cub3d, char pos_player);
 void			raycast(t_cub3d *cub3d);
 void			steps(t_cub3d *cub3d);
@@ -170,4 +170,6 @@ int				key_press(int keycode, t_cub3d *cub3d);
 int				key_release(int keycode, t_cub3d *cub3d);
 void			movement_player(t_cub3d *cub3d);
 bool			is_wall(t_cub3d *cub3d, double x, double y);
+//** Animations **//
+void	ft_animation(t_cub3d *cub3d);
 #endif
