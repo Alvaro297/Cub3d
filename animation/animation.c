@@ -1,6 +1,6 @@
 #include "../cub3d.h"
 
-int	ft_animation(t_cub3d *cub3d)
+void	ft_animation(t_cub3d *cub3d)
 {
 	static int	frame_x = 0;
 	static int	frame_y = 5;
@@ -27,5 +27,4 @@ int	ft_animation(t_cub3d *cub3d)
 	}
 	if (re_casting)
 		raycast(cub3d);
-	return (0);
 }

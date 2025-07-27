@@ -73,6 +73,7 @@ int	ft_key_hook(t_cub3d *cub3d)
 	if (cub3d->player.movement.right)
 		change_angle(cub3d, 65363);
 	movement_player(cub3d);
+	ft_animation(cub3d);
 	raycast(cub3d);
 	return (0);
 }

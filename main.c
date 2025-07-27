@@ -12,10 +12,7 @@ static void	start_cub3d(t_cub3d *cub3d, bool is_bonus)
 	mlx_hook(cub3d->win_ptr, 2, 1L << 0, key_press, cub3d);
 	mlx_hook(cub3d->win_ptr, 3, 1L << 1, key_release, cub3d);
 	if (is_bonus)
-	{
 		mlx_hook(cub3d->win_ptr, 6, 1L<<6, ft_mouse_hook, cub3d);
-		mlx_loop_hook(cub3d->mlx_ptr, ft_animation, cub3d);
-	}
 	mlx_loop_hook(cub3d->mlx_ptr, ft_key_hook, cub3d);
 	mlx_loop(cub3d->mlx_ptr);
 }
