@@ -21,9 +21,9 @@ void	ft_animation(t_cub3d *cub3d)
 	{
 		re_casting = true;
 		if (cub3d->image.animation_frame > TOTAL_ANIMATIONS)
-			cub3d->image.animation_frame = 0;
+			cub3d->image.animation_frame_west = 0;
 		else
-			cub3d->image.animation_frame++;
+			cub3d->image.animation_frame_west++;
 	}
 	if (re_casting)
 		raycast(cub3d);

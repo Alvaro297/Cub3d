@@ -34,11 +34,12 @@ static t_texture	init_texture(void)
 	return (tex);
 }
 
-t_image	init_image(void)
+t_image	init_image(bool is_bonus)
 {
 	t_image	image;
 	int		i;
 
+	i = 0;
 	image.img_ptr = NULL;
 	image.data = NULL;
 	image.bits_per_pixel = 0;
@@ -50,8 +51,11 @@ t_image	init_image(void)
 	image.tex_south = init_texture();
 	while (i < TOTAL_ANIMATIONS)
 	{
-		image.tex_east[i] = init_texture();
-		image.tex_west[i] = init_texture();
+		if (i == 0 || is_bonus)
+		{
+			image.tex_east[i] = init_texture();
+			image.tex_west[i] = init_texture();
+		}
 		i++;
 	}
 	return (image);

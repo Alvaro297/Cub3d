@@ -98,6 +98,7 @@ typedef struct s_image
 	int			line_length;
 	int			endian;
 	int			animation_frame;
+	int			animation_frame_west;
 	t_texture	tex_north;
 	t_texture	tex_south;
 	t_texture	tex_east[TOTAL_ANIMATIONS];
@@ -118,8 +119,8 @@ typedef struct s_cub3d
 
 int				main(int argc, char **argv);
 //** Init_cub3d **//
-void			init_cub3d(t_cub3d *cub3d);
-t_image			init_image(void);
+void			init_cub3d(t_cub3d *cub3d, bool is_bonus);
+t_image			init_image(bool is_bonus);
 t_raycasting	init_raycasting(void);
 void			check_name(char *filename);
 void			read_map(char *filename, t_cub3d *cub3d);
@@ -153,7 +154,7 @@ void			color_floor_ceiling(t_cub3d *cub3d);
 unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end);
 //** Texture Functions **//
 void			load_all_textures(t_cub3d *cub3d);
-void			load_images(t_cub3d *cub3d);
+void			load_images(t_cub3d *cub3d, bool is_bonus);
 void			load_texture(t_cub3d *cub3d, t_texture *tex, char *path);
 unsigned int	get_texture_color(t_texture *texture, double x, double y);
 void			free_textures(t_cub3d *cub3d);

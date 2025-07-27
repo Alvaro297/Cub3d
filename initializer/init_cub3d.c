@@ -57,7 +57,7 @@ static t_player	init_player(void)
 	return (player);
 }
 
-void	init_cub3d(t_cub3d *cub3d)
+void	init_cub3d(t_cub3d *cub3d, bool is_bonus)
 {
 	cub3d->mlx_ptr = NULL;
 	cub3d->win_ptr = NULL;
@@ -66,5 +66,5 @@ void	init_cub3d(t_cub3d *cub3d)
 	cub3d->map = init_map();
 	cub3d->player = init_player();
 	cub3d->raycast = init_raycasting();
-	cub3d->image = init_image();
+	cub3d->image = init_image(is_bonus);
 }
