@@ -172,5 +172,5 @@ int				key_release(int keycode, t_cub3d *cub3d);
 void			movement_player(t_cub3d *cub3d);
 bool			is_wall(t_cub3d *cub3d, double x, double y);
 //** Animations **//
-void	ft_animation(t_cub3d *cub3d);
+int				ft_animation(t_cub3d *cub3d);
 #endif

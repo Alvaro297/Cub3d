@@ -32,6 +32,7 @@ SRCS := \
 	print_cub3d/print_textures.c \
 	player_movement/player_movement.c \
 	player_movement/movement.c \
+	animation/animation.c \
 
 OBJ_FILES := $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

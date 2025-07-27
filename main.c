@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 	bool	is_bonus;
 
 	is_bonus = false;
-	if (ft_strcmp(argv[0], "./cub3d_bonus") == 0)
+	if (ft_strcmp(argv[0], "./cub3D_bonus") == 0)
 		is_bonus = true;
 	if (argc == 2)
 		cub3d(argv[1], is_bonus);

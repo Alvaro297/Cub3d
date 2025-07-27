@@ -63,16 +63,19 @@ void	free_cub3d(t_cub3d *cub3d)
 		}
 		free(cub3d->map.matriz);
 	}
-	if (cub3d->image.tex_north.img_ptr)
+	if (cub3d->mlx_ptr)
+	{
+		if (cub3d->image.tex_north.img_ptr)
 		mlx_destroy_image(cub3d->mlx_ptr, cub3d->image.tex_north.img_ptr);
-	if (cub3d->image.tex_south.img_ptr)
-		mlx_destroy_image(cub3d->mlx_ptr, cub3d->image.tex_south.img_ptr);
-	if (cub3d->image.tex_east.img_ptr)
-		mlx_destroy_image(cub3d->mlx_ptr, cub3d->image.tex_east.img_ptr);
-	if (cub3d->image.tex_west.img_ptr)
-		mlx_destroy_image(cub3d->mlx_ptr, cub3d->image.tex_west.img_ptr);
-	if (cub3d->img_ptr)
-		mlx_destroy_image(cub3d->mlx_ptr, cub3d->img_ptr);
+		if (cub3d->image.tex_south.img_ptr)
+			mlx_destroy_image(cub3d->mlx_ptr, cub3d->image.tex_south.img_ptr);
+		if (cub3d->image.tex_east[0].img_ptr)
+			mlx_destroy_image(cub3d->mlx_ptr, cub3d->image.tex_east[0].img_ptr);
+		if (cub3d->image.tex_west[0].img_ptr)
+			mlx_destroy_image(cub3d->mlx_ptr, cub3d->image.tex_west[0].img_ptr);
+		if (cub3d->img_ptr)
+			mlx_destroy_image(cub3d->mlx_ptr, cub3d->img_ptr);
+	}
 }
 
 void	free_norm_map(char **map, int upto)
