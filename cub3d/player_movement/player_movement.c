@@ -68,9 +68,9 @@ bool	is_wall(t_cub3d *cub3d, double x, double y)
 
 int	ft_key_hook(t_cub3d *cub3d)
 {
-	if (cub3d->player.movement.left)
-		change_angle(cub3d, 65361);
 	if (cub3d->player.movement.right)
+		change_angle(cub3d, 65361);
+	if (cub3d->player.movement.left)
 		change_angle(cub3d, 65363);
 	movement_player(cub3d);
 	raycast(cub3d);

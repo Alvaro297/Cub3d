@@ -33,7 +33,7 @@ static double	fill_raydirx(t_cub3d *cub3d, int x)
 	double	plane_x;
 
 	camera = 0;
-	plane_x = -cub3d->player.direccion_x * 0.66;
+	plane_x = -cub3d->player.direccion_y * 0.66;
 	camera = 2 * x / (double) SCREEN_WIDTH -1;
 	raydir_x = cub3d->player.direccion_x + plane_x * camera;
 	return (raydir_x);
@@ -46,10 +46,9 @@ static double	fill_raydiry(t_cub3d *cub3d, int x)
 	double	plane_y;
 
 	camera = 0;
-	plane_y = -cub3d->player.direccion_x * 0.66;
+	plane_y = cub3d->player.direccion_x * 0.66;
 	camera = 2 * x / (double) SCREEN_WIDTH -1;
 	raydir_y = cub3d->player.direccion_y + plane_y * camera;
-
 	return (raydir_y);
 }
 
@@ -78,4 +77,5 @@ void	raycast(t_cub3d *cub3d)
 		print_cub3d(cub3d, x);
 		x++;
 	}
+	render_buffer_to_window(cub3d);
 }

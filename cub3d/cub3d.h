@@ -60,7 +60,6 @@ typedef struct s_player
 	double		direccion_x;
 	double		direccion_y;
 	t_movement	movement;
-	void		*img;
 }				t_player;
 
 typedef struct s_raycasting
@@ -81,13 +80,30 @@ typedef struct s_raycasting
 }				t_raycasting;
 
 
-typedef struct s_image
+typedef struct s_texture
 {
 	void	*img_ptr;
 	char	*data;
+	int		width;
+	int		height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+}				t_texture;
+
+typedef struct s_image
+{
+	void		*img_ptr;
+	char		*data;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			animation_frame;
+	int			animation_frame_west;
+	t_texture	tex_north;
+	t_texture	tex_south;
+	t_texture	tex_east;
+	t_texture	tex_west;
 }				t_image;
 
 typedef struct s_cub3d
@@ -104,6 +120,7 @@ typedef struct s_cub3d
 
 int				main(int argc, char **argv);
 void			init_cub3d(t_cub3d *cub3d);
+t_image			init_image(void);
 void			check_name(char *filename);
 void			read_map(char *filename, t_cub3d *cub3d);
 void			ft_freedom(char **str);
@@ -134,6 +151,9 @@ void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 //** Print_Cub3d **//
 void			print_cub3d(t_cub3d *cub3d, int x);
 void			color_floor_ceiling(t_cub3d *cub3d);
+void			load_images(t_cub3d *cub3d);
+unsigned int	get_texture_color(t_texture *texture, double x, double y);
+unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end);
 //** Buffer Functions **//
 void			init_image_buffer(t_cub3d *cub3d);
 void			put_pixel_to_buffer(t_cub3d *cub3d, int x, int y, int color);

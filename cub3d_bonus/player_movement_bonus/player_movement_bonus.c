@@ -86,6 +86,7 @@ int	ft_key_hook(t_cub3d *cub3d)
 		change_angle(cub3d, 65363);
 	movement_player(cub3d);
 	update_doors(cub3d);
+	ft_animation(cub3d);
 	raycast(cub3d);
 	draw_minimap(cub3d);
 	return (0);
@@ -112,7 +113,7 @@ int	ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 	(void)y;
 	speed_rotate = 0.002;
 	frame_count++;
-	if (frame_count % 50 != 0)
+	if (frame_count % 15 != 0)
 		return (0);
 	if (last_x != -1)
 	{
