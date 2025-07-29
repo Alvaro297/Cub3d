@@ -29,40 +29,33 @@ void	step_direccion(t_cub3d *cub3d, int map_x, int map_y)
 
 void wall_hit(t_cub3d *cub3d, int side, int map_x, int map_y)
 {
-	if (side == 0)  // Pared vertical (lado NS)
+	if (side == 0)
 	{
-		// Calcular distancia perpendicular para pared vertical
 		cub3d->raycast.perp_wall_dist = (map_x - cub3d->player.x_position + (1 - cub3d->raycast.step_x) / 2) / cub3d->raycast.raydir_x;
-		// Calcular punto exacto donde el rayo golpea la pared
 		cub3d->raycast.wall_hit_y = cub3d->player.y_position + cub3d->raycast.perp_wall_dist * cub3d->raycast.raydir_y;
 		cub3d->raycast.wall_hit_x = map_x;
 		if (cub3d->raycast.step_x == -1)
 			cub3d->raycast.wall_hit_x += 1.0;
 	}
-	else  // Pared horizontal (lado EW)
+	else
 	{
-		// Calcular distancia perpendicular para pared horizontal
 		cub3d->raycast.perp_wall_dist = (map_y - cub3d->player.y_position + (1 - cub3d->raycast.step_y) / 2) / cub3d->raycast.raydir_y;
-		// Calcular punto exacto donde el rayo golpea la pared
 		cub3d->raycast.wall_hit_x = cub3d->player.x_position + cub3d->raycast.perp_wall_dist * cub3d->raycast.raydir_x;
 		cub3d->raycast.wall_hit_y = map_y;
 		if (cub3d->raycast.step_y == -1)
 			cub3d->raycast.wall_hit_y += 1.0;
 	}
-	
-	// Asegurar que la distancia nunca sea negativa o demasiado pequeña
 	if (cub3d->raycast.perp_wall_dist < 0.01)
 		cub3d->raycast.perp_wall_dist = 0.01;
 }
 
 static void hited_wall(t_cub3d *cub3d, int side, int map_x, int map_y)
 {
-	// side == 0 significa que golpeamos una pared vertical (moviéndonos en X)
-	// side == 1 significa que golpeamos una pared horizontal (moviéndonos en Y)
+
 	if (side == 0)
-		cub3d->raycast.is_horizontal = false;  // Pared vertical
+		cub3d->raycast.is_horizontal = false;
 	else
-		cub3d->raycast.is_horizontal = true;   // Pared horizontal
+		cub3d->raycast.is_horizontal = true;
 	wall_hit(cub3d, side, map_x, map_y);
 	cub3d->raycast.hit_type = cub3d->map.matriz[map_y][map_x];
 }
