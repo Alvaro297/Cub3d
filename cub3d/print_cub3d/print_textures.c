@@ -17,15 +17,15 @@ unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start
 	else
 		tex = &cub3d->image.tex_east;
 	if (cub3d->raycast.is_horizontal)
-		hit_coord_on_wall = cub3d->raycast.wall_hit_y;
-	else
 		hit_coord_on_wall = cub3d->raycast.wall_hit_x;
+	else
+		hit_coord_on_wall = cub3d->raycast.wall_hit_y;
 	dec_x = hit_coord_on_wall - floor(hit_coord_on_wall);
 	if (dec_x < 0)
 		dec_x += 1.0;
 	texture_x_coord = (int)(dec_x * tex->width);
-	if ((cub3d->raycast.is_horizontal && cub3d->raycast.raydir_x < 0) ||
-		(!cub3d->raycast.is_horizontal && cub3d->raycast.raydir_y > 0))
+	if ((cub3d->raycast.is_horizontal && cub3d->raycast.raydir_y < 0) ||
+		(!cub3d->raycast.is_horizontal && cub3d->raycast.raydir_x > 0))
 		texture_x_coord = tex->width - texture_x_coord - 1;
 	texture_y_coord = ((y - draw_start) * tex->height) / (draw_end - draw_start);
 	return (get_texture_color(tex, texture_x_coord, texture_y_coord));

@@ -85,19 +85,19 @@ void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 	y = draw_start;
 	while (y < draw_end)
 	{
-		if (cub3d->raycast.is_horizontal)
+		if (!cub3d->raycast.is_horizontal)
 		{
 			if (cub3d->raycast.raydir_x < 0)
-				wall_color = print_textures(cub3d, 0, y, draw_start, draw_end);
+				wall_color = print_textures(cub3d, 2, y, draw_start, draw_end);
 			else
-				wall_color = print_textures(cub3d, 1, y, draw_start, draw_end);
+				wall_color = print_textures(cub3d, 3, y, draw_start, draw_end);
 		}
 		else
 		{
 			if (cub3d->raycast.raydir_y < 0)
-				wall_color = print_textures(cub3d, 2, y, draw_start, draw_end);
+				wall_color = print_textures(cub3d, 0, y, draw_start, draw_end);
 			else
-				wall_color = print_textures(cub3d, 3, y, draw_start, draw_end);
+				wall_color = print_textures(cub3d, 1, y, draw_start, draw_end);
 		}
 		put_pixel_to_buffer(cub3d, x, y, (int)wall_color);
 		y++;
@@ -109,17 +109,10 @@ void	 print_cub3d(t_cub3d *cub3d, int x)
 	int	line_height;
 	int	draw_start;
 	int	draw_end;
-	double min_dist;
-	double screen_center;
-	double distance_from_center;
-	
-	screen_center = SCREEN_WIDTH / 2.0;
-	distance_from_center = fabs(x - screen_center) / screen_center;
-	min_dist = 0.1 + (distance_from_center * 0.2);
-	if (cub3d->raycast.perp_wall_dist < min_dist)
-		cub3d->raycast.perp_wall_dist = min_dist;
+	int	max_height;
+
 	line_height = SCREEN_HEIGHT / cub3d->raycast.perp_wall_dist;
-	int max_height = SCREEN_HEIGHT * (2.5 - distance_from_center);
+	max_height = SCREEN_HEIGHT * 2;
 	if (line_height > max_height)
 		line_height = max_height;
 	draw_start = (SCREEN_HEIGHT / 2) - (line_height / 2);
