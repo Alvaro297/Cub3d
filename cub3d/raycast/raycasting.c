@@ -62,15 +62,10 @@ void	raycast(t_cub3d *cub3d)
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
-		// Calcular map_x y map_y para cada rayo
 		map_x = (int)cub3d->player.x_position;
 		map_y = (int)cub3d->player.y_position;
-		
-		// Calcular direcciones del rayo
 		cub3d->raycast.raydir_x = fill_raydirx(cub3d, x);
 		cub3d->raycast.raydir_y = fill_raydiry(cub3d, x);
-		
-		// Calcular delta distances
 		if (cub3d->raycast.raydir_x == 0)
 			cub3d->raycast.delta_dist_x = 1e30;
 		else
@@ -79,8 +74,6 @@ void	raycast(t_cub3d *cub3d)
 			cub3d->raycast.delta_dist_y = 1e30;
 		else
 			cub3d->raycast.delta_dist_y = fabs(1.0 / cub3d->raycast.raydir_y);
-		
-		// Ejecutar el algoritmo DDA
 		step_direccion(cub3d, map_x, map_y);
 		dda_loop(cub3d, map_x, map_y);
 		print_cub3d(cub3d, x);
