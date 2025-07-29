@@ -99,7 +99,9 @@ void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 			else
 				wall_color = print_textures(cub3d, 1, y, draw_start, draw_end);
 		}
-		put_pixel_to_buffer(cub3d, x, y, (int)wall_color);
+// Comprobar si el píxel está dentro de los límites antes de dibujar
+		if (y >= 0 && y < SCREEN_HEIGHT)
+			put_pixel_to_buffer(cub3d, x, y, (int)wall_color);
 		y++;
 	}
 }
@@ -109,18 +111,27 @@ void	 print_cub3d(t_cub3d *cub3d, int x)
 	int	line_height;
 	int	draw_start;
 	int	draw_end;
-	int	max_height;
+	double	dist;
 
-	line_height = SCREEN_HEIGHT / cub3d->raycast.perp_wall_dist;
-	max_height = SCREEN_HEIGHT * 2;
-	if (line_height > max_height)
-		line_height = max_height;
-	draw_start = (SCREEN_HEIGHT / 2) - (line_height / 2);
-	draw_end = (SCREEN_HEIGHT / 2) + (line_height / 2);
-	if (draw_start < 0)
-		draw_start = 0;
-	if (draw_end > SCREEN_HEIGHT)
-		draw_end = SCREEN_HEIGHT - 1;
+	// Usar la distancia ya limitada del wall_hit
+	dist = cub3d->raycast.perp_wall_dist;
+	
+	// Calcular altura de línea
+	line_height = (int)(SCREEN_HEIGHT / dist);
+	
+	// Solo limitar si la altura es ridículamente grande
+	if (line_height > SCREEN_HEIGHT * 10)
+		line_height = SCREEN_HEIGHT * 10;
+	if (line_height < 1)
+		line_height = 1;
+
+	// Calcular puntos de inicio y fin del dibujo SIN clampear
+	draw_start = (SCREEN_HEIGHT - line_height) / 2;
+	draw_end = draw_start + line_height;
+	
+	// NO clampeamos draw_start ni draw_end para permitir píxeles fuera de la pantalla
+	// Esto es crucial para que las paredes se vean correctamente
+
 	put_all(cub3d, draw_start, draw_end, x);
 }
 /*	int	i;
