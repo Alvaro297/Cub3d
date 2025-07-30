@@ -2,32 +2,33 @@
 
 void	step_direccion(t_cub3d *cub3d, int map_x, int map_y)
 {
-	// Calcular step y sideDist para X
 	if (cub3d->raycast.raydir_x < 0)
 	{
 		cub3d->raycast.step_x = -1;
-		cub3d->raycast.sideDist_x = (cub3d->player.x_position - map_x) * cub3d->raycast.delta_dist_x;
+		cub3d->raycast.sideDist_x = (cub3d->player.x_position - map_x)
+			* cub3d->raycast.delta_dist_x;
 	}
 	else
 	{
 		cub3d->raycast.step_x = 1;
-		cub3d->raycast.sideDist_x = (map_x + 1.0 - cub3d->player.x_position) * cub3d->raycast.delta_dist_x;
+		cub3d->raycast.sideDist_x = (map_x + 1.0 - cub3d->player.x_position)
+			* cub3d->raycast.delta_dist_x;
 	}
-	
-	// Calcular step y sideDist para Y
 	if (cub3d->raycast.raydir_y < 0)
 	{
 		cub3d->raycast.step_y = -1;
-		cub3d->raycast.sideDist_y = (cub3d->player.y_position - map_y) * cub3d->raycast.delta_dist_y;
+		cub3d->raycast.sideDist_y = (cub3d->player.y_position - map_y)
+			* cub3d->raycast.delta_dist_y;
 	}
 	else
 	{
 		cub3d->raycast.step_y = 1;
-		cub3d->raycast.sideDist_y = (map_y + 1.0 - cub3d->player.y_position) * cub3d->raycast.delta_dist_y;
+		cub3d->raycast.sideDist_y = (map_y + 1.0 - cub3d->player.y_position)
+			* cub3d->raycast.delta_dist_y;
 	}
 }
 
-void wall_hit(t_cub3d *cub3d, int side, int map_x, int map_y)
+void	wall_hit(t_cub3d *cub3d, int side, int map_x, int map_y)
 {
 	if (side == 0)
 	{

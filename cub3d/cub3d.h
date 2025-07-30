@@ -121,6 +121,7 @@ typedef struct s_cub3d
 /* Freedoms */
 void			free_matriz(t_cub3d *cub3d);
 void			free_norm_matriz(t_cub3d *cub3d);
+int				close_window(void *param);
 
 int				main(int argc, char **argv);
 void			init_cub3d(t_cub3d *cub3d);

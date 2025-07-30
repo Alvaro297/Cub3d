@@ -1,6 +1,6 @@
 #include "../cub3d_bonus.h"
 
-unsigned int	get_texture_color_door(t_door *texture, double x, double y)
+unsigned int	get_texture_color_door(t_texture *texture, double x, double y)
 {
 	int				pixel_index;
 	unsigned int	*buffer;

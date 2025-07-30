@@ -25,3 +25,13 @@ void	free_norm_matriz(t_cub3d *cub3d)
 	}
 	free(cub3d->map.matriz_norm);
 }
+
+int	close_window(void *param)
+{
+	t_cub3d	*cub3d;
+
+	cub3d = (t_cub3d *)param;
+	free_cub3d(cub3d);
+	exit(0);
+	return (0);
+}

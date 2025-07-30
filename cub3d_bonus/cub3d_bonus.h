@@ -191,7 +191,6 @@ void			load_images(t_cub3d *cub3d);
 unsigned int	get_texture_color(t_texture *texture, double x, double y);
 unsigned int	get_texture_color_door(t_texture *texture, double x, double y);
 unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end);
-unsigned int	print_door(t_cub3d *cub3d);
 
 //** Buffer Functions **//
 void			init_image_buffer(t_cub3d *cub3d);

@@ -1,53 +1,13 @@
 # include "../cub3d_bonus.h"
 
-int	calculate_texture_x_coord(t_cub3d *cub3d, t_texture *tex)
+static t_texture	*texture_decider(t_cub3d *cub3d, int direction)
 {
-	double	hit_coord_on_wall;
-	double	dec_x;
-	int		texture_x_coord;
-
-	if (cub3d->raycast.is_horizontal)
-		hit_coord_on_wall = cub3d->raycast.wall_hit_y;
-	else
-		hit_coord_on_wall = cub3d->raycast.wall_hit_x;
-	dec_x = hit_coord_on_wall - floor(hit_coord_on_wall);
-	if (dec_x < 0)
-		dec_x += 1.0;
-	texture_x_coord = (int)(dec_x * tex->width);
-	if ((cub3d->raycast.is_horizontal && cub3d->raycast.raydir_x < 0) ||
-		(!cub3d->raycast.is_horizontal && cub3d->raycast.raydir_y > 0))
-		texture_x_coord = tex->width - texture_x_coord - 1;
-	return (texture_x_coord);
-}
-
-int	calculate_texture_y_coord(int y, int draw_start, int draw_end, t_texture *tex)
-{
-	int	texture_y_coord;
-
-	texture_y_coord = ((y - draw_start) * tex->height) / (draw_end - draw_start);
-	return (texture_y_coord);
-}
-
-unsigned int	print_door(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end)
-{
-	int			texture_x_coord;
-	int			texture_y_coord;
-	t_texture	*tex;
-
-	tex = &cub3d->image.doors;
-	texture_x_coord = calculate_texture_x_coord_door(cub3d, tex);
-	texture_y_coord = calculate_texture_y_coord_door(y, draw_start, draw_end, tex);
-	return (get_texture_color_door(tex, texture_x_coord, texture_y_coord));
-}
-
-unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end)
-{
-	int			texture_x_coord;
-	int			texture_y_coord;
 	t_texture	*tex;
 
 	tex = NULL;
-	if (direction == 0)
+	if (direction == 4)
+		tex = &cub3d->image.doors;
+	else if (direction == 0)
 		tex = &cub3d->image.tex_north;
 	else if (direction == 1)
 		tex = &cub3d->image.tex_south;
@@ -55,11 +15,61 @@ unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start
 		tex = &cub3d->image.tex_west[cub3d->image.animation_frame_west];
 	else if (direction == 3)
 		tex = &cub3d->image.tex_east[cub3d->image.animation_frame];
+	return (tex);
+}
+
+static int	calc_tex_y(t_texture *tex, int draw_end, int draw_start, int y)
+{
+	int		total;
+	double	wall_pos;
+
+	wall_pos = 0.0;
+	if (draw_end != draw_start)
+	{
+		wall_pos = (double)(y - draw_start) / (double)(draw_end - draw_start);
+		if (wall_pos < 0.0)
+			wall_pos = 0.0;
+		if (wall_pos > 1.0)
+			wall_pos = 1.0;
+		total = (int)(wall_pos * (double)tex->height);
+	}
 	else
-		return (print_door(cub3d, direction, y, draw_start, draw_end));
-	texture_x_coord = calculate_texture_x_coord(cub3d, tex);
-	texture_y_coord = calculate_texture_y_coord(y, draw_start, draw_end, tex);
-	return (get_texture_color(tex, texture_x_coord, texture_y_coord));
+		total = 0;
+	return(total);
+}
+
+static void		print_texture_help(t_texture *tex, int *tex_x, int *tex_y)
+{
+	if (*tex_x < 0)
+		*tex_x = 0;
+	if (*tex_x >= tex->width)
+		*tex_x = tex->width - 1;
+	if (*tex_y < 0)
+		*tex_y = 0;
+	if (*tex_y >= tex->height)
+		*tex_y = tex->height - 1;
+}
+
+unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end)
+{
+	double		wall_x;
+	int			tex_x;
+	int			tex_y;
+	t_texture	*tex;
+
+	tex = texture_decider(cub3d, direction);
+	if (cub3d->raycast.is_horizontal)
+		wall_x = cub3d->raycast.wall_hit_x;
+	else
+		wall_x = cub3d->raycast.wall_hit_y;
+	wall_x = wall_x - floor(wall_x);
+	tex_x = (int)(wall_x * (double)tex->width);
+	if ((!cub3d->raycast.is_horizontal && cub3d->raycast.raydir_x > 0) ||
+		(cub3d->raycast.is_horizontal && cub3d->raycast.raydir_y < 0))
+		tex_x = tex->width - tex_x - 1;
+	tex_y = calc_tex_y(tex, draw_end, draw_start, y);
+	print_texture_help(tex, &tex_x, &tex_y);
+	return (get_texture_color(tex, tex_x, tex_y));
 }
 /*
 unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end)

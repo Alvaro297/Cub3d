@@ -45,12 +45,15 @@ BONUS_SRCS := \
 	cub3d_bonus/freedoom_bonus/freedoom_bonus.c \
 	cub3d_bonus/freedoom_bonus/more_freedom_bonus.c \
 	cub3d_bonus/initializer_bonus/initializer_bonus.c \
+	cub3d_bonus/initializer_bonus/init_cub3d_bonus.c \
 	cub3d_bonus/minimap_bonus/minimap_bonus.c \
 	cub3d_bonus/player_movement_bonus/movement_bonus.c \
 	cub3d_bonus/player_movement_bonus/player_movement_bonus.c \
 	cub3d_bonus/print_cub3d_bonus/color_ceiling_bonus.c \
 	cub3d_bonus/print_cub3d_bonus/print_cub3d_bonus.c \
 	cub3d_bonus/print_cub3d_bonus/load_images_bonus.c \
+	cub3d_bonus/print_cub3d_bonus/print_textures.c \
+	cub3d_bonus/print_cub3d_bonus/print_textures_door.c \
 	cub3d_bonus/raycast_bonus/raycasting_bonus.c \
 	cub3d_bonus/raycast_bonus/steps_clean_bonus.c \
 	cub3d_bonus/read_map_bonus/handle_map_bonus.c \
