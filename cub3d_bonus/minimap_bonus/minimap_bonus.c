@@ -1,33 +1,6 @@
 #include "../cub3d_bonus.h"
 
 
-/* static void	print_minimap(t_minimap *m)
-{
-	printf("=== MINIMAP ===\n");
-	printf("map_rows:    %d\n", m->map_rows);
-	printf("map_cols:    %d\n", m->map_cols);
-	printf("max_width:   %d\n", m->max_width);
-	printf("max_height:  %d\n", m->max_height);
-	printf("scale_x:     %d\n", m->scale_x);
-	printf("scale_y:     %d\n", m->scale_y);
-	printf("================\n");
-} */
-/* static void	print_minimap(char **map)
-{
-	int	i = 0;
-
-	if (!map)
-	{
-		printf("Mapa nulo\n");
-		return;
-	}
-	while (map[i])
-	{
-		printf("%s", map[i]);
-		i++;
-	}
-} */
-
 static void	put_pixel_map(t_image *img, int x, int y, int color)
 {
 	char	*dst;
@@ -35,7 +8,6 @@ static void	put_pixel_map(t_image *img, int x, int y, int color)
 	dst = img->data + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
-
 
 static void	print_map(t_image *img, int x, int y, int size, int color)
 {
@@ -63,13 +35,12 @@ void	draw_minimap(t_cub3d *cub3d)
 	int			screen_y;
 	int			player_x;
 	int			player_y;
-	
 	int			cell_size;
+
 	cub3d->minimap = init_minimap(cub3d);
 	cell_size = 0;
 	i = 0;
 	cell_size = cub3d->map.map_scale;
-
 	while (i < cub3d->minimap.map_rows)
 	{
 		j = 0;

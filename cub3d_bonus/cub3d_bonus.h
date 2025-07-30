@@ -62,7 +62,6 @@ typedef struct s_movement
 	bool		right;
 }				t_movement;
 
-
 typedef struct s_player
 {
 	double		x_position;
@@ -92,7 +91,6 @@ typedef struct s_raycasting
 	double		wall_hit_y;
 	char		hit_type;
 }				t_raycasting;
-
 
 typedef struct s_image
 {
@@ -129,6 +127,13 @@ typedef struct s_cub3d
 	t_raycasting	raycast;
 	t_minimap		minimap;
 }				t_cub3d;
+
+/* Freedoms */
+void			free_matriz(t_cub3d *cub3d);
+void			free_norm_matriz(t_cub3d *cub3d);
+
+/* Close game */
+int				close_window(void *param);
 
 /* read && validate map */
 void			init_cub3d(t_cub3d *cub3d);

@@ -24,6 +24,7 @@ SRCS := \
 	cub3d/read_map/utils_validate_map.c \
 	cub3d/read_map/validade_player.c \
 	cub3d/freedoom/freedoom.c \
+	cub3d/freedoom/more_freedom.c \
 	cub3d/raycast/raycasting.c \
 	cub3d/raycast/steps.c \
 	cub3d/print_cub3d/print_cub3d.c \
@@ -39,6 +40,7 @@ BONUS_SRCS := \
 	cub3d_bonus/doors_bonus/doors_bonus.c \
 	cub3d_bonus/doors_bonus/doors_utils_bonus.c \
 	cub3d_bonus/freedoom_bonus/freedoom_bonus.c \
+	cub3d_bonus/freedoom_bonus/more_freedom_bonus.c \
 	cub3d_bonus/initializer_bonus/initializer_bonus.c \
 	cub3d_bonus/minimap_bonus/minimap_bonus.c \
 	cub3d_bonus/player_movement_bonus/movement_bonus.c \
