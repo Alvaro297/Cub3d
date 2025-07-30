@@ -6,12 +6,12 @@ static void	door_position(t_cub3d *cub3d)
 	int	j;
 	int	k;
 
-	i = 0;
+	i = -1;
 	k = 0;
 	cub3d->map.door = malloc(sizeof(t_door) * cub3d->map.n_doors);
 	if (!cub3d->map.door)
 		(printf("Error\nmalloc in doors failed\n"), free_cub3d(cub3d), exit(1));
-	while (i < cub3d->map.height)
+	while (++i < cub3d->map.height)
 	{
 		j = 0;
 		while (j < cub3d->map.width)
@@ -26,7 +26,6 @@ static void	door_position(t_cub3d *cub3d)
 			}
 			j++;
 		}
-		i++;
 	}
 }
 
@@ -69,12 +68,11 @@ void	open_door(t_cub3d *cub3d)
 				cub3d->map.door[i].animation = 1.0;
 			else
 				cub3d->map.door[i].animation = 0.0;
-
-			break;
+			break ;
 		}
 		i++;
 	}
-	update_doors(cub3d); 
+	update_doors(cub3d);
 	raycast(cub3d);
 	draw_minimap(cub3d);
 }
