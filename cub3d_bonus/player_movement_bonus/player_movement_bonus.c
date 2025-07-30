@@ -80,9 +80,9 @@ bool	is_wall(t_cub3d *cub3d, double x, double y)
 
 int	ft_key_hook(t_cub3d *cub3d)
 {
-	if (cub3d->player.movement.left)
-		change_angle(cub3d, 65361);
 	if (cub3d->player.movement.right)
+		change_angle(cub3d, 65361);
+	if (cub3d->player.movement.left)
 		change_angle(cub3d, 65363);
 	movement_player(cub3d);
 	update_doors(cub3d);
@@ -111,7 +111,7 @@ int	ft_mouse_hook(int x, int y, t_cub3d *cub3d)
 	double rot;
 
 	(void)y;
-	speed_rotate = 0.002;
+	speed_rotate = 0.005;
 	frame_count++;
 	if (frame_count % 15 != 0)
 		return (0);
