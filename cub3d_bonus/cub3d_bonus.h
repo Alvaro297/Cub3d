@@ -93,7 +93,6 @@ typedef struct s_raycasting
 }				t_raycasting;
 
 typedef struct s_texture
-typedef struct s_image
 {
 	void	*img_ptr;
 	char	*data;
@@ -180,10 +179,8 @@ void			free_norm_map(char **map, int upto);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
 
 //** Raycasting **//
-t_raycasting	init_raycasting(void);
 void			starting_raycasting(t_cub3d *cub3d, char pos_player);
 void			raycast(t_cub3d *cub3d);
-void			steps(t_cub3d *cub3d);
 void			dda_loop(t_cub3d *cub3d, int map_x, int map_y);
 void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 

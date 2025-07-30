@@ -95,6 +95,7 @@ void	free_cub3d(t_cub3d *cub3d)
 		mlx_destroy_display(cub3d->mlx_ptr);
 		free(cub3d->mlx_ptr);
 	}
+	if (cub3d->map.matriz)
 		free_matriz(cub3d);
 	else
 		free_norm_matriz(cub3d);
