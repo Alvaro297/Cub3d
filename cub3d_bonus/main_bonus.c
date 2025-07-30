@@ -21,6 +21,7 @@ static void	start_cub3d(t_cub3d *cub3d)
 	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
 	cub3d->img_ptr = mlx_new_image(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	init_image_buffer(cub3d);
+	load_images(cub3d);
 	raycast(cub3d);
 	draw_minimap(cub3d);
 	mlx_hook(cub3d->win_ptr, 6, 1L << 6, ft_mouse_hook, cub3d);
@@ -45,7 +46,7 @@ static void	cub3d(char *argv)
 	color_floor_ceiling(&cub3d);
 	find_doors(&cub3d);
 	debug_all_doors(&cub3d);
-	start_cub3d(&cub3d);      // Luego ya todo puede arrancar
+	start_cub3d(&cub3d);
 }
 
 

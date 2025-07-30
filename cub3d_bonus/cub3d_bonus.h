@@ -7,6 +7,7 @@
 # include <math.h>
 # include <stdbool.h>
 
+#define TOTAL_ANIMATIONS 8
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define GREY 0xAAAAAA
@@ -24,7 +25,6 @@ typedef struct s_door
 	int			y;
 	bool		is_open;
 	double		animation;
-
 }				t_door;
 
 typedef struct s_map
@@ -92,13 +92,32 @@ typedef struct s_raycasting
 	char		hit_type;
 }				t_raycasting;
 
+typedef struct s_texture
 typedef struct s_image
 {
 	void	*img_ptr;
 	char	*data;
+	int		width;
+	int		height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+}				t_texture;
+
+typedef struct s_image
+{
+	void		*img_ptr;
+	char		*data;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			animation_frame;
+	int			animation_frame_west;
+	t_texture	tex_north;
+	t_texture	tex_south;
+	t_texture	tex_east[TOTAL_ANIMATIONS];
+	t_texture	tex_west[TOTAL_ANIMATIONS];
+	t_texture	doors;
 }				t_image;
 
 typedef struct s_minimap
@@ -137,6 +156,8 @@ int				close_window(void *param);
 
 /* read && validate map */
 void			init_cub3d(t_cub3d *cub3d);
+t_raycasting	init_raycasting(void);
+t_image			init_image(void);
 void			check_name(char *filename);
 void			read_map(char *filename, t_cub3d *cub3d);
 void			ft_freedom(char **str);
@@ -169,6 +190,11 @@ void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 //** Print_Cub3d **//
 void			print_cub3d(t_cub3d *cub3d, int x);
 void			color_floor_ceiling(t_cub3d *cub3d);
+void			load_images(t_cub3d *cub3d);
+unsigned int	get_texture_color(t_texture *texture, double x, double y);
+unsigned int	get_texture_color_door(t_texture *texture, double x, double y);
+unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end);
+unsigned int	print_door(t_cub3d *cub3d);
 
 //** Buffer Functions **//
 void			init_image_buffer(t_cub3d *cub3d);
@@ -195,5 +221,8 @@ void			open_door(t_cub3d *cub3d);
 t_door			*get_door(t_cub3d *cub3d, int x, int y);
 void			toogle_door(t_cub3d *cub3d);
 void			update_doors(t_cub3d *cub3d);
+
+/* Animation */
+void	ft_animation(t_cub3d *cub3d);
 
 #endif

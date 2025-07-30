@@ -1,4 +1,4 @@
-NAME := cub3D
+NAME := cub3D_normal
 BONUS_NAME := cub3D_bonus
 
 CC := cc
@@ -17,6 +17,7 @@ OBJ_DIR := obj
 SRCS := \
 	cub3d/main.c \
 	cub3d/initializer/init_cub3d.c \
+	cub3d/initializer/init_cub3d2.c \
 	cub3d/read_map/read_map.c \
 	cub3d/read_map/handle_map.c \
 	cub3d/read_map/utils_read_map.c \
@@ -26,9 +27,11 @@ SRCS := \
 	cub3d/freedoom/freedoom.c \
 	cub3d/freedoom/more_freedom.c \
 	cub3d/raycast/raycasting.c \
-	cub3d/raycast/steps.c \
+	cub3d/raycast/steps_clean.c \
 	cub3d/print_cub3d/print_cub3d.c \
+	cub3d/print_cub3d/load_images.c \
 	cub3d/print_cub3d/color_ceiling.c \
+	cub3d/print_cub3d/print_textures.c \
 	cub3d/player_movement/player_movement.c \
 	cub3d/player_movement/movement.c \
 
@@ -47,6 +50,7 @@ BONUS_SRCS := \
 	cub3d_bonus/player_movement_bonus/player_movement_bonus.c \
 	cub3d_bonus/print_cub3d_bonus/color_ceiling_bonus.c \
 	cub3d_bonus/print_cub3d_bonus/print_cub3d_bonus.c \
+	cub3D_bonus/print_cub3d_bonus/load_images.c \
 	cub3d_bonus/raycast_bonus/raycasting_bonus.c \
 	cub3d_bonus/raycast_bonus/steps_bonus.c \
 	cub3d_bonus/read_map_bonus/handle_map_bonus.c \
@@ -54,7 +58,8 @@ BONUS_SRCS := \
 	cub3d_bonus/read_map_bonus/utils_read_map_bonus.c \
 	cub3d_bonus/read_map_bonus/utils_validate_map_bonus.c \
 	cub3d_bonus/read_map_bonus/validade_player_bonus.c \
-	cub3d_bonus/read_map_bonus/validate_map_bonus.c
+	cub3d_bonus/read_map_bonus/validate_map_bonus.c \
+	cub3d_bonus/animation/animation.c \
 
 OBJ_FILES := $(SRCS:%.c=$(OBJ_DIR)/%.o)
 BONUS_OBJ_FILES := $(BONUS_SRCS:%.c=$(OBJ_DIR)/%.o)

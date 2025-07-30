@@ -55,26 +55,6 @@ static t_player	init_player(void)
 	return (player);
 }
 
-t_raycasting	init_raycasting(void)
-{
-	t_raycasting rc;
-
-	rc.delta_dist_x = 0.0;
-	rc.delta_dist_y = 0.0;
-	rc.raydir_x = 0.0;
-	rc.raydir_y = 0.0;
-	rc.sideDist_x = 0.0;
-	rc.sideDist_y = 0.0;
-	rc.step_x = 0;
-	rc.step_y = 0;
-	rc.is_horizontal = false;
-	rc.perp_wall_dist = 0.0;
-	rc.wall_hit_x = 0.0;
-	rc.wall_hit_y = 0.0;
-	rc.hit_type = '\0';
-	return (rc);
-}
-
 t_minimap	init_minimap(t_cub3d *cub3d)
 {
 	t_minimap	m;
@@ -96,8 +76,12 @@ t_minimap	init_minimap(t_cub3d *cub3d)
 
 void	init_cub3d(t_cub3d *cub3d)
 {
+	cub3d->mlx_ptr = NULL;
+	cub3d->win_ptr = NULL;
+	cub3d->img_ptr = NULL;
+	cub3d->map_route = NULL;
 	cub3d->map = init_map();
 	cub3d->player = init_player();
 	cub3d->raycast = init_raycasting();
-	
+	cub3d->image = init_image();
 }
