@@ -102,6 +102,10 @@ typedef struct s_cub3d
 	t_raycasting	raycast;
 }				t_cub3d;
 
+/* Freedoms */
+void			free_matriz(t_cub3d *cub3d);
+void			free_norm_matriz(t_cub3d *cub3d);
+
 int				main(int argc, char **argv);
 void			init_cub3d(t_cub3d *cub3d);
 void			check_name(char *filename);
