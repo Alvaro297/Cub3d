@@ -81,7 +81,7 @@ static void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 	{
 		if (cub3d->raycast.hit_type == 2)
 			wall_color = print_textures(cub3d, 4, y, draw_start, draw_end);
-		if (cub3d->raycast.is_horizontal)
+		else if (cub3d->raycast.is_horizontal)
 		{
 			if (cub3d->raycast.raydir_x < 0)
 				wall_color = print_textures(cub3d, 0, y, draw_start, draw_end);

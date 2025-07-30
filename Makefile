@@ -50,9 +50,9 @@ BONUS_SRCS := \
 	cub3d_bonus/player_movement_bonus/player_movement_bonus.c \
 	cub3d_bonus/print_cub3d_bonus/color_ceiling_bonus.c \
 	cub3d_bonus/print_cub3d_bonus/print_cub3d_bonus.c \
-	cub3D_bonus/print_cub3d_bonus/load_images.c \
+	cub3d_bonus/print_cub3d_bonus/load_images_bonus.c \
 	cub3d_bonus/raycast_bonus/raycasting_bonus.c \
-	cub3d_bonus/raycast_bonus/steps_bonus.c \
+	cub3d_bonus/raycast_bonus/steps_clean_bonus.c \
 	cub3d_bonus/read_map_bonus/handle_map_bonus.c \
 	cub3d_bonus/read_map_bonus/read_map_bonus.c \
 	cub3d_bonus/read_map_bonus/utils_read_map_bonus.c \
