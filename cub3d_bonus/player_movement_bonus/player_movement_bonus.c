@@ -6,11 +6,15 @@ static void	change_angle(t_cub3d *cub3d, int keycode)
 {
 	double rot_speed;
 
-	rot_speed = 0.01;
+	rot_speed = 0.05;
 	if (keycode == 65361)
 		cub3d->player.angle += rot_speed;
 	else if (keycode == 65363)
 		cub3d->player.angle -= rot_speed;
+	if (cub3d->player.angle < 0)
+		cub3d->player.angle += 2 * 3.14159265359;
+	if (cub3d->player.angle >= 2 * 3.14159265359)
+		cub3d->player.angle -= 2 * 3.14159265359;
 	cub3d->player.direccion_x = cos(cub3d->player.angle);
 	cub3d->player.direccion_y = sin(cub3d->player.angle);
 }
@@ -58,9 +62,13 @@ int	key_release(int keycode, t_cub3d *cub3d)
 
 bool	is_wall(t_cub3d *cub3d, double x, double y)
 {
-	int yi = (int)y;
-	int xi = (int)x;
+	int		yi;
+	int		xi;
+	t_door	*door;
 
+	xi = (int)x;
+	yi = (int)y;
+	door = NULL;
 	if (yi < 0 || yi >= cub3d->map.height || xi < 0 || xi >= cub3d->map.width)
 		return (true);
 	if (xi >= (int)ft_strlen(cub3d->map.matriz[yi]))
@@ -71,11 +79,11 @@ bool	is_wall(t_cub3d *cub3d, double x, double y)
 		return (true);
 	else if (cell == '2')
 	{
-		t_door *door = get_door(cub3d, xi, yi);
+		door = get_door(cub3d, xi, yi);
 		if (!door || door->animation < 0.99)
-			return (true); //puerta cerrada o abriendo, aún no atravesable
+			return (true);
 	}
-	return (false); // libre
+	return (false);
 }
 
 int	ft_key_hook(t_cub3d *cub3d)
@@ -96,9 +104,9 @@ static void	rotate_player(t_cub3d *cub3d, double rot)
 {
 	cub3d->player.angle += rot;
 	if (cub3d->player.angle < 0)
-		cub3d->player.angle += 2 * M_PI;
-	if (cub3d->player.angle >= 2 * M_PI)
-		cub3d->player.angle -= 2 * M_PI;
+		cub3d->player.angle += 2 * 3.14159265359;
+	if (cub3d->player.angle >= 2 * 3.14159265359)
+		cub3d->player.angle -= 2 * 3.14159265359;
 	cub3d->player.direccion_x = cos(cub3d->player.angle);
 	cub3d->player.direccion_y = sin(cub3d->player.angle);
 }

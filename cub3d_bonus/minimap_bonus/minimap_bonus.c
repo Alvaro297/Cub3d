@@ -56,9 +56,9 @@ void	draw_minimap(t_cub3d *cub3d)
 			else if (c == '2')
 			{
 				if (get_door(cub3d, i, j))
-					print_map(&cub3d->image, screen_x, screen_y, cell_size, 0x00FF00); // Verde = abierta
+					print_map(&cub3d->image, screen_x, screen_y, cell_size, 0x00FF00);
 				else
-					print_map(&cub3d->image, screen_x, screen_y, cell_size, MORAO); // Negro = cerrada
+					print_map(&cub3d->image, screen_x, screen_y, cell_size, MORAO);
 			}
 			else
 				print_map(&cub3d->image, screen_x, screen_y, cell_size, 0x444444);

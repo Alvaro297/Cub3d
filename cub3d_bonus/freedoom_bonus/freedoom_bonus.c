@@ -68,7 +68,6 @@ void	free_cub3d(t_cub3d *cub3d)
 
 	if (cub3d->mlx_ptr)
 		free_images(cub3d);
-
 	if (cub3d->map.tex_no)
 		free(cub3d->map.tex_no);
 	if (cub3d->map.tex_so)
@@ -78,7 +77,6 @@ void	free_cub3d(t_cub3d *cub3d)
 	if (cub3d->map.tex_ea)
 		free(cub3d->map.tex_ea);
 	if (cub3d->map.matriz)
-
 	{
 		i = 0;
 		while (cub3d->map.matriz[i])
@@ -88,6 +86,8 @@ void	free_cub3d(t_cub3d *cub3d)
 		}
 		free(cub3d->map.matriz);
 	}
+	if (cub3d->map.matriz_norm)
+		ft_free_map(cub3d->map.matriz_norm, cub3d);
 	if (cub3d->win_ptr)
 		mlx_destroy_window(cub3d->mlx_ptr, cub3d->win_ptr);
 	if (cub3d->mlx_ptr)
@@ -95,10 +95,6 @@ void	free_cub3d(t_cub3d *cub3d)
 		mlx_destroy_display(cub3d->mlx_ptr);
 		free(cub3d->mlx_ptr);
 	}
-	if (cub3d->map.matriz)
-		free_matriz(cub3d);
-	else
-		free_norm_matriz(cub3d);
 }
 
 void	free_norm_map(char **map, int upto)

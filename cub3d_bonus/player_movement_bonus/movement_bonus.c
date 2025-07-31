@@ -66,14 +66,14 @@ void	movement_player(t_cub3d *cub3d)
 	double	move_speed;
 	double	margin;
 
-	margin = 0.2;
-	move_speed = 0.01;
+	margin = 0.4;
+	move_speed = 0.03;
 	if (cub3d->player.movement.w)
 		move_front(cub3d, move_speed, margin);
 	if (cub3d->player.movement.s)
 		move_back(cub3d, move_speed, margin);
-	if (cub3d->player.movement.a)
-		move_left(cub3d, move_speed, margin);
 	if (cub3d->player.movement.d)
+		move_left(cub3d, move_speed, margin);
+	if (cub3d->player.movement.a)
 		move_right(cub3d, move_speed, margin);
 }

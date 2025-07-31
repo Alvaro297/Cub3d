@@ -12,18 +12,16 @@ void	ft_animation(t_cub3d *cub3d)
 	if (frame_x % 10 == 0)
 	{
 		re_casting = true;
-		if (cub3d->image.animation_frame > TOTAL_ANIMATIONS - 1)
+		cub3d->image.animation_frame++;
+		if (cub3d->image.animation_frame >= TOTAL_ANIMATIONS)
 			cub3d->image.animation_frame = 0;
-		else
-			cub3d->image.animation_frame++;
 	}
 	if (frame_y % 10 == 0)
 	{
 		re_casting = true;
-		if (cub3d->image.animation_frame_west > TOTAL_ANIMATIONS - 1)
+		cub3d->image.animation_frame_west++;
+		if (cub3d->image.animation_frame_west >= TOTAL_ANIMATIONS)
 			cub3d->image.animation_frame_west = 0;
-		else
-			cub3d->image.animation_frame_west++;
 	}
 	if (re_casting)
 	{

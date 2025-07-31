@@ -41,7 +41,7 @@ static void	load_images_animated(t_cub3d *cub3d)
 static void	load_images_door(t_cub3d *cub3d)
 {
 	cub3d->image.doors.img_ptr = mlx_xpm_file_to_image(cub3d->mlx_ptr,
-		"textures/door.xpm", &cub3d->image.doors.width, &cub3d->image.doors.height);
+		"textures/door/door.xpm", &cub3d->image.doors.width, &cub3d->image.doors.height);
 	if (cub3d->image.doors.img_ptr)
 		cub3d->image.doors.data = mlx_get_data_addr(cub3d->image.doors.img_ptr,
 			&cub3d->image.doors.bits_per_pixel,
