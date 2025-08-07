@@ -54,6 +54,7 @@ BONUS_SRCS := \
 	cub3d_bonus/print_cub3d_bonus/load_images_bonus.c \
 	cub3d_bonus/print_cub3d_bonus/print_textures.c \
 	cub3d_bonus/print_cub3d_bonus/print_textures_door.c \
+	cub3d_bonus/raycast_bonus/utils_steps_clean_bonus.c \
 	cub3d_bonus/raycast_bonus/raycasting_bonus.c \
 	cub3d_bonus/raycast_bonus/steps_clean_bonus.c \
 	cub3d_bonus/read_map_bonus/handle_map_bonus.c \

@@ -1,5 +1,6 @@
 #include "../cub3d_bonus.h"
 
+
 void	starting_raycasting(t_cub3d *cub3d, char pos_player)
 {
 	if (pos_player == 'N')
@@ -28,33 +29,33 @@ void	starting_raycasting(t_cub3d *cub3d, char pos_player)
 
 static double	fill_raydirx(t_cub3d *cub3d, int x)
 {
-	double	raydir_x;
-	double	camera;
-	double	plane_x;
+	double raydir_x;
+	double camera;
+	double plane_x;
 
 	camera = 0;
 	plane_x = -cub3d->player.direccion_y * 0.66;
-	camera = 2 * x / (double) SCREEN_WIDTH -1;
+	camera = 2 * x / (double)SCREEN_WIDTH - 1;
 	raydir_x = cub3d->player.direccion_x + plane_x * camera;
 	return (raydir_x);
 }
 
 static double	fill_raydiry(t_cub3d *cub3d, int x)
 {
-	double	raydir_y;
-	double	camera;
-	double	plane_y;
+	double raydir_y;
+	double camera;
+	double plane_y;
 
 	camera = 0;
 	plane_y = cub3d->player.direccion_x * 0.66;
-	camera = 2 * x / (double) SCREEN_WIDTH -1;
+	camera = 2 * x / (double)SCREEN_WIDTH - 1;
 	raydir_y = cub3d->player.direccion_y + plane_y * camera;
 	return (raydir_y);
 }
 
 void	raycast(t_cub3d *cub3d)
 {
-	int		x;
+	int	x;
 	int	map_x;
 	int	map_y;
 

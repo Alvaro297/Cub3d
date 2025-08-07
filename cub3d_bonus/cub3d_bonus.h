@@ -181,6 +181,9 @@ int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
 //** Raycasting **//
 void			starting_raycasting(t_cub3d *cub3d, char pos_player);
 void			raycast(t_cub3d *cub3d);
+void			wall_hit(t_cub3d *cub3d, int side, int map_x, int map_y);
+void			hited_wall(t_cub3d *cub3d, int side, int map_x, int map_y);
+void			dda_loop_help(t_cub3d *cub3d, int *map_x, int *map_y, int *side);
 void			dda_loop(t_cub3d *cub3d, int map_x, int map_y);
 void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 
