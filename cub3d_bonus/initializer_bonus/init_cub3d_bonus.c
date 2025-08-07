@@ -8,8 +8,8 @@ t_raycasting	init_raycasting(void)
 	rc.delta_dist_y = 0.0;
 	rc.raydir_x = 0.0;
 	rc.raydir_y = 0.0;
-	rc.sideDist_x = 0.0;
-	rc.sideDist_y = 0.0;
+	rc.side_dist_x = 0.0;
+	rc.side_dist_y = 0.0;
 	rc.step_x = 0;
 	rc.step_y = 0;
 	rc.is_horizontal = false;

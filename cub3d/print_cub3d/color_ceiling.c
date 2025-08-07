@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color_ceiling.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-07 18:53:27 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-07 18:53:27 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 void	color_floor_ceiling(t_cub3d *cub3d)
@@ -32,7 +44,8 @@ unsigned int	get_texture_color(t_texture *texture, int x, int y)
 		return (0xFF00FF);
 	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
 		return (0xFF00FF);
-	pixel_index = y * (texture->line_length / (texture->bits_per_pixel / 8)) + x;
+	pixel_index = y * (texture->line_length
+			/ (texture->bits_per_pixel / 8)) + x;
 	buffer = (unsigned int *)texture->data;
 	color = buffer[pixel_index];
 	return (color);

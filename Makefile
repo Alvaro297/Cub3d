@@ -29,6 +29,7 @@ SRCS := \
 	cub3d/raycast/raycasting.c \
 	cub3d/raycast/steps_clean.c \
 	cub3d/print_cub3d/print_cub3d.c \
+	cub3d/print_cub3d/print_cub3d_help.c \
 	cub3d/print_cub3d/load_images.c \
 	cub3d/print_cub3d/color_ceiling.c \
 	cub3d/print_cub3d/print_textures.c \

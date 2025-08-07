@@ -25,15 +25,15 @@ void	hited_wall(t_cub3d *cub3d, int side, int map_x, int map_y)
 
 void	dda_loop_help(t_cub3d *cub3d, int *map_x, int *map_y, int *side)
 {
-	if (cub3d->raycast.sideDist_x < cub3d->raycast.sideDist_y)
+	if (cub3d->raycast.side_dist_x < cub3d->raycast.side_dist_y)
 	{
-		cub3d->raycast.sideDist_x += cub3d->raycast.delta_dist_x;
+		cub3d->raycast.side_dist_x += cub3d->raycast.delta_dist_x;
 		*map_x += cub3d->raycast.step_x;
 		*side = 0;
 	}
 	else
 	{
-		cub3d->raycast.sideDist_y += cub3d->raycast.delta_dist_y;
+		cub3d->raycast.side_dist_y += cub3d->raycast.delta_dist_y;
 		*map_y += cub3d->raycast.step_y;
 		*side = 1;
 	}

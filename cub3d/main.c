@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-07 17:49:47 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-07 17:49:47 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	start_cub3d(t_cub3d *cub3d)
 {
 	starting_raycasting(cub3d, cub3d->player.direction);
 	cub3d->mlx_ptr = mlx_init();
-	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
+	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr,
+			SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
 	cub3d->img_ptr = mlx_new_image(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	init_image_buffer(cub3d);
 	load_images(cub3d);

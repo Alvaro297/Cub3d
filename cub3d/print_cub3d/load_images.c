@@ -1,25 +1,30 @@
-# include "../cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_images.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-07 18:45:55 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-07 18:45:55 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cub3d.h"
+
+static void	load_texture(t_cub3d *cub3d, t_texture *tex, char *path)
+{
+	tex->img_ptr = mlx_xpm_file_to_image(cub3d->mlx_ptr, path,
+			&tex->width, &tex->height);
+	if (tex->img_ptr)
+		tex->data = mlx_get_data_addr(tex->img_ptr, &tex->bits_per_pixel,
+				&tex->line_length, &tex->endian);
+}
 
 void	load_images(t_cub3d *cub3d)
 {
-	cub3d->image.tex_north.img_ptr = mlx_xpm_file_to_image(cub3d->mlx_ptr, cub3d->map.tex_no,
-			&cub3d->image.tex_north.width, &cub3d->image.tex_north.height);
-	cub3d->image.tex_north.data = mlx_get_data_addr(cub3d->image.tex_north.img_ptr,
-		&cub3d->image.tex_north.bits_per_pixel,
-		&cub3d->image.tex_north.line_length, &cub3d->image.tex_north.endian);
-	cub3d->image.tex_south.img_ptr = mlx_xpm_file_to_image(cub3d->mlx_ptr, cub3d->map.tex_so,
-			&cub3d->image.tex_south.width, &cub3d->image.tex_south.height);
-	cub3d->image.tex_south.data = mlx_get_data_addr(cub3d->image.tex_south.img_ptr,
-		&cub3d->image.tex_south.bits_per_pixel,
-		&cub3d->image.tex_south.line_length, &cub3d->image.tex_south.endian);
-	cub3d->image.tex_east.img_ptr = mlx_xpm_file_to_image(cub3d->mlx_ptr, cub3d->map.tex_ea,
-			&cub3d->image.tex_east.width, &cub3d->image.tex_east.height);
-	cub3d->image.tex_east.data = mlx_get_data_addr(cub3d->image.tex_east.img_ptr,
-		&cub3d->image.tex_east.bits_per_pixel,
-		&cub3d->image.tex_east.line_length, &cub3d->image.tex_east.endian);
-	cub3d->image.tex_west.img_ptr = mlx_xpm_file_to_image(cub3d->mlx_ptr, cub3d->map.tex_we,
-			&cub3d->image.tex_west.width, &cub3d->image.tex_west.height);
-	cub3d->image.tex_west.data = mlx_get_data_addr(cub3d->image.tex_west.img_ptr,
-		&cub3d->image.tex_west.bits_per_pixel,
-		&cub3d->image.tex_west.line_length, &cub3d->image.tex_west.endian);
+	load_texture(cub3d, &cub3d->image.tex_north, cub3d->map.tex_no);
+	load_texture(cub3d, &cub3d->image.tex_south, cub3d->map.tex_so);
+	load_texture(cub3d, &cub3d->image.tex_east, cub3d->map.tex_ea);
+	load_texture(cub3d, &cub3d->image.tex_west, cub3d->map.tex_we);
 }

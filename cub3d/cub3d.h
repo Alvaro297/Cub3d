@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-07 16:41:51 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-07 16:41:51 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -7,14 +19,20 @@
 # include <math.h>
 # include <stdbool.h>
 
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
-#define GREY 0xAAAAAA
-#define RED2 0xFF0000
-#define GREEN2 0x00FF00
-#define BLUE2 0x0000FF
-#define YELLOW 0xFFFF00
-#define BLACK 0x444444
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
+# define GREY 0xAAAAAA
+# define RED2 0xFF0000
+# define GREEN2 0x00FF00
+# define BLUE2 0x0000FF
+# define YELLOW 0xFFFF00
+# define BLACK 0x444444
+
+typedef struct s_help
+{
+	int	direction;
+	int	y;
+}	t_help;
 
 typedef struct s_map
 {
@@ -49,7 +67,6 @@ typedef struct s_movement
 	bool	right;
 }	t_movement;
 
-
 typedef struct s_player
 {
 	double		x_position;
@@ -68,8 +85,8 @@ typedef struct s_raycasting
 	double	delta_dist_y;
 	double	raydir_x;
 	double	raydir_y;
-	double	sideDist_x;
-	double	sideDist_y;
+	double	side_dist_x;
+	double	side_dist_y;
 	short	step_x;
 	short	step_y;
 	bool	is_horizontal;
@@ -78,7 +95,6 @@ typedef struct s_raycasting
 	double	wall_hit_y;
 	char	hit_type;
 }				t_raycasting;
-
 
 typedef struct s_texture
 {
@@ -142,8 +158,6 @@ void			free_cub3d(t_cub3d *cub3d);
 void			ft_free_map(char **map_lines, t_cub3d *cub3d);
 int				is_blank_line(char *line);
 void			check_player(t_cub3d *cub3d);
-void			validate_cell(t_cub3d *cub3d, char **map_copy,
-					int y, int x, int height);
 void			free_norm_map(char **map, int upto);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
 //** Raycasting **//
@@ -158,7 +172,9 @@ void			print_cub3d(t_cub3d *cub3d, int x);
 void			color_floor_ceiling(t_cub3d *cub3d);
 void			load_images(t_cub3d *cub3d);
 unsigned int	get_texture_color(t_texture *texture, int x, int y);
-unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end);
+unsigned int	print_textures(t_cub3d *cub3d,
+					t_help help,
+					int draw_start, int draw_end);
 //** Buffer Functions **//
 void			init_image_buffer(t_cub3d *cub3d);
 void			put_pixel_to_buffer(t_cub3d *cub3d, int x, int y, int color);
@@ -171,5 +187,4 @@ int				key_press(int keycode, t_cub3d *cub3d);
 int				key_release(int keycode, t_cub3d *cub3d);
 void			movement_player(t_cub3d *cub3d);
 bool			is_wall(t_cub3d *cub3d, double x, double y);
-
 #endif

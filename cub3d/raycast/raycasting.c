@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-07 17:45:36 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-07 17:45:36 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 void	starting_raycasting(t_cub3d *cub3d, char pos_player)
@@ -55,12 +67,12 @@ static double	fill_raydiry(t_cub3d *cub3d, int x)
 void	raycast(t_cub3d *cub3d)
 {
 	int		x;
-	int	map_x;
-	int	map_y;
+	int		map_x;
+	int		map_y;
 
 	render_ceiling_floor(cub3d);
-	x = 0;
-	while (x < SCREEN_WIDTH)
+	x = -1;
+	while (++x < SCREEN_WIDTH)
 	{
 		map_x = (int)cub3d->player.x_position;
 		map_y = (int)cub3d->player.y_position;
@@ -77,7 +89,6 @@ void	raycast(t_cub3d *cub3d)
 		step_direccion(cub3d, map_x, map_y);
 		dda_loop(cub3d, map_x, map_y);
 		print_cub3d(cub3d, x);
-		x++;
 	}
 	render_buffer_to_window(cub3d);
 }

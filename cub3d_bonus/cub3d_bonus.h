@@ -81,8 +81,8 @@ typedef struct s_raycasting
 	double		delta_dist_y;
 	double		raydir_x;
 	double		raydir_y;
-	double		sideDist_x;
-	double		sideDist_y;
+	double		side_dist_x;
+	double		side_dist_y;
 	short		step_x;
 	short		step_y;
 	bool		is_horizontal;
@@ -173,8 +173,6 @@ void			free_cub3d(t_cub3d *cub3d);
 void			ft_free_map(char **map_lines, t_cub3d *cub3d);
 int				is_blank_line(char *line);
 void			check_player(t_cub3d *cub3d);
-void			validate_cell(t_cub3d *cub3d, char **map_copy,
-					int y, int x, int height);
 void			free_norm_map(char **map, int upto);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
 

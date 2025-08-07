@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_cub3d2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-07 18:53:49 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-07 18:53:49 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 t_raycasting	init_raycasting(void)
 {
-	t_raycasting rc;
+	t_raycasting	rc;
 
 	rc.delta_dist_x = 0.0;
 	rc.delta_dist_y = 0.0;
 	rc.raydir_x = 0.0;
 	rc.raydir_y = 0.0;
-	rc.sideDist_x = 0.0;
-	rc.sideDist_y = 0.0;
+	rc.side_dist_x = 0.0;
+	rc.side_dist_y = 0.0;
 	rc.step_x = 0;
 	rc.step_y = 0;
 	rc.is_horizontal = false;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_read_map.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-07 17:41:11 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-07 17:41:11 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 int	is_line(char *line)
@@ -5,9 +17,9 @@ int	is_line(char *line)
 	while (*line && *line != '\n')
 	{
 		if (*line != ' ' && *line != '0' && *line != '1'
-			&& *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W' 
+			&& *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W'
 			&& *line != 13)
-				return (0);
+			return (0);
 		line++;
 	}
 	return (1);
