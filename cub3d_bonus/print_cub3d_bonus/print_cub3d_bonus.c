@@ -1,34 +1,37 @@
 #include "../cub3d_bonus.h"
 
+
 void	init_image_buffer(t_cub3d *cub3d)
 {
-	cub3d->image.img_ptr = mlx_new_image(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+	cub3d->image.img_ptr = mlx_new_image(cub3d->mlx_ptr, SCREEN_WIDTH,
+			SCREEN_HEIGHT);
 	cub3d->image.data = mlx_get_data_addr(cub3d->image.img_ptr,
-		&cub3d->image.bits_per_pixel,
-		&cub3d->image.line_length,
-		&cub3d->image.endian);
+			&cub3d->image.bits_per_pixel, &cub3d->image.line_length,
+			&cub3d->image.endian);
 }
 
 void	put_pixel_to_buffer(t_cub3d *cub3d, int x, int y, int color)
 {
-	int				pixel_index;
+	int pixel_index;
 
 	if (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT)
 	{
-		pixel_index = y * cub3d->image.line_length + x * (cub3d->image.bits_per_pixel / 8);
+		pixel_index = y * cub3d->image.line_length + x
+			* (cub3d->image.bits_per_pixel / 8);
 		*(int *)(cub3d->image.data + pixel_index) = color;
 	}
 }
 
 void	render_buffer_to_window(t_cub3d *cub3d)
 {
-	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, cub3d->image.img_ptr, 0, 0);
+	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr,
+		cub3d->image.img_ptr, 0, 0);
 }
 
 void	clear_buffer(t_cub3d *cub3d, int color)
 {
-	int	y;
-	int	x;
+	int y;
+	int x;
 
 	y = 0;
 	while (y < SCREEN_HEIGHT)
@@ -45,8 +48,8 @@ void	clear_buffer(t_cub3d *cub3d, int color)
 
 void	render_ceiling_floor(t_cub3d *cub3d)
 {
-	int	y;
-	int	x;
+	int y;
+	int x;
 
 	y = 0;
 	while (y < SCREEN_HEIGHT / 2)
@@ -73,8 +76,8 @@ void	render_ceiling_floor(t_cub3d *cub3d)
 
 static void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 {
-	int				y;
-	unsigned int	wall_color;
+	int y;
+	unsigned int wall_color;
 
 	y = draw_start;
 	while (y < draw_end)
@@ -101,11 +104,11 @@ static void	put_all(t_cub3d *cub3d, int draw_start, int draw_end, int x)
 	}
 }
 
-void	 print_cub3d(t_cub3d *cub3d, int x)
+void	print_cub3d(t_cub3d *cub3d, int x)
 {
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 	double	dist;
 
 	dist = cub3d->raycast.perp_wall_dist;
