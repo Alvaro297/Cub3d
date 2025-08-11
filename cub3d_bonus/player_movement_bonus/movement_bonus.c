@@ -1,5 +1,16 @@
-#include "../cub3d_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 22:19:56 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 22:19:56 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../cub3d_bonus.h"
 
 static void	move_front(t_cub3d *cub3d, double move_speed, double margin)
 {

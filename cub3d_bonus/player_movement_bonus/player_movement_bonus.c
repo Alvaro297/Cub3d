@@ -1,10 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_movement_bonus.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 22:20:13 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 22:20:13 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d_bonus.h"
-
-
 
 static void	change_angle(t_cub3d *cub3d, int keycode)
 {
-	double rot_speed;
+	double	rot_speed;
 
 	rot_speed = 0.05;
 	if (keycode == 65361)
@@ -65,7 +75,9 @@ bool	is_wall(t_cub3d *cub3d, double x, double y)
 	int		yi;
 	int		xi;
 	t_door	*door;
+	char	cell;
 
+	cell = '\0';
 	xi = (int)x;
 	yi = (int)y;
 	door = NULL;
@@ -73,8 +85,7 @@ bool	is_wall(t_cub3d *cub3d, double x, double y)
 		return (true);
 	if (xi >= (int)ft_strlen(cub3d->map.matriz[yi]))
 		return (true);
-
-	char cell = cub3d->map.matriz[yi][xi];
+	cell = cub3d->map.matriz[yi][xi];
 	if (cell == '1')
 		return (true);
 	else if (cell == '2')
@@ -95,45 +106,6 @@ int	ft_key_hook(t_cub3d *cub3d)
 	movement_player(cub3d);
 	update_doors(cub3d);
 	ft_animation(cub3d);
-	raycast(cub3d);
-	draw_minimap(cub3d);
-	return (0);
-}
-
-static void	rotate_player(t_cub3d *cub3d, double rot)
-{
-	cub3d->player.angle += rot;
-	if (cub3d->player.angle < 0)
-		cub3d->player.angle += 2 * 3.14159265359;
-	if (cub3d->player.angle >= 2 * 3.14159265359)
-		cub3d->player.angle -= 2 * 3.14159265359;
-	cub3d->player.direccion_x = cos(cub3d->player.angle);
-	cub3d->player.direccion_y = sin(cub3d->player.angle);
-}
-
-int	ft_mouse_hook(int x, int y, t_cub3d *cub3d)
-{
-	static int last_x = -1;
-	static int frame_count = 0;
-	double speed_rotate;
-	double rot;
-
-	(void)y;
-	speed_rotate = 0.005;
-	frame_count++;
-	if (frame_count % 15 != 0)
-		return (0);
-	if (last_x != -1)
-	{
-		if (abs(x - last_x) > 1)
-		{
-			rot = (x - last_x) * speed_rotate;
-			rotate_player(cub3d, rot);
-			raycast(cub3d);
-			draw_minimap(cub3d);
-		}
-	}
-	last_x = x;
 	raycast(cub3d);
 	draw_minimap(cub3d);
 	return (0);

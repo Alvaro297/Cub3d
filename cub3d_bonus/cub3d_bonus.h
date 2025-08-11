@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 23:16:33 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 23:16:33 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
@@ -7,7 +19,7 @@
 # include <math.h>
 # include <stdbool.h>
 
-#define TOTAL_ANIMATIONS 8
+# define TOTAL_ANIMATIONS 8
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define GREY 0xAAAAAA
@@ -18,6 +30,12 @@
 # define YELLOW 0xFFFF00
 # define BLACK 0x000000
 # define KEY_E 101
+
+typedef struct s_help
+{
+	int	direction;
+	int	y;
+}	t_help;
 
 typedef struct s_door
 {
@@ -129,6 +147,10 @@ typedef struct s_minimap
 	int	map_cols;
 	int	scale_x;
 	int	scale_y;
+	int	screen_x;
+	int	screen_y;
+	int	player_x;
+	int	player_y;
 	int	max_width;
 	int	max_height;
 }	t_minimap;
@@ -181,7 +203,8 @@ void			starting_raycasting(t_cub3d *cub3d, char pos_player);
 void			raycast(t_cub3d *cub3d);
 void			wall_hit(t_cub3d *cub3d, int side, int map_x, int map_y);
 void			hited_wall(t_cub3d *cub3d, int side, int map_x, int map_y);
-void			dda_loop_help(t_cub3d *cub3d, int *map_x, int *map_y, int *side);
+void			dda_loop_help(t_cub3d *cub3d, int *map_x,
+					int *map_y, int *side);
 void			dda_loop(t_cub3d *cub3d, int map_x, int map_y);
 void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 
@@ -189,9 +212,12 @@ void			step_direccion(t_cub3d *cub3d, int map_x, int map_y);
 void			print_cub3d(t_cub3d *cub3d, int x);
 void			color_floor_ceiling(t_cub3d *cub3d);
 void			load_images(t_cub3d *cub3d);
+void			load_images_north_south(t_cub3d *cub3d);
+void			load_images_east_west(t_cub3d *cub3d);
 unsigned int	get_texture_color(t_texture *texture, double x, double y);
 unsigned int	get_texture_color_door(t_texture *texture, double x, double y);
-unsigned int	print_textures(t_cub3d *cub3d, int direction, int y, int draw_start, int draw_end);
+unsigned int	print_textures(t_cub3d *cub3d, t_help help,
+					int draw_start, int draw_end);
 
 //** Buffer Functions **//
 void			init_image_buffer(t_cub3d *cub3d);
@@ -220,6 +246,6 @@ void			toogle_door(t_cub3d *cub3d);
 void			update_doors(t_cub3d *cub3d);
 
 /* Animation */
-void	ft_animation(t_cub3d *cub3d);
+void			ft_animation(t_cub3d *cub3d);
 
 #endif

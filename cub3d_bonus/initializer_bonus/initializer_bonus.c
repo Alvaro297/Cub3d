@@ -1,5 +1,16 @@
-#include "../cub3d_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initializer_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 21:41:05 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 21:41:05 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../cub3d_bonus.h"
 
 static t_map	init_map(void)
 {
@@ -32,7 +43,7 @@ static t_map	init_map(void)
 
 static t_movement	init_movement(void)
 {
-	t_movement move;
+	t_movement	move;
 
 	move.w = false;
 	move.a = false;
@@ -61,10 +72,14 @@ t_minimap	init_minimap(t_cub3d *cub3d)
 
 	m.map_rows = cub3d->map.height;
 	m.map_cols = cub3d->map.width;
-	m.max_width = SCREEN_WIDTH * 0.5;
-	m.max_height = SCREEN_HEIGHT * 0.5;
+	m.max_width = SCREEN_WIDTH * 0.3;
+	m.max_height = SCREEN_HEIGHT * 0.3;
 	m.scale_x = m.max_width / m.map_cols;
 	m.scale_y = m.max_height / m.map_rows;
+	m.screen_x = 0;
+	m.screen_y = 0;
+	m.player_x = 0;
+	m.player_y = 0;
 	if (m.scale_x < m.scale_y)
 		cub3d->map.map_scale = m.scale_x;
 	else

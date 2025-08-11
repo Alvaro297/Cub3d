@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_cub3d_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 21:40:29 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 21:40:29 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d_bonus.h"
 
 t_raycasting	init_raycasting(void)
 {
-	t_raycasting rc;
+	t_raycasting	rc;
 
 	rc.delta_dist_x = 0.0;
 	rc.delta_dist_y = 0.0;

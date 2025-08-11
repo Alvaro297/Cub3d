@@ -64,6 +64,26 @@ static double	fill_raydiry(t_cub3d *cub3d, int x)
 	return (raydir_y);
 }
 
+static void	raycast_near_wall(t_cub3d *cub3d)
+{
+	if (cub3d->raycast.raydir_x == 0)
+		cub3d->raycast.delta_dist_x = 1e30;
+	else
+	{
+		cub3d->raycast.delta_dist_x = fabs(1.0 / cub3d->raycast.raydir_x);
+		if (cub3d->raycast.delta_dist_x > 100.0)
+			cub3d->raycast.delta_dist_x = 100.0;
+	}
+	if (cub3d->raycast.raydir_y == 0)
+		cub3d->raycast.delta_dist_y = 1e30;
+	else
+	{
+		cub3d->raycast.delta_dist_y = fabs(1.0 / cub3d->raycast.raydir_y);
+		if (cub3d->raycast.delta_dist_y > 100.0)
+			cub3d->raycast.delta_dist_y = 100.0;
+	}
+}
+
 void	raycast(t_cub3d *cub3d)
 {
 	int		x;
@@ -78,14 +98,7 @@ void	raycast(t_cub3d *cub3d)
 		map_y = (int)cub3d->player.y_position;
 		cub3d->raycast.raydir_x = fill_raydirx(cub3d, x);
 		cub3d->raycast.raydir_y = fill_raydiry(cub3d, x);
-		if (cub3d->raycast.raydir_x == 0)
-			cub3d->raycast.delta_dist_x = 1e30;
-		else
-			cub3d->raycast.delta_dist_x = fabs(1.0 / cub3d->raycast.raydir_x);
-		if (cub3d->raycast.raydir_y == 0)
-			cub3d->raycast.delta_dist_y = 1e30;
-		else
-			cub3d->raycast.delta_dist_y = fabs(1.0 / cub3d->raycast.raydir_y);
+		raycast_near_wall(cub3d);
 		step_direccion(cub3d, map_x, map_y);
 		dda_loop(cub3d, map_x, map_y);
 		print_cub3d(cub3d, x);

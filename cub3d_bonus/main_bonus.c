@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 23:19:09 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 23:19:09 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d_bonus.h"
 
-static void	debug_all_doors(t_cub3d *cub3d)
+/*static void	debug_all_doors(t_cub3d *cub3d)
 {
-	int i;
+	int	i;
 
 	printf("=== Estado de todas las puertas ===\n");
 	for (i = 0; i < cub3d->map.n_doors; i++)
@@ -12,13 +24,14 @@ static void	debug_all_doors(t_cub3d *cub3d)
 			i, d->x, d->y, d->is_open ? "ABIERTA" : "CERRADA", d->animation);
 	}
 	printf("===================================\n");
-}
+}*/
 
 static void	start_cub3d(t_cub3d *cub3d)
 {
 	starting_raycasting(cub3d, cub3d->player.direction);
 	cub3d->mlx_ptr = mlx_init();
-	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
+	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr,
+			SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
 	cub3d->img_ptr = mlx_new_image(cub3d->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	init_image_buffer(cub3d);
 	load_images(cub3d);
@@ -45,10 +58,8 @@ static void	cub3d(char *argv)
 	validate_map(&cub3d);
 	color_floor_ceiling(&cub3d);
 	find_doors(&cub3d);
-	debug_all_doors(&cub3d);
 	start_cub3d(&cub3d);
 }
-
 
 int	main(int argc, char **argv)
 {

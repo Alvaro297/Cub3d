@@ -77,7 +77,7 @@ void	movement_player(t_cub3d *cub3d)
 	double	move_speed;
 	double	margin;
 
-	margin = 0.50;
+	margin = 0.4;
 	move_speed = 0.03;
 	if (cub3d->player.movement.w)
 		move_front(cub3d, move_speed, margin);

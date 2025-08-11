@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   freedoom_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 21:39:39 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 21:39:39 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d_bonus.h"
 
 void	ft_freedom(char **str)
@@ -62,10 +74,8 @@ void	free_images(t_cub3d *cub3d)
 		mlx_destroy_image(cub3d->mlx_ptr, cub3d->image.img_ptr);
 }
 
-void	free_cub3d(t_cub3d *cub3d)
+static void	free_cub3d_help(t_cub3d *cub3d)
 {
-	int	i;
-
 	if (cub3d->mlx_ptr)
 		free_images(cub3d);
 	if (cub3d->map.tex_no)
@@ -76,6 +86,13 @@ void	free_cub3d(t_cub3d *cub3d)
 		free(cub3d->map.tex_we);
 	if (cub3d->map.tex_ea)
 		free(cub3d->map.tex_ea);
+}
+
+void	free_cub3d(t_cub3d *cub3d)
+{
+	int	i;
+
+	free_cub3d_help(cub3d);
 	if (cub3d->map.matriz)
 	{
 		i = 0;
@@ -95,17 +112,4 @@ void	free_cub3d(t_cub3d *cub3d)
 		mlx_destroy_display(cub3d->mlx_ptr);
 		free(cub3d->mlx_ptr);
 	}
-}
-
-void	free_norm_map(char **map, int upto)
-{
-	int	i;
-
-	i = 0;
-	while (i < upto)
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }

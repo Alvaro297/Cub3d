@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   more_freedom_bonus.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 21:39:44 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 21:39:44 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d_bonus.h"
 
 void	free_matriz(t_cub3d *cub3d)
@@ -34,4 +46,17 @@ int	close_window(void *param)
 	free_cub3d(cub3d);
 	exit(0);
 	return (0);
+}
+
+void	free_norm_map(char **map, int upto)
+{
+	int	i;
+
+	i = 0;
+	while (i < upto)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }

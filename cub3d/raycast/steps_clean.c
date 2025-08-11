@@ -95,17 +95,25 @@ static void	dda_loop_help(t_cub3d *cub3d, int *map_x, int *map_y, int *side)
 void	dda_loop(t_cub3d *cub3d, int map_x, int map_y)
 {
 	int		side;
+	int		max_iterations;
 
-	while (1)
+	max_iterations = 64;
+	while (max_iterations-- > 0)
 	{
 		dda_loop_help(cub3d, &map_x, &map_y, &side);
 		if (map_y < 0 || map_y >= cub3d->map.height
 			|| map_x < 0 || map_x >= cub3d->map.width)
+		{
+			hited_wall(cub3d, side, map_x, map_y);
 			break ;
+		}
 		if (cub3d->map.matriz[map_y][map_x] == '1')
 		{
 			hited_wall(cub3d, side, map_x, map_y);
 			break ;
 		}
+		if (cub3d->raycast.side_dist_x > 20.0 
+			&& cub3d->raycast.side_dist_y > 20.0)
+			break ;
 	}
 }
