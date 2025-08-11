@@ -1,14 +1,25 @@
-#include "../cub3d_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_read_map_bonus.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 23:13:50 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 23:13:50 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../cub3d_bonus.h"
 
 int	is_line(char *line)
 {
 	while (*line && *line != '\n')
 	{
 		if (*line != ' ' && *line != '0' && *line != '1'
-			&& *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W' 
+			&& *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W'
 			&& *line != 13 && *line != '2')
-				return (0);
+			return (0);
 		line++;
 	}
 	return (1);

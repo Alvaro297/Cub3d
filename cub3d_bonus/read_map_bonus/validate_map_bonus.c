@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map_bonus.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 23:12:47 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 23:12:47 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d_bonus.h"
 
 static int	flood_fill(char **map, int x, int y, int height)
@@ -36,13 +48,12 @@ static char	**normalize_map(char **map, t_cub3d *cub3d)
 	char	**norm;
 	int		y;
 
-	height = 0;
+	height = -1;
 	cub3d->map.width = 0;
-	while (map[height])
+	while (map[++height])
 	{
 		if ((int)ft_strlen(map[height]) > cub3d->map.width)
 			cub3d->map.width = ft_strlen(map[height]);
-		height++;
 	}
 	norm = malloc(sizeof(char *) * (height + 1));
 	if (!norm)

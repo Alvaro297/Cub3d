@@ -1,5 +1,16 @@
-#include "../cub3d_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_validate_map_bonus.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 23:13:30 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 23:13:30 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../cub3d_bonus.h"
 
 int	check_texture_file(const char *path)
 {
@@ -20,7 +31,7 @@ int	check_texture_name(const char *path)
 {
 	size_t	len;
 
-    len = ft_strlen(path);
+	len = ft_strlen(path);
 	if (len < 4 || ft_strncmp(path + len - 4, ".xpm", 4) != 0)
 		return (printf("Error\nIn texture extension\n"), 1);
 	return (0);

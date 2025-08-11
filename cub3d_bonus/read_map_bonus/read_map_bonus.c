@@ -1,5 +1,16 @@
-#include "../cub3d_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 23:14:20 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 23:14:20 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../cub3d_bonus.h"
 
 static int	error_rgb(char **splited, char *trimmed, char *msg)
 {

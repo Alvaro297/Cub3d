@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validade_player_bonus.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alvamart <alvamart@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-08-10 23:12:58 by alvamart          #+#    #+#             */
+/*   Updated: 2025-08-10 23:12:58 by alvamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d_bonus.h"
 
 void	set_player(t_cub3d *cub3d, int x, int y, char dir)
@@ -21,8 +33,8 @@ void	check_player(t_cub3d *cub3d)
 	int		y;
 	char	c;
 
-	y = 0;
-	while (cub3d->map.matriz[y])
+	y = -1;
+	while (cub3d->map.matriz[++y])
 	{
 		x = 0;
 		while (cub3d->map.matriz[y][x])
@@ -35,7 +47,6 @@ void	check_player(t_cub3d *cub3d)
 			}
 			x++;
 		}
-		y++;
 	}
 	if (cub3d->player.player_count != 1)
 	{
