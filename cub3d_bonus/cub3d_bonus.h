@@ -249,5 +249,7 @@ void			update_doors(t_cub3d *cub3d);
 
 /* Animation */
 void			ft_animation(t_cub3d *cub3d);
+char			*extract_until_textures(const char *path);
+int				file_path_animation(char *path_animation, int i, int is_east);
 
 #endif

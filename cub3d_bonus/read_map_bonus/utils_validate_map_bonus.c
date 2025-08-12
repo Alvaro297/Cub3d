@@ -12,6 +12,24 @@
 
 #include "../cub3d_bonus.h"
 
+static int	check_animation_file(const char *path)
+{
+	char	*path_animation;
+	int		i;
+
+	path_animation = extract_until_textures(path);
+	i = 1;
+	while (i < TOTAL_ANIMATIONS - 1)
+	{
+		if(file_path_animation(path_animation, i, 0)
+			|| file_path_animation(path_animation, i, 1))
+			return (free(path_animation), 1);
+		i++;
+	}
+	free(path_animation);
+	return (0);
+}
+
 int	check_texture_file(const char *path)
 {
 	int		fd;
@@ -58,6 +76,7 @@ void	validate_textures(t_cub3d *cub3d)
 		|| check_texture_file(cub3d->map.tex_so)
 		|| check_texture_file(cub3d->map.tex_so)
 		|| check_texture_file(cub3d->map.tex_we)
-		|| check_texture_file(cub3d->map.tex_ea))
+		|| check_texture_file(cub3d->map.tex_ea)
+		|| check_animation_file(cub3d->map.tex_no))
 		(free_cub3d(cub3d), exit(1));
 }

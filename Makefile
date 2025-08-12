@@ -67,6 +67,7 @@ BONUS_SRCS := \
 	cub3d_bonus/read_map_bonus/utils_validate_map_bonus.c \
 	cub3d_bonus/read_map_bonus/validade_player_bonus.c \
 	cub3d_bonus/read_map_bonus/validate_map_bonus.c \
+	cub3d_bonus/read_map_bonus/validate_map_bonus_help.c \
 	cub3d_bonus/animation/animation.c \
 
 OBJ_FILES := $(SRCS:%.c=$(OBJ_DIR)/%.o)
