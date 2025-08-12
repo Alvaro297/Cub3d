@@ -197,7 +197,9 @@ int				is_blank_line(char *line);
 void			check_player(t_cub3d *cub3d);
 void			free_norm_map(char **map, int upto);
 int				handle_map_line(char *line, t_cub3d *cub3d, char **map_lines);
-
+char			**copy_region(char **map_region, t_cub3d *cub3d);
+void			validate_cell_help(t_cub3d *cub3d,
+					char **map_region, char **map_region_copy);
 //** Raycasting **//
 void			starting_raycasting(t_cub3d *cub3d, char pos_player);
 void			raycast(t_cub3d *cub3d);

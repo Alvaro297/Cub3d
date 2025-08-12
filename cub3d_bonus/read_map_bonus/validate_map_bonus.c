@@ -18,7 +18,7 @@ static int	flood_fill(char **map, int x, int y, int height)
 		return (0);
 	if (map[y][x] == ' ' || map[y][x] == '\0')
 		return (0);
-	if (map[y][x] == '1' || map[y][x] == 'x' || map[y][x] == '2')
+	if (map[y][x] == '1' || map[y][x] == 'x')
 		return (1);
 	map[y][x] = 'x';
 	if (!flood_fill(map, x + 1, y, height))
@@ -76,24 +76,27 @@ static void	validate_cell(t_cub3d *cub3d, char **map_copy,
 {
 	char	c;
 	char	**map_region;
+	char	**map_region_copy;
 	int		height;
 
+	map_region_copy = NULL;
 	height = cub3d->map.height;
 	c = map_copy[y][x];
 	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != '0')
 		return ;
 	map_region = normalize_map(map_copy, cub3d);
-	if (!flood_fill(map_region, x, y, height))
+	map_region_copy = copy_region(map_region, cub3d);
+	if (!map_region_copy || !flood_fill(map_region_copy, x, y, height))
 	{
 		printf("Error\nMap is not closed\n");
+		if (map_region_copy)
+			free_norm_map(map_region_copy, cub3d->map.height);
 		ft_free_map(map_region, cub3d);
 		ft_free_map(map_copy, cub3d);
 		free_cub3d(cub3d);
 		exit(1);
 	}
-	if (cub3d->map.matriz_norm)
-		ft_free_map(cub3d->map.matriz_norm, cub3d);
-	cub3d->map.matriz_norm = map_region;
+	validate_cell_help(cub3d, map_region, map_region_copy);
 }
 
 void	validate_map(t_cub3d *cub3d)
