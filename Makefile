@@ -7,7 +7,7 @@ CFLAGS := -Wall -Wextra -Werror
 LIBFT_DIR := libft_cub3d/
 LIBFT_LIB := $(LIBFT_DIR)libft.a
 
-MINILIB_DIR := minilibx-linux/
+MINILIB_DIR := minilibx/
 MINILIB_LIB := $(MINILIB_DIR)libmlx_$(shell uname).a
 
 INCLUDES := -I. -Iincludes -I$(MINILIB_DIR)

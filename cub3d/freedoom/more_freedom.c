@@ -30,6 +30,8 @@ void	free_norm_matriz(t_cub3d *cub3d)
 	int	i;
 
 	i = 0;
+	if (!cub3d->map.matriz_norm)
+		return ;
 	while (cub3d->map.matriz_norm[i])
 	{
 		free(cub3d->map.matriz_norm[i]);

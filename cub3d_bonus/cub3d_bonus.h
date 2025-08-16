@@ -14,8 +14,8 @@
 # define CUB3D_BONUS_H
 
 # include "../libft_cub3d/libft.h"
-# include "../minilibx-linux/mlx.h"
-# include "../minilibx-linux/mlx_int.h"
+# include "../minilibx/mlx.h"
+# include "../minilibx/mlx_int.h"
 # include <math.h>
 # include <stdbool.h>
 
