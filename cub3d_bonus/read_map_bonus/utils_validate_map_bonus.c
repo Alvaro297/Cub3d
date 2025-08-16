@@ -21,7 +21,7 @@ static int	check_animation_file(const char *path)
 	i = 1;
 	while (i < TOTAL_ANIMATIONS - 1)
 	{
-		if(file_path_animation(path_animation, i, 0)
+		if (file_path_animation(path_animation, i, 0)
 			|| file_path_animation(path_animation, i, 1))
 			return (free(path_animation), 1);
 		i++;

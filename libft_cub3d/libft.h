@@ -16,11 +16,10 @@
 //LIBS//
 # include <string.h>
 # include <stdlib.h>
-#include <fcntl.h>
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/stat.h>
-
 
 # define BUFFER_SIZE 10
 

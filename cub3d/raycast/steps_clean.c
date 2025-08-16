@@ -112,7 +112,7 @@ void	dda_loop(t_cub3d *cub3d, int map_x, int map_y)
 			hited_wall(cub3d, side, map_x, map_y);
 			break ;
 		}
-		if (cub3d->raycast.side_dist_x > 20.0 
+		if (cub3d->raycast.side_dist_x > 20.0
 			&& cub3d->raycast.side_dist_y > 20.0)
 			break ;
 	}

@@ -45,6 +45,7 @@ SRCS = \
 	ft_putstr_fd.c \
 	ft_realloc.c \
 	get_next_line.c \
+	get_next_line_utils.c \
 	ft_lstnew.c \
 	ft_lstadd_front.c \
 	ft_lstsize.c \
