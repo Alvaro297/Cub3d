@@ -41,8 +41,6 @@ void	update_doors(t_cub3d *cub3d)
 		{
 			door->is_open = false;
 			door->animation = 1.0;
-			printf("[DEBUG] Cerrando puerta automáticamente en (%d, %d)\n",
-				door->x, door->y);
 		}
 		i++;
 	}

@@ -77,6 +77,7 @@ void	free_cub3d(t_cub3d *cub3d)
 {
 	free_texture_paths(cub3d);
 	free_map_matriz(cub3d);
+	free_norm_matriz(cub3d);
 	if (cub3d->mlx_ptr)
 		free_mlx_images(cub3d);
 }
