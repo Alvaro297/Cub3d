@@ -46,4 +46,4 @@ Completar Cub3D es una prueba tangible de las siguientes competencias:
 
 ## **Video demostracion**
 
-(./Video/Cub3dVideo.gif)
+![Cub3D Demo](./Video/Cub3dVideo.gif)
